@@ -1,21 +1,38 @@
-import { LOGIN, LOGOUT, SIGNUP } from "@/api";
+// src/hooks/useAuth.ts
 import { useMutation, useQuery } from "@tanstack/react-query";
-import toast from "react-hot-toast";
-import { useNavigate } from "react-router-dom";
-import { DASHBOARD, UPLOAD_PROFILE_PICTURE } from "@/routes/routes";
-import { LoginData, SignupData } from "@/types/auth";
-import api from "../../intercerptor";
-import { LOGIN as LOGIN_ROUTE } from "@/routes/routes";
+import { useNavigation } from '@react-navigation/native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useState, useEffect } from "react";
+import { Alert } from 'react-native';
+import { LOGIN, LOGOUT, SIGNUP } from "@/api";
+import { ROUTES } from '@/navigation/routes';
+import api from "../interceptor";
 import { API_CONFIG } from "@/api";
-import { useState } from "react";
+import { LoginData, SignupData } from "@/types/auth";
 
 export const useAuth = () => {
-  const navigate = useNavigate();
+  const navigation = useNavigation();
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(null);
   const [formData, setFormData] = useState<LoginData>({
     email: "",
     password: "",
   });
   const [errors, setErrors] = useState<Partial<LoginData>>({});
+
+  // Check authentication status on hook mount
+  useEffect(() => {
+    const checkAuth = async () => {
+      try {
+        const token = await AsyncStorage.getItem('token');
+        setIsAuthenticated(!!token);
+      } catch (error) {
+        console.error('Error checking auth status:', error);
+        setIsAuthenticated(false);
+      }
+    };
+    
+    checkAuth();
+  }, []);
 
   const signUpMutation = useMutation({
     mutationKey: ["signup"],
@@ -23,13 +40,14 @@ export const useAuth = () => {
       const response = await api.post(SIGNUP, data);
       return response.data;
     },
-    onSuccess: (data) => {
-      localStorage.setItem("token", data.token);
-      toast.success("Account created successfully!");
-      navigate(UPLOAD_PROFILE_PICTURE);
+    onSuccess: async (data) => {
+      await AsyncStorage.setItem("token", data.token);
+      setIsAuthenticated(true);
+      Alert.alert('Success', 'Account created successfully!');
+      navigation.navigate(ROUTES.UPLOAD_PROFILE_PICTURE);
     },
     onError: (error: Error) => {
-      toast.error(error.message);
+      Alert.alert('Error', error.message);
       console.error(error);
     },
   });
@@ -40,13 +58,14 @@ export const useAuth = () => {
       const response = await api.post(LOGIN, data);
       return response.data;
     },
-    onSuccess: (data) => {
-      localStorage.setItem("token", data.token);
-      toast.success("Logged in successfully!");
-      navigate(DASHBOARD);
+    onSuccess: async (data) => {
+      await AsyncStorage.setItem("token", data.token);
+      setIsAuthenticated(true);
+      Alert.alert('Success', 'Logged in successfully!');
+      navigation.navigate(ROUTES.DASHBOARD);
     },
     onError: (error: Error) => {
-      toast.error(error.message);
+      Alert.alert('Error', error.message);
       console.error(error);
     },
   });
@@ -57,13 +76,14 @@ export const useAuth = () => {
       const response = await api.post(LOGOUT);
       return response.data;
     },
-    onSuccess: () => {
-      localStorage.removeItem("token");
-      toast.success("Logged out successfully!");
-      navigate(LOGIN_ROUTE);
+    onSuccess: async () => {
+      await AsyncStorage.removeItem("token");
+      setIsAuthenticated(false);
+      Alert.alert('Success', 'Logged out successfully!');
+      navigation.navigate(ROUTES.LOGIN);
     },
     onError: (error: Error) => {
-      toast.error(error.message);
+      Alert.alert('Error', error.message);
       console.error(error);
     },
   });
@@ -78,21 +98,28 @@ export const useAuth = () => {
       const response = await api.get(API_CONFIG.endpoints.auth.getProfile);
       return response.data;
     },
-    enabled: !!localStorage.getItem("token"),
+    enabled: isAuthenticated === true,
     staleTime: 1000 * 60 * 60 * 24,
     refetchOnWindowFocus: false,
   });
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { id, value } = e.target;
+  const handleInputChange = (
+    e: { target: { id: string; value: string } } | { id: string; value: string }
+  ) => {
+    // Handle both React Native and React Web style events
+    const id = 'target' in e ? e.target.id : e.id;
+    const value = 'target' in e ? e.target.value : e.value;
+    
     setFormData({ ...formData, [id]: value });
     if (errors[id as keyof LoginData]) {
       setErrors({ ...errors, [id]: "" });
     }
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  const handleSubmit = (e?: React.FormEvent<HTMLFormElement>) => {
+    // Prevent default only in web context
+    if (e) e.preventDefault();
+    
     setErrors({});
     loginMutation.mutate(formData, {
       onError: (error: Error) => {
@@ -112,6 +139,20 @@ export const useAuth = () => {
     });
   };
 
+  const handleSignupSubmit = (e?: React.FormEvent<HTMLFormElement>) => {
+    // Prevent default only in web context
+    if (e) e.preventDefault();
+    
+    // You would need to adapt this for your signup form data
+    const signupData = {
+      name: formData.name || '',
+      email: formData.email,
+      password: formData.password,
+    };
+    
+    signUpMutation.mutate(signupData as SignupData);
+  };
+
   return {
     signUpMutation,
     isLoading: signUpMutation.isPending,
@@ -124,7 +165,10 @@ export const useAuth = () => {
     refetchProfile,
     handleInputChange,
     handleSubmit,
+    handleSignupSubmit,
     errors,
     formData,
+    isAuthenticated,
+    setFormData,
   };
 };
