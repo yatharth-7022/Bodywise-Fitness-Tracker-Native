@@ -1,20 +1,21 @@
 // TimerPage.tsx
-import React from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import { useNavigation } from '@react-navigation/native';
-import Icon from 'react-native-vector-icons/Feather';
+import React from "react";
+import { View, Text, TouchableOpacity } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
+import { useNavigation } from "@react-navigation/native";
+import Icon from "react-native-vector-icons/Feather";
+
 import Animated, {
   useSharedValue,
   useAnimatedStyle,
   withSpring,
   FadeIn,
-  FadeOut
-} from 'react-native-reanimated';
-import { ROUTES } from '@/routes/routes';
-import { useTimer } from '@/hooks/useTimer';
-import { Stopwatch } from '../../components/Timer/Stopwatch';
-import { Timer } from '../../components/Timer/Timer';
+  FadeOut,
+} from "react-native-reanimated";
+import { ROUTES } from "../../navigation/routes";
+import { useTimer } from "../../hooks/useTimer";
+import { Stopwatch } from "../../components/Timer/Stopwatch";
+import { Timer } from "../../components/Timer/Timer";
 
 const pad = (n: number) => n.toString().padStart(2, "0");
 
@@ -41,62 +42,123 @@ export const TimerPage = () => {
   } = useTimer();
 
   // For animated tab indicator
-  const tabPosition = useSharedValue(tab === 'timer' ? 0 : 1);
+  const tabPosition = useSharedValue(tab === "timer" ? 0 : 1);
 
   // Update animation when tab changes
   React.useEffect(() => {
-    tabPosition.value = tab === 'timer' ? 0 : 1;
+    tabPosition.value = tab === "timer" ? 0 : 1;
   }, [tab, tabPosition]);
 
   // Animated style for the tab indicator
   const tabIndicatorStyle = useAnimatedStyle(() => {
     return {
       transform: [
-        { translateX: withSpring(tabPosition.value * 50 + '%', { damping: 20, stiffness: 300 }) }
+        {
+          translateX: withSpring(tabPosition.value * 50, {
+            damping: 20,
+            stiffness: 300,
+          }),
+        },
       ],
     };
   });
 
   return (
-    <SafeAreaView className="flex-1 bg-zinc-950 text-white items-center justify-start py-8 px-4">
-      <View className="w-full max-w-md flex-row items-center mb-8">
+    <SafeAreaView
+      style={{
+        flex: 1,
+        backgroundColor: "#18181b",
+        alignItems: "center",
+        justifyContent: "flex-start",
+        paddingVertical: 32,
+        paddingHorizontal: 16,
+      }}
+    >
+      <View
+        style={{
+          width: "100%",
+          maxWidth: 400,
+          flexDirection: "row",
+          alignItems: "center",
+          marginBottom: 32,
+        }}
+      >
         <TouchableOpacity
-          className="mr-2"
-          onPress={() => navigation.navigate(ROUTES.DASHBOARD)}
+          style={{ marginRight: 8 }}
+          onPress={() => navigation.navigate(ROUTES.DASHBOARD as never)}
         >
           <Icon name="arrow-left" size={20} color="white" />
         </TouchableOpacity>
-        <Text className="text-2xl font-bold text-white flex-row items-center">
+        <Text
+          style={{
+            fontSize: 24,
+            fontWeight: "bold",
+            color: "white",
+            flexDirection: "row",
+            alignItems: "center",
+          }}
+        >
           <Icon name="clock" size={20} color="#D6FC03" /> Timer & Stopwatch
         </Text>
       </View>
 
-      <View className="w-full max-w-md flex-row relative mb-8">
+      <View
+        style={{
+          width: "100%",
+          maxWidth: 400,
+          flexDirection: "row",
+          position: "relative",
+          marginBottom: 32,
+        }}
+      >
         <TouchableOpacity
-          className={`flex-1 py-2 text-lg font-semibold transition-colors`}
+          style={{ flex: 1, paddingVertical: 8 }}
           onPress={() => setTab("timer")}
         >
-          <Text className={tab === 'timer' ? "text-primary text-center" : "text-zinc-400 text-center"}>
+          <Text
+            style={{
+              color: tab === "timer" ? "#3b82f6" : "#a1a1aa",
+              textAlign: "center",
+              fontSize: 18,
+              fontWeight: "600",
+            }}
+          >
             Timer
           </Text>
         </TouchableOpacity>
         <TouchableOpacity
-          className={`flex-1 py-2 text-lg font-semibold transition-colors`}
+          style={{ flex: 1, paddingVertical: 8 }}
           onPress={() => setTab("stopwatch")}
         >
-          <Text className={tab === 'stopwatch' ? "text-primary text-center" : "text-zinc-400 text-center"}>
+          <Text
+            style={{
+              color: tab === "stopwatch" ? "#3b82f6" : "#a1a1aa",
+              textAlign: "center",
+              fontSize: 18,
+              fontWeight: "600",
+            }}
+          >
             Stopwatch
           </Text>
         </TouchableOpacity>
-        <Animated.View
-          className="absolute bottom-0 h-1 w-1/2 bg-primary rounded-full"
-          style={tabIndicatorStyle}
+        <View
+          style={[
+            {
+              position: "absolute",
+              bottom: 0,
+              height: 4,
+              width: "50%",
+              backgroundColor: "#3b82f6",
+              borderRadius: 2,
+            },
+            tabIndicatorStyle,
+          ]}
         />
       </View>
 
       {tab === "timer" ? (
         <Animated.View
-          className="w-full items-center"
+          style={{ width: "100%", alignItems: "center" }}
           entering={FadeIn}
           exiting={FadeOut}
         >
@@ -114,7 +176,7 @@ export const TimerPage = () => {
         </Animated.View>
       ) : (
         <Animated.View
-          className="w-full items-center"
+          style={{ width: "100%", alignItems: "center" }}
           entering={FadeIn}
           exiting={FadeOut}
         >
@@ -126,10 +188,10 @@ export const TimerPage = () => {
             stopwatchActive={stopwatchActive}
             stopwatch={stopwatch}
             pauseStopwatch={pauseStopwatch}
-               startStopwatch={startStopwatch}
-                     />
-                   </Animated.View>
-                 )}
-               </SafeAreaView>
-             );
-           };
+            startStopwatch={startStopwatch}
+          />
+        </Animated.View>
+      )}
+    </SafeAreaView>
+  );
+};

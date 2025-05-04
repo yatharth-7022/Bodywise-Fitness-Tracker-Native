@@ -1,15 +1,16 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import { ALL_WEIGHTS, RECENT_WEIGHTS, WEIGHT_LOG } from "@/api";
-import toast from "react-hot-toast";
-import { useLocation } from "react-router-dom";
-import { LOG_WEIGHT, WEIGHTS } from "@/routes/routes";
+import { ALL_WEIGHTS, RECENT_WEIGHTS, WEIGHT_LOG } from "../api";
 import { useState } from "react";
-import api from "../../intercerptor";
-import { Weight } from "@/types/weights";
+import api from "../interceptor";
+import { Alert } from "react-native";
+import { Weight } from "../types/weights";
+
+// Define types needed for this hook
 
 export const useWeights = () => {
   const queryClient = useQueryClient();
-  const location = useLocation();
+  const [isWeightsScreen, setIsWeightsScreen] = useState(false);
+  const [isLogWeightScreen, setIsLogWeightScreen] = useState(false);
 
   //LOG_WEIGHT LOGIC
   const [formData, setFormData] = useState({
@@ -18,7 +19,7 @@ export const useWeights = () => {
     date: new Date(),
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = (e: any) => {
     e.preventDefault();
     addWeight({
       ...formData,
@@ -31,10 +32,10 @@ export const useWeights = () => {
     });
   };
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleInputChange = (fieldName: string, value: string) => {
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value,
+      [fieldName]: value,
     });
   };
 
@@ -44,7 +45,7 @@ export const useWeights = () => {
       const response = await api.get(ALL_WEIGHTS);
       return response.data;
     },
-    enabled: location.pathname === WEIGHTS,
+    enabled: isWeightsScreen,
   });
 
   const { data: recentWeights, isLoading: isLoadingRecent } = useQuery({
@@ -53,7 +54,7 @@ export const useWeights = () => {
       const response = await api.get(RECENT_WEIGHTS);
       return response.data;
     },
-    enabled: location.pathname === LOG_WEIGHT,
+    enabled: isLogWeightScreen,
     refetchOnWindowFocus: false,
   });
 
@@ -63,12 +64,12 @@ export const useWeights = () => {
       return response.data;
     },
     onSuccess: () => {
-      toast.success("Weight added successfully");
+      Alert.alert("Success", "Weight added successfully");
       queryClient.invalidateQueries({ queryKey: ["weights"] });
       queryClient.invalidateQueries({ queryKey: ["recent-weights"] });
     },
     onError: (error) => {
-      toast.error("Failed to add weight");
+      Alert.alert("Error", "Failed to add weight");
       console.error("Error logging weight:", error);
     },
   });
@@ -83,5 +84,7 @@ export const useWeights = () => {
     handleSubmit,
     handleInputChange,
     formData,
+    setIsWeightsScreen,
+    setIsLogWeightScreen,
   };
 };

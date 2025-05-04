@@ -1,18 +1,30 @@
 // components/Timer/Stopwatch.tsx
-import React from 'react';
-import { View, Text, FlatList, TouchableOpacity } from 'react-native';
-import { Feather } from '@expo/vector-icons';
-import Animated, { FadeIn, useAnimatedStyle, useSharedValue, withSpring } from 'react-native-reanimated';
-import { Button } from '../ui/Button';
+import React from "react";
+import { View, Text, FlatList, TouchableOpacity } from "react-native";
+import { Feather } from "@expo/vector-icons";
+import Animated, {
+  FadeIn,
+  useAnimatedStyle,
+  useSharedValue,
+  withSpring,
+} from "react-native-reanimated";
 
 interface StopwatchProps {
-  stopwatch: number;
+  stopwatch: {
+    minutes: number;
+    seconds: number;
+    milliseconds: number;
+  };
   stopwatchActive: boolean;
   startStopwatch: () => void;
   pauseStopwatch: () => void;
   resetStopwatch: () => void;
   addLap: () => void;
-  laps: number[];
+  laps: {
+    minutes: number;
+    seconds: number;
+    milliseconds: number;
+  }[];
   pad: (n: number) => string;
 }
 
@@ -38,74 +50,97 @@ export const Stopwatch = ({
     };
   });
 
-  const formatTime = (time: number) => {
-    const minutes = Math.floor(time / 6000);
-    const seconds = Math.floor((time - minutes * 6000) / 100);
-    const hundredths = time - minutes * 6000 - seconds * 100;
-    return `${pad(minutes)}:${pad(seconds)}.${pad(hundredths)}`;
+  const formatTime = (time: {
+    minutes: number;
+    seconds: number;
+    milliseconds: number;
+  }) => {
+    return `${pad(time.minutes)}:${pad(time.seconds)}.${pad(
+      time.milliseconds
+    )}`;
   };
 
   return (
-    <View className="w-full max-w-md items-center">
-      <Animated.View
-        entering={FadeIn.duration(300).springify()}
-        style={animatedStyle}
-        className="mb-6"
-      >
-        <Text className="text-6xl font-mono text-primary">
-          {formatTime(stopwatch)}
-        </Text>
-      </Animated.View>
+    <View style={{ alignItems: "center" }}>
+      <Text style={{ fontSize: 60, color: "white", marginBottom: 20 }}>
+        {formatTime(stopwatch)}
+      </Text>
 
-      <View className="flex-row gap-4 mb-8">
+      <View style={{ flexDirection: "row", justifyContent: "center", gap: 10 }}>
         {stopwatchActive ? (
-          <Button
+          <TouchableOpacity
+            style={{
+              backgroundColor: "#ef4444",
+              paddingVertical: 12,
+              paddingHorizontal: 24,
+              borderRadius: 8,
+            }}
             onPress={pauseStopwatch}
-            className="bg-zinc-800"
-            textClassName="text-primary"
-            icon={<Feather name="pause" size={20} color="#D6FC03" />}
-            iconPosition="left"
           >
-            <Text className="ml-2">Pause</Text>
-          </Button>
+            <Text style={{ color: "white", fontWeight: "bold" }}>Pause</Text>
+          </TouchableOpacity>
         ) : (
-          <Button
+          <TouchableOpacity
+            style={{
+              backgroundColor: "#22c55e",
+              paddingVertical: 12,
+              paddingHorizontal: 24,
+              borderRadius: 8,
+            }}
             onPress={startStopwatch}
-            className="bg-primary"
-            textClassName="text-black"
-            icon={<Feather name="play" size={20} color="black" />}
-            iconPosition="left"
           >
-            <Text className="ml-2">Start</Text>
-          </Button>
+            <Text style={{ color: "white", fontWeight: "bold" }}>Start</Text>
+          </TouchableOpacity>
         )}
 
-        <Button
-          onPress={stopwatchActive ? addLap : resetStopwatch}
-          className="bg-zinc-800"
-          textClassName="text-white"
-          icon={<Feather name={stopwatchActive ? "flag" : "rotate-ccw"} size={20} color="white" />}
-          iconPosition="left"
+        <TouchableOpacity
+          style={{
+            backgroundColor: "#3b82f6",
+            paddingVertical: 12,
+            paddingHorizontal: 24,
+            borderRadius: 8,
+          }}
+          onPress={addLap}
+          disabled={!stopwatchActive}
         >
-          <Text className="ml-2">{stopwatchActive ? "Lap" : "Reset"}</Text>
-        </Button>
+          <Text style={{ color: "white", fontWeight: "bold" }}>Lap</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          style={{
+            backgroundColor: "#6b7280",
+            paddingVertical: 12,
+            paddingHorizontal: 24,
+            borderRadius: 8,
+          }}
+          onPress={resetStopwatch}
+        >
+          <Text style={{ color: "white", fontWeight: "bold" }}>Reset</Text>
+        </TouchableOpacity>
       </View>
 
       {laps.length > 0 && (
-        <View className="w-full bg-zinc-900 rounded-lg p-4 mb-6">
-          <Text className="text-white text-lg font-semibold mb-2">Laps</Text>
-
-          <FlatList
-            data={laps}
-            keyExtractor={(_, index) => index.toString()}
-            renderItem={({ item, index }) => (
-              <View className="flex-row justify-between py-2 border-b border-zinc-800">
-                <Text className="text-zinc-400">Lap {laps.length - index}</Text>
-                <Text className="text-white font-mono">{formatTime(item)}</Text>
-              </View>
-            )}
-            contentContainerStyle={{ paddingBottom: 12 }}
-          />
+        <View style={{ marginTop: 20, width: "100%", maxHeight: 200 }}>
+          <Text
+            style={{ color: "white", marginBottom: 10, fontWeight: "bold" }}
+          >
+            Laps
+          </Text>
+          {laps.map((lap, index) => (
+            <View
+              key={index}
+              style={{
+                flexDirection: "row",
+                justifyContent: "space-between",
+                paddingVertical: 8,
+                borderBottomWidth: 1,
+                borderBottomColor: "#3f3f46",
+              }}
+            >
+              <Text style={{ color: "white" }}>Lap {laps.length - index}</Text>
+              <Text style={{ color: "white" }}>{formatTime(lap)}</Text>
+            </View>
+          ))}
         </View>
       )}
     </View>

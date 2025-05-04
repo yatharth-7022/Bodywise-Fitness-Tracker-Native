@@ -1,9 +1,17 @@
 // components/Exercise/ExerciseDrawer.tsx
-import React from 'react';
-import { View, Text, Image, TouchableOpacity, ScrollView, Modal } from 'react-native';
-import { Feather } from '@expo/vector-icons';
-import { firstLetterUppercase } from '@/utils/handlerFunctions';
-import { ExerciseCard } from '@/types/exercises';
+import React from "react";
+import {
+  View,
+  Text,
+  Image,
+  TouchableOpacity,
+  ScrollView,
+  Modal,
+  StyleSheet,
+} from "react-native";
+import { Feather } from "@expo/vector-icons";
+import { ExerciseCard } from "../../types/exercises";
+import { firstLetterUppercase } from "../../utils/handlerFunctions";
 
 interface ExerciseDrawerProps {
   exercise: ExerciseCard | null;
@@ -11,7 +19,11 @@ interface ExerciseDrawerProps {
   onClose: () => void;
 }
 
-export const ExerciseDrawer = ({ exercise, isOpen, onClose }: ExerciseDrawerProps) => {
+export const ExerciseDrawer = ({
+  exercise,
+  isOpen,
+  onClose,
+}: ExerciseDrawerProps) => {
   if (!exercise) return null;
 
   return (
@@ -41,7 +53,9 @@ export const ExerciseDrawer = ({ exercise, isOpen, onClose }: ExerciseDrawerProp
             <View className="p-6">
               <View className="flex-row items-center justify-between mb-4">
                 <View>
-                  <Text className="text-2xl font-bold text-white">{exercise.name}</Text>
+                  <Text className="text-2xl font-bold text-white">
+                    {exercise.name}
+                  </Text>
                   <Text className="text-blue-500">
                     {firstLetterUppercase(exercise.bodyPart)} Exercise
                   </Text>
@@ -60,9 +74,7 @@ export const ExerciseDrawer = ({ exercise, isOpen, onClose }: ExerciseDrawerProp
                 </View>
                 <View className="items-center">
                   <Text className="text-zinc-400 text-sm mb-1">Equipment</Text>
-                  <Text className="text-white font-semibold">
-                    {exercise.equipment || "Bodyweight"}
-                  </Text>
+                  <Text className="text-white font-semibold">Bodyweight</Text>
                 </View>
                 <View className="items-center">
                   <Text className="text-zinc-400 text-sm mb-1">Difficulty</Text>
@@ -71,27 +83,23 @@ export const ExerciseDrawer = ({ exercise, isOpen, onClose }: ExerciseDrawerProp
               </View>
 
               <View className="mb-6">
-                <Text className="text-lg font-semibold mb-2 text-white">Description</Text>
+                <Text className="text-lg font-semibold mb-2 text-white">
+                  Description
+                </Text>
                 <Text className="text-zinc-400 leading-5">
-                  {exercise.description || "No description available for this exercise."}
+                  {exercise.description ||
+                    "No description available for this exercise."}
                 </Text>
               </View>
 
               <View className="mb-6">
-                <Text className="text-lg font-semibold mb-2 text-white">Instructions</Text>
+                <Text className="text-lg font-semibold mb-2 text-white">
+                  Instructions
+                </Text>
                 <View className="space-y-2">
-                  {exercise.instructions ? (
-                    exercise.instructions.split('\n').map((step, index) => (
-                      <View key={index} className="flex-row items-start">
-                        <View className="bg-blue-600 w-6 h-6 rounded-full items-center justify-center mr-3 mt-0.5">
-                          <Text className="text-white font-bold">{index + 1}</Text>
-                        </View>
-                        <Text className="flex-1 text-zinc-300">{step.trim()}</Text>
-                      </View>
-                    ))
-                  ) : (
-                    <Text className="text-zinc-400">No instructions available for this exercise.</Text>
-                  )}
+                  <Text className="text-zinc-400">
+                    No instructions available for this exercise.
+                  </Text>
                 </View>
               </View>
             </View>

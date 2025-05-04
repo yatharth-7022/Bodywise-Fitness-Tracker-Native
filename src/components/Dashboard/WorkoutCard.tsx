@@ -1,9 +1,20 @@
 // components/Dashboard/WorkoutCard.tsx
-import React from 'react';
-import { View, Text, Image, TouchableOpacity } from 'react-native';
-import { Feather } from '@expo/vector-icons';
-import { useNavigation } from '@react-navigation/native';
-import { ROUTES } from '@/routes/routes';
+import React from "react";
+import { View, Text, Image, TouchableOpacity } from "react-native";
+import { Feather } from "@expo/vector-icons";
+import { useNavigation } from "@react-navigation/native";
+import { ROUTES } from "../../../src/navigation/routes";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+
+// Define the navigation param list
+type RootStackParamList = {
+  ROUTINE: {
+    id: number;
+    title: string;
+  };
+};
+
+type NavigationProp = NativeStackNavigationProp<RootStackParamList>;
 
 interface WorkoutCardProps {
   id: number;
@@ -14,16 +25,25 @@ interface WorkoutCardProps {
   description: string;
 }
 
-export const WorkoutCard = ({ id, title, duration, calories, image, description }: WorkoutCardProps) => {
-  const navigation = useNavigation();
+export const WorkoutCard = ({
+  id,
+  title,
+  duration,
+  calories,
+  image,
+  description,
+}: WorkoutCardProps) => {
+  const navigation = useNavigation<NavigationProp>();
 
   return (
     <TouchableOpacity
       className="w-64 h-[190px] bg-zinc-900 rounded-lg overflow-hidden mr-4"
-      onPress={() => navigation.navigate(ROUTES.ROUTINE, {
-        id,
-        title
-      })}
+      onPress={() =>
+        navigation.navigate("ROUTINE", {
+          id,
+          title,
+        })
+      }
       activeOpacity={0.7}
     >
       <Image

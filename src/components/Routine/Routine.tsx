@@ -1,16 +1,32 @@
 // components/Routine/Routine.tsx
-import React from 'react';
-import { View, Text, Image, TouchableOpacity, ScrollView, ActivityIndicator } from 'react-native';
-import { Feather } from '@expo/vector-icons';
-import { useDashboard } from '@/hooks/useDashboard';
-import { ROUTES } from '@/routes/routes';
-import { useNavigation } from '@react-navigation/native';
-import { firstLetterUppercase } from '@/utils/handlerFunctions';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import React from "react";
+import {
+  View,
+  Text,
+  Image,
+  TouchableOpacity,
+  ScrollView,
+  ActivityIndicator,
+} from "react-native";
+import { Feather } from "@expo/vector-icons";
+import { useNavigation } from "@react-navigation/native";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import { SafeAreaView } from "react-native-safe-area-context";
+import { useDashboard } from "../../hooks/useDashboard";
+import { firstLetterUppercase } from "../../utils/handlerFunctions";
+import { ROUTES } from "../../navigation/routes";
+
+// Define navigation types
+type RootStackParamList = {
+  Dashboard: undefined;
+  RoutineSession: { id: number; title: string };
+};
+
+type NavigationProp = NativeStackNavigationProp<RootStackParamList>;
 
 const Routine = () => {
   const { routineById, isRoutineLoading } = useDashboard();
-  const navigation = useNavigation();
+  const navigation = useNavigation<NavigationProp>();
 
   if (isRoutineLoading) {
     return (
@@ -23,9 +39,11 @@ const Routine = () => {
   if (!isRoutineLoading && !routineById) {
     return (
       <View className="flex-1 items-center justify-center bg-zinc-950">
-        <Text className="text-xl font-semibold mb-2 text-white">Routine not found</Text>
+        <Text className="text-xl font-semibold mb-2 text-white">
+          Routine not found
+        </Text>
         <TouchableOpacity
-          onPress={() => navigation.navigate(ROUTES.DASHBOARD)}
+          onPress={() => navigation.navigate(ROUTES.DASHBOARD as "Dashboard")}
           className="mt-2"
         >
           <Text className="text-blue-500">Return to Dashboard</Text>
@@ -35,7 +53,7 @@ const Routine = () => {
   }
 
   return (
-    <SafeAreaView className="flex-1 bg-zinc-950" edges={['bottom']}>
+    <SafeAreaView className="flex-1 bg-zinc-950" edges={["bottom"]}>
       <View className="flex-1">
         <View className="h-64 relative">
           <Image
@@ -44,21 +62,21 @@ const Routine = () => {
             resizeMode="cover"
           />
           <TouchableOpacity
-            onPress={() => navigation.navigate(ROUTES.DASHBOARD)}
+            onPress={() => navigation.navigate(ROUTES.DASHBOARD as "Dashboard")}
             className="absolute top-4 left-4 p-2 rounded-full bg-black/20"
           >
             <Feather name="chevron-left" size={24} color="white" />
           </TouchableOpacity>
-          <TouchableOpacity
-            className="absolute top-4 right-4 p-2 rounded-full bg-black/20"
-          >
+          <TouchableOpacity className="absolute top-4 right-4 p-2 rounded-full bg-black/20">
             <Feather name="bookmark" size={24} color="white" />
           </TouchableOpacity>
         </View>
 
         <View className="flex-1 bg-zinc-950 -mt-8 rounded-t-3xl">
           <ScrollView className="flex-1 px-4 pt-4 pb-5">
-            <Text className="text-2xl font-bold mb-2 text-white">{routineById?.name}</Text>
+            <Text className="text-2xl font-bold mb-2 text-white">
+              {routineById?.name}
+            </Text>
 
             <View className="flex-row items-center text-gray-500 text-sm mb-4">
               <View className="flex-row ml-auto space-x-4">
@@ -117,10 +135,15 @@ const Routine = () => {
           <View className="px-4 py-2 border-t border-zinc-800">
             <TouchableOpacity
               className="w-full bg-blue-600 py-3 rounded-lg items-center"
-              onPress={() => navigation.navigate(ROUTES.ROUTINE_SESSION, {
-                id: routineById?.id,
-                title: routineById?.name
-              })}
+              onPress={() =>
+                navigation.navigate(
+                  ROUTES.ROUTINE_SESSION as "RoutineSession",
+                  {
+                    id: routineById?.id || 0,
+                    title: routineById?.name || "",
+                  }
+                )
+              }
             >
               <Text className="text-white font-medium">Start Session</Text>
             </TouchableOpacity>

@@ -1,12 +1,14 @@
 // App.tsx
-import React from 'react';
-import { SafeAreaProvider } from 'react-native-safe-area-context';
-import { NavigationContainer } from '@react-navigation/native';
-import { StatusBar } from 'expo-status-bar';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import RootNavigator from './src/navigation';
-import { LoadingScreen } from './src/screens/LoadingScreen';
-import { useAuth } from './src/hooks/useAuth';
+import React from "react";
+import { SafeAreaProvider } from "react-native-safe-area-context";
+import { NavigationContainer } from "@react-navigation/native";
+import { StatusBar } from "expo-status-bar";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import RootNavigator from "./src/navigation";
+import { LoadingScreen } from "./src/screens/LoadingScreen";
+import { useAuth } from "./src/hooks/useAuth";
+import "react-native-reanimated";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
 
 // Create a client
 const queryClient = new QueryClient();
@@ -25,13 +27,15 @@ function NavigationWithAuth() {
 
 export default function App() {
   return (
-    <QueryClientProvider client={queryClient}>
-      <SafeAreaProvider>
-        <StatusBar style="light" />
-        <NavigationContainer>
-          <NavigationWithAuth />
-        </NavigationContainer>
-      </SafeAreaProvider>
-    </QueryClientProvider>
+    <GestureHandlerRootView style={{ flex: 1 }}>
+      <QueryClientProvider client={queryClient}>
+        <SafeAreaProvider>
+          <StatusBar style="light" />
+          <NavigationContainer>
+            <NavigationWithAuth />
+          </NavigationContainer>
+        </SafeAreaProvider>
+      </QueryClientProvider>
+    </GestureHandlerRootView>
   );
 }

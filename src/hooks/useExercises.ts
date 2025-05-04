@@ -1,10 +1,11 @@
-import { ALL_EXERCISES } from "@/api";
+import { ALL_EXERCISES } from "../api";
 import { useQuery } from "@tanstack/react-query";
-import api from "../../intercerptor";
-import { useLocation } from "react-router-dom";
-import { EXERCISES } from "@/routes/routes";
+import api from "../interceptor";
 import { useState } from "react";
-import { ExerciseCard } from "@/types/exercises";
+import { ROUTES } from "../navigation/routes";
+import { ExerciseCard } from "../types/exercises";
+
+// Define types needed for this hook
 
 export const useExercises = () => {
   const [selectedExercise, setSelectedExercise] = useState<ExerciseCard | null>(
@@ -12,13 +13,13 @@ export const useExercises = () => {
   );
   const [showModal, setShowModal] = useState(false);
   const [activeFilter, setActiveFilter] = useState("All");
+  const [isExercisesScreen, setIsExercisesScreen] = useState(false);
 
   const handleExerciseClick = (exercise: ExerciseCard) => {
     setSelectedExercise(exercise);
     setShowModal(true);
   };
 
-  const location = useLocation();
   const { data: allExercises, isLoading: isLoadingAllExercises } = useQuery<
     ExerciseCard[]
   >({
@@ -27,7 +28,7 @@ export const useExercises = () => {
       const response = await api.get(ALL_EXERCISES);
       return response?.data;
     },
-    enabled: location.pathname === EXERCISES,
+    enabled: isExercisesScreen,
     staleTime: 1000 * 60 * 60 * 24,
     refetchOnWindowFocus: false,
   });
@@ -42,5 +43,6 @@ export const useExercises = () => {
     setSelectedExercise,
     setShowModal,
     setActiveFilter,
+    setIsExercisesScreen,
   };
 };

@@ -1,14 +1,21 @@
 // Login.tsx
-import React from 'react';
-import { View, Text, TouchableOpacity, TextInput, ScrollView } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import { useNavigation } from '@react-navigation/native';
-import Icon from 'react-native-vector-icons/Feather';
-import { useAuth } from '@/hooks/useAuth';
-
+import React from "react";
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  TextInput,
+  ScrollView,
+} from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
+import { useNavigation } from "@react-navigation/native";
+import Icon from "react-native-vector-icons/Feather";
+import { useAuth } from "../../hooks/useAuth";
+import { ROUTES } from "../../navigation/routes";
 const Login = () => {
   const navigation = useNavigation();
-  const { isLoginLoading, handleInputChange, handleSubmit, errors, formData } = useAuth();
+  const { isLoginLoading, handleInputChange, handleSubmit, errors, formData } =
+    useAuth();
 
   return (
     <SafeAreaView className="flex-1 bg-black">
@@ -16,7 +23,7 @@ const Login = () => {
         <View className="py-4">
           <TouchableOpacity
             className="flex-row items-center"
-            onPress={() => navigation.navigate('Home')}
+            onPress={() => navigation.navigate(ROUTES.HOME as never)}
           >
             <Icon name="arrow-left" size={20} color="#D6FC03" />
             <Text className="text-primary font-medium ml-1">Back</Text>
@@ -34,7 +41,9 @@ const Login = () => {
           <View className="w-32 h-32 rounded-full bg-zinc-800 items-center justify-center mb-6">
             <Icon name="user" size={64} color="#D6FC03" />
           </View>
-          <Text className="text-3xl font-bold text-white mb-2">Welcome Back</Text>
+          <Text className="text-3xl font-bold text-white mb-2">
+            Welcome Back
+          </Text>
           <Text className="text-zinc-400">Continue your fitness journey</Text>
         </View>
 
@@ -42,43 +51,64 @@ const Login = () => {
           <View className="space-y-2">
             <Text className="text-sm font-medium text-zinc-300">Email</Text>
             <TextInput
-              className={`bg-zinc-900 border ${errors.email ? "border-red-500" : "border-zinc-700"} text-white h-12 px-4 rounded-md`}
+              className={`bg-zinc-900 border ${
+                errors.email ? "border-red-500" : "border-zinc-700"
+              } text-white h-12 px-4 rounded-md`}
               placeholder="you@example.com"
               placeholderTextColor="#666"
               keyboardType="email-address"
               autoCapitalize="none"
               value={formData.email}
-              onChangeText={(text) => handleInputChange({ target: { id: 'email', value: text } })}
+              onChangeText={(text) =>
+                handleInputChange({ target: { id: "email", value: text } })
+              }
             />
-            {errors.email && <Text className="text-red-500 text-xs mt-1">{errors.email}</Text>}
+            {errors.email && (
+              <Text className="text-red-500 text-xs mt-1">{errors.email}</Text>
+            )}
           </View>
 
           <View className="space-y-2">
             <View className="flex-row justify-between items-center">
-              <Text className="text-sm font-medium text-zinc-300">Password</Text>
+              <Text className="text-sm font-medium text-zinc-300">
+                Password
+              </Text>
               <TouchableOpacity>
                 <Text className="text-xs text-primary">Forgot password?</Text>
               </TouchableOpacity>
             </View>
             <TextInput
-              className={`bg-zinc-900 border ${errors.password ? "border-red-500" : "border-zinc-700"} text-white h-12 px-4 rounded-md`}
+              className={`bg-zinc-900 border ${
+                errors.password ? "border-red-500" : "border-zinc-700"
+              } text-white h-12 px-4 rounded-md`}
               placeholder="••••••••"
               placeholderTextColor="#666"
               secureTextEntry
               value={formData.password}
-              onChangeText={(text) => handleInputChange({ target: { id: 'password', value: text } })}
+              onChangeText={(text) =>
+                handleInputChange({ target: { id: "password", value: text } })
+              }
             />
-            {errors.password && <Text className="text-red-500 text-xs mt-1">{errors.password}</Text>}
+            {errors.password && (
+              <Text className="text-red-500 text-xs mt-1">
+                {errors.password}
+              </Text>
+            )}
           </View>
 
           <TouchableOpacity
             className="w-full bg-primary hover:bg-lime-500 text-black font-bold h-12 rounded-md flex-row items-center justify-center mt-4"
-            onPress={handleSubmit}
+            onPress={() => handleSubmit()}
             disabled={isLoginLoading}
           >
             {isLoginLoading ? (
               <View className="flex-row items-center justify-center">
-                <Icon name="loader" size={20} color="black" className="animate-spin mr-2" />
+                <Icon
+                  name="loader"
+                  size={20}
+                  color="black"
+                  className="animate-spin mr-2"
+                />
                 <Text className="text-black font-bold">Logging in...</Text>
               </View>
             ) : (
@@ -92,7 +122,7 @@ const Login = () => {
             Don't have an account yet?{" "}
             <Text
               className="text-primary font-medium"
-              onPress={() => navigation.navigate('SignUp')}
+              onPress={() => navigation.navigate(ROUTES.SIGNUP as never)}
             >
               Sign up
             </Text>

@@ -1,10 +1,18 @@
 // components/Exercise/AllExercises.tsx
-import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, FlatList, ActivityIndicator, SafeAreaView } from 'react-native';
-import { Feather } from '@expo/vector-icons';
-import { useExercises } from '@/hooks/useExercises';
-import { ExerciseCardContent } from './ExerciseCard';
-import { ExerciseDrawer } from './ExerciseDrawer';
+import React, { useState } from "react";
+import {
+  View,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  FlatList,
+  ActivityIndicator,
+  SafeAreaView,
+} from "react-native";
+import { Feather } from "@expo/vector-icons";
+import { ExerciseCardContent } from "./ExerciseCard";
+import { ExerciseDrawer } from "./ExerciseDrawer";
+import { useExercises } from "../../hooks/useExercises";
 
 const bodyParts = ["All", "Chest", "Back", "Arms", "Shoulders", "Legs"];
 
@@ -44,7 +52,9 @@ export const AllExercises = () => {
         <View className="absolute inset-0 bg-black/70 z-50 flex items-center justify-center">
           <View className="flex flex-col items-center gap-4">
             <ActivityIndicator size="large" color="#D6FC03" />
-            <Text className="text-lg text-white font-medium">Getting exercises...</Text>
+            <Text className="text-lg text-white font-medium">
+              Getting exercises...
+            </Text>
           </View>
         </View>
       )}
@@ -65,7 +75,7 @@ export const AllExercises = () => {
                 name="search"
                 size={16}
                 color="#9ca3af"
-                style={{ position: 'absolute', left: 12, top: 12 }}
+                style={{ position: "absolute", left: 12, top: 12 }}
               />
             </View>
           </View>
@@ -77,15 +87,15 @@ export const AllExercises = () => {
             renderItem={({ item }) => (
               <TouchableOpacity
                 className={`px-4 py-2 rounded-full mr-2 ${
-                  activeFilter === item
-                    ? "bg-blue-600"
-                    : "bg-gray-800"
+                  activeFilter === item ? "bg-blue-600" : "bg-gray-800"
                 }`}
                 onPress={() => setActiveFilter(item)}
               >
-                <Text className={`text-sm ${
-                  activeFilter === item ? "text-white" : "text-gray-300"
-                }`}>
+                <Text
+                  className={`text-sm ${
+                    activeFilter === item ? "text-white" : "text-gray-300"
+                  }`}
+                >
                   {item}
                 </Text>
               </TouchableOpacity>

@@ -1,15 +1,16 @@
 // components/Exercise/ExerciseCard.tsx
-import React from 'react';
-import { View, Text, Image, TouchableOpacity } from 'react-native';
-import { ExerciseCard as ExerciseCardType } from '@/types/exercises';
-import { firstLetterUppercase } from '@/utils/handlerFunctions';
-import { Feather } from '@expo/vector-icons';
+import React from "react";
+import { View, Text, Image, TouchableOpacity } from "react-native";
+
+import { Feather } from "@expo/vector-icons";
+import { firstLetterUppercase } from "../../utils/handlerFunctions";
+import { ExerciseCard } from "../../types/exercises";
 
 export const ExerciseCardContent = ({
   exercise,
   onClick,
 }: {
-  exercise: ExerciseCardType;
+  exercise: ExerciseCard;
   onClick: () => void;
 }) => {
   return (
@@ -26,12 +27,19 @@ export const ExerciseCardContent = ({
         />
       </View>
       <View className="p-4">
-        <Text className="font-semibold text-lg mb-1 text-white">{exercise?.name}</Text>
+        <Text className="font-semibold text-lg mb-1 text-white">
+          {exercise?.name}
+        </Text>
         <Text className="text-gray-400 text-sm mb-2">
           {firstLetterUppercase(exercise?.bodyPart)}
         </Text>
         <View className="flex-row items-center text-gray-500 text-sm">
-          <Feather name="clock" size={16} color="#6b7280" style={{ marginRight: 4 }} />
+          <Feather
+            name="clock"
+            size={16}
+            color="#6b7280"
+            style={{ marginRight: 4 }}
+          />
         </View>
       </View>
     </TouchableOpacity>

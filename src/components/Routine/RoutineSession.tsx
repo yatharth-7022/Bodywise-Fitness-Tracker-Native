@@ -1,232 +1,183 @@
 // components/Routine/RoutineSession.tsx
-import React, { useState } from 'react';
+import React, { useState, useEffect } from "react";
 import {
   View,
   Text,
   ScrollView,
   TouchableOpacity,
-  TextInput,
-  Modal,
   SafeAreaView,
   ActivityIndicator,
-  Alert,
-} from 'react-native';
-import { Feather } from '@expo/vector-icons';
-import { useNavigation, useRoute } from '@react-navigation/native';
-import { useDashboard } from '@/hooks/useDashboard';
-import { ROUTES } from '@/routes/routes';
-import { firstLetterUppercase } from '@/utils/handlerFunctions';
+} from "react-native";
+import { useNavigation, useRoute } from "@react-navigation/native";
+import { useDashboard } from "../../hooks/useDashboard";
+import SessionHeader from "./SessionHeader";
+import SessionExerciseCard from "./SessionExerciseCard";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import { Exercise, ExerciseSet } from "../../types/routine";
+
+// Define navigation types
+type RoutineStackParamList = {
+  DASHBOARD: undefined;
+};
+
+type NavigationProp = NativeStackNavigationProp<RoutineStackParamList>;
+type RouteParams = {
+  id: string;
+  title: string;
+};
+
+// Helper function to convert dashboard Exercise type to routine Exercise type
+const mapDashboardToRoutineExercise = (
+  dashboardExercise: any,
+  index: number
+): Exercise => {
+  return {
+    exercise: {
+      name: dashboardExercise.exercise.name,
+      bodyPart: dashboardExercise.exercise.bodyPart,
+      imageUrl: dashboardExercise.exercise.imageUrl,
+    },
+    exerciseSets: Array(dashboardExercise.sets || 3)
+      .fill(0)
+      .map(() => ({
+        routineExerciseId: 0,
+        userId: 0,
+        weight: 0,
+        reps: dashboardExercise.reps || 8,
+        isCompleted: false,
+      })),
+  };
+};
 
 const RoutineSession = () => {
-  const navigation = useNavigation();
+  const navigation = useNavigation<NavigationProp>();
   const route = useRoute();
-  const { id, title } = route.params;
+  const { id } = route.params as RouteParams;
 
-  const { routineById, isRoutineLoading, startSession, sessionData, isSessionLoading } = useDashboard();
-  const [showRestTimer, setShowRestTimer] = useState(false);
-  const [restTime, setRestTime] = useState(60);
-  const [isResting, setIsResting] = useState(false);
-  const [currentExerciseIndex, setCurrentExerciseIndex] = useState(0);
-  const [completedSets, setCompletedSets] = useState<Record<string, boolean[]>>({});
+  const { routineById, isRoutineLoading, setSelectedRoutineId } =
+    useDashboard();
 
-  React.useEffect(() => {
-    startSession(id);
-  }, [id]);
+  const [exercises, setExercises] = useState<Exercise[]>([]);
 
-  const handleCompleteSet = (exerciseId: number, setIndex: number) => {
-    setCompletedSets((prev) => {
-      const exerciseSets = prev[exerciseId] || Array(5).fill(false);
-      const updatedSets = [...exerciseSets];
-      updatedSets[setIndex] = !updatedSets[setIndex];
+  // Initialize the routine when component mounts
+  useEffect(() => {
+    if (id) {
+      setSelectedRoutineId(id);
+    }
+  }, [id, setSelectedRoutineId]);
 
-      return {
-        ...prev,
-        [exerciseId]: updatedSets,
-      };
-    });
+  // Update exercises when routineById changes
+  useEffect(() => {
+    if (routineById?.exercises) {
+      // Map dashboard exercises to the routine Exercise type
+      const mappedExercises = routineById.exercises.map((ex, index) =>
+        mapDashboardToRoutineExercise(ex, index)
+      );
+      setExercises(mappedExercises);
+    }
+  }, [routineById]);
 
-    // Show rest timer after completing a set
-    setShowRestTimer(true);
+  const handleSetChange = (
+    exerciseIdx: number,
+    setIdx: number,
+    field: "kg" | "reps" | "isCompleted",
+    value: number | boolean
+  ) => {
+    setExercises((prev) =>
+      prev.map((ex, exIdx) =>
+        exIdx === exerciseIdx
+          ? {
+              ...ex,
+              exerciseSets: ex.exerciseSets?.map((set, sIdx) =>
+                sIdx === setIdx
+                  ? { ...set, [field === "kg" ? "weight" : field]: value }
+                  : set
+              ),
+            }
+          : ex
+      )
+    );
   };
 
-  const startRestTimer = () => {
-    setIsResting(true);
-    setShowRestTimer(false);
-
-    // Logic for counting down rest timer would go here
-    setTimeout(() => {
-      setIsResting(false);
-    }, restTime * 1000);
+  const handleAddSet = (exerciseIdx: number) => {
+    setExercises((prev) =>
+      prev.map((ex, exIdx) =>
+        exIdx === exerciseIdx
+          ? {
+              ...ex,
+              exerciseSets: [
+                ...(ex.exerciseSets || []),
+                {
+                  weight: 0,
+                  reps: 0,
+                  isCompleted: false,
+                  routineExerciseId: 0,
+                  userId: 0,
+                },
+              ],
+            }
+          : ex
+      )
+    );
   };
 
-  if (isRoutineLoading || isSessionLoading) {
+  const handleSubmit = () => {
+    const payload = exercises.map((ex) => ({
+      exerciseName: ex.exercise.name,
+      sets: ex.exerciseSets,
+    }));
+    console.log("Submit payload:", payload);
+    // ...submit logic...
+  };
+
+  if (isRoutineLoading) {
     return (
       <View className="flex-1 items-center justify-center bg-zinc-950">
-        <ActivityIndicator size="large" color="#3b82f6" />
-        <Text className="text-white mt-4">Preparing your workout...</Text>
+        <ActivityIndicator size="large" color="#d6fc03" />
+        <Text className="text-white mt-4">Loading workout...</Text>
+      </View>
+    );
+  }
+
+  if (!routineById) {
+    return (
+      <View className="flex-1 items-center justify-center bg-zinc-950">
+        <Text className="text-xl font-semibold text-white mb-2">
+          Routine not found
+        </Text>
+        <TouchableOpacity onPress={() => navigation.goBack()} className="py-2">
+          <Text className="text-lime-400">Go Back</Text>
+        </TouchableOpacity>
       </View>
     );
   }
 
   return (
     <SafeAreaView className="flex-1 bg-zinc-950">
-      <View className="flex-row items-center px-4 py-3 border-b border-zinc-800">
-        <TouchableOpacity
-          onPress={() => {
-            Alert.alert(
-              "End Workout",
-              "Are you sure you want to end this workout?",
-              [
-                { text: "Cancel", style: "cancel" },
-                { text: "End Workout", onPress: () => navigation.navigate(ROUTES.DASHBOARD) }
-              ]
-            );
-          }}
-          className="mr-4"
-        >
-          <Feather name="x" size={24} color="white" />
-        </TouchableOpacity>
-        <Text className="text-xl font-semibold text-white flex-1">{title} Workout</Text>
-        <View className="flex-row items-center">
-          <Feather name="clock" size={16} color="white" />
-          <Text className="text-white ml-1">25:43</Text>
+      <SessionHeader routineName={routineById.name} />
+
+      <ScrollView className="flex-1 px-2 py-4">
+        <View className="space-y-6">
+          {exercises.map((exercise, exerciseIdx) => (
+            <SessionExerciseCard
+              key={exerciseIdx}
+              exercise={exercise}
+              exerciseIdx={exerciseIdx}
+              onSetChange={handleSetChange}
+              onAddSet={handleAddSet}
+            />
+          ))}
         </View>
-      </View>
-
-      {isResting && (
-        <View className="bg-blue-600 px-4 py-2 flex-row justify-between items-center">
-          <Text className="text-white font-medium">Rest Timer: 00:{restTime}s</Text>
-          <TouchableOpacity onPress={() => setIsResting(false)}>
-            <Text className="text-white">Skip</Text>
-          </TouchableOpacity>
-        </View>
-      )}
-
-      <ScrollView className="flex-1 px-4">
-        {sessionData?.exercise?.map((exercise, index) => (
-          <View key={exercise.id} className="mt-6">
-            <View className="flex-row items-center mb-2">
-              <View
-                className={`w-6 h-6 rounded-full items-center justify-center mr-2 ${
-                  index === currentExerciseIndex ? "bg-blue-600" : "bg-zinc-700"
-                }`}
-              >
-                <Text className="text-white font-semibold">{index + 1}</Text>
-              </View>
-              <Text className="text-lg font-semibold text-white">
-                {exercise.exercise.name}
-              </Text>
-            </View>
-
-            <View className="mb-4">
-              <Text className="text-zinc-400 text-sm">
-                {firstLetterUppercase(exercise.exercise.bodyPart)} • {exercise.sets.length} sets
-              </Text>
-            </View>
-
-            {exercise.sets.map((set, setIndex) => (
-              <View
-                key={setIndex}
-                className={`flex-row items-center justify-between p-3 mb-3 rounded-lg ${
-                  completedSets[exercise.id]?.[setIndex]
-                    ? "bg-zinc-800/30 border border-green-500/30"
-                    : "bg-zinc-800"
-                }`}
-              >
-                <View className="flex-row items-center">
-                  <Text className="text-zinc-400 w-10">Set {setIndex + 1}</Text>
-                  <View className="flex-row ml-4">
-                    <View className="items-center mr-6">
-                      <Text className="text-zinc-400 text-xs mb-1">Weight</Text>
-                      <TextInput
-                        value={set.weight.toString()}
-                        onChangeText={(text) => {
-                          // Handle weight change
-                        }}
-                        keyboardType="numeric"
-                        className="bg-zinc-700 text-white rounded w-16 h-8 text-center"
-                      />
-                    </View>
-                    <View className="items-center">
-                      <Text className="text-zinc-400 text-xs mb-1">Reps</Text>
-                      <TextInput
-                        value={set.reps.toString()}
-                        onChangeText={(text) => {
-                          // Handle reps change
-                        }}
-                        keyboardType="numeric"
-                        className="bg-zinc-700 text-white rounded w-16 h-8 text-center"
-                      />
-                    </View>
-                  </View>
-                </View>
-
-                <TouchableOpacity
-                  onPress={() => handleCompleteSet(exercise.id, setIndex)}
-                  className="p-2"
-                >
-                  {completedSets[exercise.id]?.[setIndex] ? (
-                    <Feather name="check-circle" size={24} color="#10b981" />
-                  ) : (
-                    <Feather name="circle" size={24} color="white" />
-                  )}
-                </TouchableOpacity>
-              </View>
-            ))}
-
-            <TouchableOpacity
-              className="flex-row items-center justify-center p-2 mb-6 border border-dashed border-zinc-700 rounded-lg"
-            >
-              <Feather name="plus" size={18} color="#9ca3af" />
-              <Text className="text-zinc-400 ml-2">Add Set</Text>
-            </TouchableOpacity>
-          </View>
-        ))}
       </ScrollView>
 
       <View className="p-4 border-t border-zinc-800">
-        <TouchableOpacity className="bg-blue-600 py-3 rounded-lg items-center">
-          <Text className="text-white font-medium">Complete Workout</Text>
+        <TouchableOpacity
+          className="bg-lime-500 py-4 rounded-xl items-center"
+          onPress={handleSubmit}
+        >
+          <Text className="text-black font-bold">Submit Session</Text>
         </TouchableOpacity>
       </View>
-
-      {/* Rest Timer Modal */}
-      <Modal
-        visible={showRestTimer}
-        transparent={true}
-        animationType="fade"
-      >
-        <View className="flex-1 bg-black/50 items-center justify-center p-4">
-          <View className="bg-zinc-900 w-full max-w-xs rounded-xl p-6">
-            <Text className="text-white text-lg font-bold mb-4 text-center">Rest Timer</Text>
-
-            <View className="flex-row items-center justify-between bg-zinc-800 rounded-lg p-2 mb-6">
-              <TouchableOpacity onPress={() => setRestTime(Math.max(restTime - 15, 15))}>
-                <Feather name="minus" size={20} color="white" />
-              </TouchableOpacity>
-              <Text className="text-xl font-semibold text-white">{restTime}s</Text>
-              <TouchableOpacity onPress={() => setRestTime(restTime + 15)}>
-                <Feather name="plus" size={20} color="white" />
-              </TouchableOpacity>
-            </View>
-
-            <View className="flex-row gap-2">
-              <TouchableOpacity
-                onPress={() => setShowRestTimer(false)}
-                className="flex-1 py-3 border border-zinc-700 rounded-lg items-center"
-              >
-                <Text className="text-white">Skip</Text>
-              </TouchableOpacity>
-              <TouchableOpacity
-                onPress={startRestTimer}
-                className="flex-1 py-3 bg-blue-600 rounded-lg items-center"
-              >
-                <Text className="text-white font-medium">Start</Text>
-              </TouchableOpacity>
-            </View>
-          </View>
-        </View>
-      </Modal>
     </SafeAreaView>
   );
 };

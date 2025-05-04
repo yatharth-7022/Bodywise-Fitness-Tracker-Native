@@ -1,20 +1,20 @@
 // src/navigation/MainTabNavigator.tsx
-import React from 'react';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { View, TouchableOpacity } from 'react-native';
-import { Feather } from '@expo/vector-icons';
-import { ROUTES } from './routes';
+import React from "react";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { TouchableOpacity } from "react-native";
+import { Feather } from "@expo/vector-icons";
+import { ROUTES } from "./routes";
 
 // Screens
-import Dashboard from '../screens/Dashboard';
-import { AllExercises } from '../screens/Exercise/AllExercises';
-import { TimerPage } from '../screens/Timer';
-import ChartScreen from '../screens/Chart';
+import Dashboard from "../screens/Dashboard";
+import { TimerPage } from "../screens/Timer/Timer";
+
+// Use empty components as placeholders for screens we haven't created yet
+const EmptyComponent = () => null;
+const AllExercises = EmptyComponent;
+const ChartScreen = EmptyComponent;
 
 const Tab = createBottomTabNavigator();
-
-// Empty component for the center add button
-const EmptyComponent = () => null;
 
 export function MainTabNavigator() {
   return (
@@ -22,28 +22,27 @@ export function MainTabNavigator() {
       screenOptions={({ route }) => ({
         headerShown: false,
         tabBarStyle: {
-          backgroundColor: '#18181b', // zinc-900
-          borderTopColor: '#27272a', // zinc-800
+          backgroundColor: "#18181b", // zinc-900
+          borderTopColor: "#27272a", // zinc-800
           height: 60,
         },
-        tabBarActiveTintColor: '#3b82f6', // blue-500
-        tabBarInactiveTintColor: 'white',
+        tabBarActiveTintColor: "#3b82f6", // blue-500
+        tabBarInactiveTintColor: "white",
         tabBarShowLabel: false,
         tabBarIcon: ({ color, size }) => {
-          let iconName;
+          let iconName = "circle";
 
           if (route.name === ROUTES.DASHBOARD) {
-            iconName = 'home';
+            iconName = "home";
           } else if (route.name === ROUTES.EXERCISES) {
-            iconName = 'activity';
+            iconName = "activity";
           } else if (route.name === ROUTES.TIMER) {
-            iconName = 'clock';
-          } else if (route.name === 'Chart') {
-            iconName = 'bar-chart-2';
-          } else {
-            iconName = 'circle';
+            iconName = "clock";
+          } else if (route.name === "Chart") {
+            iconName = "bar-chart-2";
           }
 
+          // @ts-ignore - Feather icon names
           return <Feather name={iconName} size={size} color={color} />;
         },
       })}
@@ -57,10 +56,19 @@ export function MainTabNavigator() {
           tabBarButton: (props) => (
             <TouchableOpacity
               {...props}
-              className="w-16 h-16 -mt-6 rounded-full bg-blue-600 items-center justify-center mx-2"
+              style={{
+                width: 64,
+                height: 64,
+                marginTop: -24,
+                borderRadius: 32,
+                backgroundColor: "#2563eb",
+                alignItems: "center",
+                justifyContent: "center",
+                marginHorizontal: 8,
+              }}
               onPress={() => {
                 // Handle add button press - could open a modal with options
-                console.log('Add button pressed');
+                console.log("Add button pressed");
               }}
             >
               <Feather name="plus" size={24} color="white" />

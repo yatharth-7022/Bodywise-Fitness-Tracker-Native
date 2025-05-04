@@ -1,5 +1,4 @@
 // app.config.js
-import 'dotenv/config';
 
 export default {
   name: "workout-tracker-native",
@@ -9,27 +8,26 @@ export default {
   icon: "./assets/icon.png",
   userInterfaceStyle: "dark",
   splash: {
-    image: "./assets/splash.png",
+    //    image: "./assets/splash.png",
     resizeMode: "contain",
-    backgroundColor: "#111111"
+    backgroundColor: "#111111",
   },
-  assetBundlePatterns: [
-    "**/*"
-  ],
+  assetBundlePatterns: ["**/*"],
   ios: {
-    supportsTablet: true
+    supportsTablet: true,
   },
   android: {
     adaptiveIcon: {
       foregroundImage: "./assets/adaptive-icon.png",
-      backgroundColor: "#111111"
-    }
+      backgroundColor: "#111111",
+    },
   },
   web: {
-    favicon: "./assets/favicon.png"
+    favicon: "./assets/favicon.png",
   },
   extra: {
-    apiUrl: process.env.API_URL,
-    apiTimeout: process.env.API_TIMEOUT,
-  }
+    // These will be populated at runtime from .env
+    apiUrl: null,
+    apiTimeout: null,
+  },
 };

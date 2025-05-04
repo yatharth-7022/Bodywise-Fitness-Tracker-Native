@@ -1,13 +1,17 @@
 import { useQuery } from "@tanstack/react-query";
-import api from "../../intercerptor";
-import { DEFAULT_ROUTINE, ROUTINE_BY_ID } from "@/api";
-import { DASHBOARD } from "@/routes/routes";
-import { useLocation, useParams } from "react-router-dom";
-import { DefaultRoutine, Routine } from "@/types/dashboard";
+import api from "../interceptor";
+import { DEFAULT_ROUTINE, ROUTINE_BY_ID } from "../api";
+import { ROUTES } from "../navigation/routes";
+import { useState } from "react";
+import { DefaultRoutine, Routine } from "../types/dashboard";
+
+// Define types needed for this hook
 
 export const useDashboard = () => {
-  const location = useLocation();
-  const { id } = useParams();
+  // Using useState to track active route instead of useLocation/useParams from react-router
+  const [selectedRoutineId, setSelectedRoutineId] = useState<string | null>(
+    null
+  );
 
   const { data: defaultRoutines } = useQuery<DefaultRoutine[]>({
     queryKey: ["default-routines"],
@@ -18,21 +22,25 @@ export const useDashboard = () => {
       return response.data;
     },
     staleTime: 1000 * 60 * 60 * 24,
-    enabled: location.pathname === DASHBOARD,
     refetchOnWindowFocus: false,
   });
 
   const { data: routineById, isLoading: isRoutineLoading } = useQuery<Routine>({
-    queryKey: ["routine-by-id", id],
+    queryKey: ["routine-by-id", selectedRoutineId],
     queryFn: async () => {
       const response = await api.get(
-        `${ROUTINE_BY_ID}${id}?includeExercises=true`
+        `${ROUTINE_BY_ID}${selectedRoutineId}?includeExercises=true`
       );
       return response.data;
     },
-    enabled: !!id,
+    enabled: !!selectedRoutineId,
     refetchOnWindowFocus: false,
   });
 
-  return { defaultRoutines, routineById, isRoutineLoading };
+  return {
+    defaultRoutines,
+    routineById,
+    isRoutineLoading,
+    setSelectedRoutineId,
+  };
 };
