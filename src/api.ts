@@ -10,7 +10,7 @@ const getApiBaseUrl = () => {
   }
 
   // For physical devices or iOS simulator
-  return Constants.expoConfig?.extra?.apiUrl || 'http://192.168.1.15:5000'; // Your laptop's IP
+  return Constants.expoConfig?.extra?.apiUrl || 'http://192.168.199.183:5000'; // Your laptop's IP
 };
 
 const API_CONFIG = {

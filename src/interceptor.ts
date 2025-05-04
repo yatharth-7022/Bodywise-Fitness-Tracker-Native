@@ -19,7 +19,7 @@ let failedQueue: QueueItem[] = [];
 
 const processQueue = (error: Error | null, token: string | null = null) => {
   failedQueue.forEach((prom) => {
-    if (error) {
+    if (error) {app
       prom.reject(error);
     } else {
       prom.resolve(token);
