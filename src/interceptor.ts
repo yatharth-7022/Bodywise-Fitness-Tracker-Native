@@ -1,6 +1,5 @@
-// src/interceptor.ts
 import axios, { InternalAxiosRequestConfig } from "axios";
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { API_CONFIG } from "./api";
 
 const api = axios.create({
@@ -19,7 +18,8 @@ let failedQueue: QueueItem[] = [];
 
 const processQueue = (error: Error | null, token: string | null = null) => {
   failedQueue.forEach((prom) => {
-    if (error) {app
+    if (error) {
+      console.log("Error in processQueue:", error);
       prom.reject(error);
     } else {
       prom.resolve(token);
@@ -62,9 +62,8 @@ api.interceptors.response.use(
       isRefreshing = true;
 
       try {
-        const response = await api.post(
-          `${API_CONFIG.baseUrl}${API_CONFIG.endpoints.auth.refresh}`
-        );
+        // Use the refresh endpoint directly without trying to combine baseURL
+        const response = await api.post(API_CONFIG.endpoints.auth.refresh);
         const { token: newToken } = response.data;
 
         // Use AsyncStorage instead of localStorage
