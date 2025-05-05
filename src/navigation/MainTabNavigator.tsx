@@ -4,10 +4,10 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { TouchableOpacity } from "react-native";
 import { Feather } from "@expo/vector-icons";
 import { ROUTES } from "./routes";
+import Dashboard from "../components/Dashboard/Dashboard";
+import { TimerPage } from "../screens/Timer/TimerPage";
 
 // Screens
-import Dashboard from "../screens/Dashboard";
-import { TimerPage } from "../screens/Timer/Timer";
 
 // Use empty components as placeholders for screens we haven't created yet
 const EmptyComponent = () => null;

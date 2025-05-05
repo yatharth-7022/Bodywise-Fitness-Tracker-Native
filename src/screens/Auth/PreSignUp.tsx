@@ -14,7 +14,7 @@ export const PreSignUp = () => {
       <View className="p-4">
         <TouchableOpacity
           className="flex-row items-center"
-          onPress={() => navigation.navigate("Home" as never)}
+          onPress={() => navigation.navigate(ROUTES.HOME as never)}
         >
           <Icon name="arrow-left" size={20} color="#D6FC03" />
           <Text className="text-primary ml-1 font-medium">Back</Text>
@@ -31,7 +31,7 @@ export const PreSignUp = () => {
 
         <View className="items-center mb-8">
           <Image
-            source={require("../../assets/image/workout.png")}
+            source={require("../../assets/image/chest-workout.jpg")}
             className="w-60 h-60"
             resizeMode="contain"
           />

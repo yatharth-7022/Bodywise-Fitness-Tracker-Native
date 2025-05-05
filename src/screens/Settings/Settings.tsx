@@ -1,5 +1,5 @@
 // Settings.tsx
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import {
   View,
   Text,
@@ -9,19 +9,20 @@ import {
   ActivityIndicator,
   Switch,
   Alert,
-} from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import { useNavigation } from '@react-navigation/native';
-import Icon from 'react-native-vector-icons/Feather';
-import * as ImagePicker from 'expo-image-picker';
-import { useAuth } from '@/hooks/useAuth';
-import { ROUTES } from '@/routes/routes';
-import { API_CONFIG } from '@/api';
-import api from '../../../intercerptor';
+} from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
+import { useNavigation } from "@react-navigation/native";
+import Icon from "react-native-vector-icons/Feather";
+import * as ImagePicker from "expo-image-picker";
+import { useAuth } from "../../hooks/useAuth";
+import api from "../../interceptor";
+import { API_CONFIG } from "../../api";
+import { ROUTES } from "../../navigation/routes";
 
 export const Settings = () => {
   const navigation = useNavigation();
-  const { handleLogout, isLogoutLoading, profileData, refetchProfile } = useAuth();
+  const { handleLogout, isLogoutLoading, profileData, refetchProfile } =
+    useAuth();
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const [isUploading, setIsUploading] = useState(false);
   const [uploadProgress, setUploadProgress] = useState(0);
@@ -53,13 +54,13 @@ export const Settings = () => {
 
       // Create form data
       const formData = new FormData();
-      const filename = selectedImage.split('/').pop();
+      const filename = selectedImage.split("/").pop();
 
       // @ts-ignore
-      formData.append('profilePicture', {
+      formData.append("profilePicture", {
         uri: selectedImage,
         name: filename,
-        type: 'image/jpeg'
+        type: "image/jpeg",
       });
 
       await api.post(API_CONFIG.endpoints.auth.uploadProfilePic, formData);
@@ -69,10 +70,10 @@ export const Settings = () => {
 
       setSelectedImage(null);
       await refetchProfile();
-      Alert.alert('Success', 'Profile picture updated successfully!');
+      Alert.alert("Success", "Profile picture updated successfully!");
     } catch (error) {
       console.error(error);
-      Alert.alert('Error', 'Failed to upload profile picture');
+      Alert.alert("Error", "Failed to upload profile picture");
       setUploadProgress(0);
     } finally {
       setIsUploading(false);
@@ -81,21 +82,17 @@ export const Settings = () => {
   };
 
   const confirmLogout = () => {
-    Alert.alert(
-      "Logout",
-      "Are you sure you want to logout?",
-      [
-        {
-          text: "Cancel",
-          style: "cancel"
-        },
-        {
-          text: "Logout",
-          onPress: handleLogout,
-          style: "destructive"
-        }
-      ]
-    );
+    Alert.alert("Logout", "Are you sure you want to logout?", [
+      {
+        text: "Cancel",
+        style: "cancel",
+      },
+      {
+        text: "Logout",
+        onPress: handleLogout,
+        style: "destructive",
+      },
+    ]);
   };
 
   return (
@@ -104,7 +101,9 @@ export const Settings = () => {
         <View className="absolute inset-0 bg-black/70 backdrop-blur-sm z-50 flex items-center justify-center">
           <View className="flex flex-col items-center gap-4">
             <ActivityIndicator size="large" color="#D6FC03" />
-            <Text className="text-lg text-white font-medium">Logging out...</Text>
+            <Text className="text-lg text-white font-medium">
+              Logging out...
+            </Text>
           </View>
         </View>
       )}
@@ -112,7 +111,7 @@ export const Settings = () => {
       <View className="px-6 py-4 flex flex-row items-center">
         <TouchableOpacity
           className="mr-2"
-          onPress={() => navigation.navigate(ROUTES.DASHBOARD)}
+          onPress={() => navigation.navigate(ROUTES.DASHBOARD as never)}
         >
           <Icon name="arrow-left" size={20} color="white" />
         </TouchableOpacity>
@@ -123,7 +122,9 @@ export const Settings = () => {
 
       <ScrollView className="px-6">
         <View className="space-y-4 mb-6">
-          <Text className="text-xl font-semibold text-primary">Profile Picture</Text>
+          <Text className="text-xl font-semibold text-primary">
+            Profile Picture
+          </Text>
           <View className="bg-zinc-900 rounded-lg p-6">
             <View className="flex flex-col items-center gap-6">
               <View className="relative">
@@ -134,7 +135,7 @@ export const Settings = () => {
                         ? { uri: selectedImage }
                         : profileData?.user?.profilePicture
                         ? { uri: profileData.user.profilePicture }
-                        : require('../../assets/default-avatar.png')
+                        : require("../../assets/image/phyphoto.jpg")
                     }
                     className="w-full h-full"
                   />
@@ -175,7 +176,9 @@ export const Settings = () => {
                       <Text className="text-black font-bold">Done!</Text>
                     </View>
                   ) : (
-                    <Text className="text-black font-bold">Update Profile Picture</Text>
+                    <Text className="text-black font-bold">
+                      Update Profile Picture
+                    </Text>
                   )}
                 </TouchableOpacity>
               )}
@@ -187,7 +190,9 @@ export const Settings = () => {
           <Text className="text-xl font-semibold text-primary">Account</Text>
           <View className="bg-zinc-900 rounded-lg p-4 space-y-4">
             <View className="space-y-1">
-              <Text className="text-sm font-medium text-zinc-400">Username</Text>
+              <Text className="text-sm font-medium text-zinc-400">
+                Username
+              </Text>
               <Text className="text-white">{profileData?.user?.name}</Text>
             </View>
             <View className="space-y-1">
@@ -195,23 +200,29 @@ export const Settings = () => {
               <Text className="text-white">{profileData?.user?.email}</Text>
             </View>
             <View className="space-y-1">
-              <Text className="text-sm font-medium text-zinc-400">Account Type</Text>
+              <Text className="text-sm font-medium text-zinc-400">
+                Account Type
+              </Text>
               <Text className="text-white">Free Plan</Text>
             </View>
           </View>
         </View>
 
         <View className="space-y-4 mb-6">
-          <Text className="text-xl font-semibold text-primary">Preferences</Text>
+          <Text className="text-xl font-semibold text-primary">
+            Preferences
+          </Text>
           <View className="bg-zinc-900 rounded-lg p-4 space-y-4">
             <View className="flex-row items-center justify-between">
               <View>
                 <Text className="font-medium text-white">Dark Mode</Text>
-                <Text className="text-sm text-zinc-400">Toggle between light and dark theme</Text>
+                <Text className="text-sm text-zinc-400">
+                  Toggle between light and dark theme
+                </Text>
               </View>
               <Switch
-                trackColor={{ false: '#767577', true: '#D6FC03' }}
-                thumbColor={isDarkMode ? '#fff' : '#f4f3f4'}
+                trackColor={{ false: "#767577", true: "#D6FC03" }}
+                thumbColor={isDarkMode ? "#fff" : "#f4f3f4"}
                 ios_backgroundColor="#3e3e3e"
                 onValueChange={() => setIsDarkMode(!isDarkMode)}
                 value={isDarkMode}
@@ -224,8 +235,8 @@ export const Settings = () => {
                 <Text className="text-sm text-zinc-400">Workout reminders</Text>
               </View>
               <Switch
-                trackColor={{ false: '#767577', true: '#D6FC03' }}
-                thumbColor={true ? '#fff' : '#f4f3f4'}
+                trackColor={{ false: "#767577", true: "#D6FC03" }}
+                thumbColor={true ? "#fff" : "#f4f3f4"}
                 ios_backgroundColor="#3e3e3e"
                 onValueChange={() => {}}
                 value={true}
