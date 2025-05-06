@@ -9,7 +9,7 @@ import {
   ActivityIndicator,
 } from "react-native";
 import { Feather } from "@expo/vector-icons";
-import { useNavigation } from "@react-navigation/native";
+import { NavigationProp, useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useDashboard } from "../../hooks/useDashboard";
@@ -17,16 +17,16 @@ import { firstLetterUppercase } from "../../utils/handlerFunctions";
 import { ROUTES } from "../../navigation/routes";
 
 // Define navigation types
-type RootStackParamList = {
-  Dashboard: undefined;
-  RoutineSession: { id: number; title: string };
-};
+// type RootStackParamList = {
+//   Dashboard: undefined;
+//   RoutineSession: { id: number; title: string };
+// };
 
-type NavigationProp = NativeStackNavigationProp<RootStackParamList>;
+// type NavigationProp = NativeStackNavigationProp<RootStackParamList>;
 
 const Routine = () => {
   const { routineById, isRoutineLoading } = useDashboard();
-  const navigation = useNavigation<NavigationProp>();
+  const navigation = useNavigation();
 
   if (isRoutineLoading) {
     return (
@@ -43,7 +43,11 @@ const Routine = () => {
           Routine not found
         </Text>
         <TouchableOpacity
-          onPress={() => navigation.navigate(ROUTES.DASHBOARD as "Dashboard")}
+          onPress={() =>
+            navigation.navigate("MainTabs", {
+              screen: "Dashboard",
+            })
+          }
           className="mt-2"
         >
           <Text className="text-blue-500">Return to Dashboard</Text>
@@ -62,7 +66,11 @@ const Routine = () => {
             resizeMode="cover"
           />
           <TouchableOpacity
-            onPress={() => navigation.navigate(ROUTES.DASHBOARD as "Dashboard")}
+            onPress={() =>
+              navigation.navigate("MainTabs", {
+                screen: "Dashboard",
+              })
+            }
             className="absolute top-4 left-4 p-2 rounded-full bg-black/20"
           >
             <Feather name="chevron-left" size={24} color="white" />
@@ -136,13 +144,12 @@ const Routine = () => {
             <TouchableOpacity
               className="w-full bg-blue-600 py-3 rounded-lg items-center"
               onPress={() =>
-                navigation.navigate(
-                  ROUTES.ROUTINE_SESSION as "RoutineSession",
-                  {
-                    id: routineById?.id || 0,
-                    title: routineById?.name || "",
-                  }
-                )
+                navigation.navigate("WorkoutStack", {
+                  screen: "RoutineSession",
+                  params: {
+                    routineId: routineById?.id || 0,
+                  },
+                })
               }
             >
               <Text className="text-white font-medium">Start Session</Text>

@@ -2,19 +2,19 @@
 import React from "react";
 import { View, Text, Image, TouchableOpacity } from "react-native";
 import { Feather } from "@expo/vector-icons";
-import { useNavigation } from "@react-navigation/native";
+import { NavigationProp, useNavigation } from "@react-navigation/native";
 import { ROUTES } from "../../../src/navigation/routes";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 
 // Define the navigation param list
-type RootStackParamList = {
-  ROUTINE: {
-    id: number;
-    title: string;
-  };
-};
+// type RootStackParamList = {
+//   Routine: {
+//     id: number;
+//     title: string;
+//   };
+// };
 
-type NavigationProp = NativeStackNavigationProp<RootStackParamList>;
+// type NavigationProp = NativeStackNavigationProp<RootStackParamList>;
 
 interface WorkoutCardProps {
   id: number;
@@ -33,15 +33,15 @@ export const WorkoutCard = ({
   image,
   description,
 }: WorkoutCardProps) => {
-  const navigation = useNavigation<NavigationProp>();
+  const navigation = useNavigation();
 
   return (
     <TouchableOpacity
       className="w-64 h-[190px] bg-zinc-900 rounded-lg overflow-hidden mr-4"
       onPress={() =>
-        navigation.navigate("ROUTINE", {
-          id,
-          title,
+        navigation.navigate("WorkoutStack", {
+          screen: "Routine",
+          params: { id },
         })
       }
       activeOpacity={0.7}

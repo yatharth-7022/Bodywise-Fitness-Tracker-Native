@@ -1,6 +1,6 @@
 // components/Dashboard/Dashboard.tsx
 import React from "react";
-import { View, Text, ScrollView, Image, TouchableOpacity } from "react-native";
+import { View, Text, ScrollView, TouchableOpacity } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { Feather } from "@expo/vector-icons";
 import { Button } from "../ui/Button";
@@ -8,26 +8,16 @@ import { Card } from "../ui/Card";
 import { WorkoutCard } from "./WorkoutCard";
 import { WeeklyActivityChart } from "./WeeklyActivityChart";
 import { MonthlyVolumeChart } from "./MonthlyVolumeChart";
-import { ROUTES } from "../../../src/navigation/routes";
-import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import { ROUTES } from "../../navigation/routes";
 
 import { ProfilePicture } from "../Upload-Profile/ProfilePicture";
 import { useDashboard } from "../../hooks/useDashboard";
 import { useAuth } from "../../hooks/useAuth";
 
-// Define the navigation type
-type RootStackParamList = {
-  SETTINGS: undefined;
-  LOG_WEIGHT: undefined;
-  TIMER: undefined;
-};
-
-type NavigationProp = NativeStackNavigationProp<RootStackParamList>;
-
 export const Dashboard = () => {
   const { defaultRoutines } = useDashboard();
   const { profileData } = useAuth();
-  const navigation = useNavigation<NavigationProp>();
+  const navigation = useNavigation();
 
   const defaultRoutinesWithImage = defaultRoutines?.filter(
     (routine) => routine.imageUrl !== null
@@ -51,7 +41,11 @@ export const Dashboard = () => {
               </View>
             </View>
             <TouchableOpacity
-              onPress={() => navigation.navigate("SETTINGS")}
+              onPress={() =>
+                navigation.navigate("ProfileStack", {
+                  screen: "Settings",
+                })
+              }
               className="p-2"
             >
               <Feather name="settings" size={20} color="white" />
@@ -66,7 +60,11 @@ export const Dashboard = () => {
               <Button
                 className="flex-1 bg-blue-600"
                 textClassName="text-white text-xs"
-                onPress={() => navigation.navigate("LOG_WEIGHT")}
+                onPress={() =>
+                  navigation.navigate("WeightStack", {
+                    screen: "LogWeight",
+                  })
+                }
                 icon={<Feather name="activity" size={16} color="white" />}
               >
                 <Text className="ml-1 text-white">Log Weight</Text>
@@ -74,7 +72,11 @@ export const Dashboard = () => {
               <Button
                 className="flex-1 bg-blue-600"
                 textClassName="text-white text-xs"
-                onPress={() => navigation.navigate("TIMER")}
+                onPress={() =>
+                  navigation.navigate("MainTabs", {
+                    screen: "Timer",
+                  })
+                }
                 icon={<Feather name="clock" size={16} color="white" />}
               >
                 <Text className="ml-1 text-white">Start Timer</Text>
@@ -82,6 +84,17 @@ export const Dashboard = () => {
               <Button
                 className="flex-1 bg-yellow-600"
                 textClassName="text-white text-xs"
+                onPress={() => {
+                  if (
+                    defaultRoutinesWithImage &&
+                    defaultRoutinesWithImage.length > 0
+                  ) {
+                    navigation.navigate("WorkoutStack", {
+                      screen: "Routine",
+                      params: { id: defaultRoutinesWithImage[0]?.id },
+                    });
+                  }
+                }}
               >
                 Start Session →
               </Button>
@@ -169,4 +182,3 @@ export const Dashboard = () => {
 };
 
 export default Dashboard;
-1

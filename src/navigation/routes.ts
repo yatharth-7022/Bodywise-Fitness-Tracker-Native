@@ -1,5 +1,12 @@
 // src/navigation/routes.ts
 export const ROUTES = {
+  // Navigator names - THESE MUST MATCH THE RootStackParamList keys exactly
+  AUTH: "Auth",
+  MAIN_TABS: "MainTabs",
+  WORKOUT_STACK: "WorkoutStack",
+  PROFILE_STACK: "ProfileStack",
+  WEIGHT_STACK: "WeightStack",
+
   // Auth routes
   HOME: "Home",
   LOGIN: "Login",
@@ -16,4 +23,6 @@ export const ROUTES = {
   SETTINGS: "Settings",
   UPLOAD_PROFILE_PICTURE: "UploadProfilePicture",
   TIMER: "Timer",
+  ADD_BUTTON: "AddButton",
+  CHART: "Chart",
 };

@@ -3,7 +3,9 @@ import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { TouchableOpacity } from "react-native";
 import { Feather } from "@expo/vector-icons";
+import { useNavigation } from "@react-navigation/native";
 import { ROUTES } from "./routes";
+import { MainTabParamList } from "../types/navigation";
 import Dashboard from "../components/Dashboard/Dashboard";
 import { TimerPage } from "../screens/Timer/TimerPage";
 
@@ -14,9 +16,11 @@ const EmptyComponent = () => null;
 const AllExercises = EmptyComponent;
 const ChartScreen = EmptyComponent;
 
-const Tab = createBottomTabNavigator();
+const Tab = createBottomTabNavigator<MainTabParamList>();
 
 export function MainTabNavigator() {
+  const navigation = useNavigation();
+
   return (
     <Tab.Navigator
       screenOptions={({ route }) => ({
@@ -38,7 +42,7 @@ export function MainTabNavigator() {
             iconName = "activity";
           } else if (route.name === ROUTES.TIMER) {
             iconName = "clock";
-          } else if (route.name === "Chart") {
+          } else if (route.name === ROUTES.CHART) {
             iconName = "bar-chart-2";
           }
 
@@ -47,8 +51,8 @@ export function MainTabNavigator() {
         },
       })}
     >
-      <Tab.Screen name={ROUTES.DASHBOARD} component={Dashboard} />
-      <Tab.Screen name={ROUTES.TIMER} component={TimerPage} />
+      <Tab.Screen name="Dashboard" component={Dashboard} />
+      <Tab.Screen name="Timer" component={TimerPage} />
       <Tab.Screen
         name="AddButton"
         component={EmptyComponent}
@@ -67,8 +71,10 @@ export function MainTabNavigator() {
                 marginHorizontal: 8,
               }}
               onPress={() => {
-                // Handle add button press - could open a modal with options
-                console.log("Add button pressed");
+                // Navigate to weight logging screen
+                navigation.navigate("WeightStack", {
+                  screen: "LogWeight",
+                });
               }}
             >
               <Feather name="plus" size={24} color="white" />
@@ -76,7 +82,7 @@ export function MainTabNavigator() {
           ),
         }}
       />
-      <Tab.Screen name={ROUTES.EXERCISES} component={AllExercises} />
+      <Tab.Screen name="Exercises" component={AllExercises} />
       <Tab.Screen name="Chart" component={ChartScreen} />
     </Tab.Navigator>
   );

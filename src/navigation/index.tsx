@@ -3,6 +3,7 @@ import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import { useAuth } from "../hooks/useAuth";
 import { ROUTES } from "./routes";
+import { RootStackParamList } from "../types/navigation";
 
 // Screens
 import { Home } from "../screens/Home/Home";
@@ -20,7 +21,13 @@ import Routine from "../components/Routine/Routine";
 import { TimerPage } from "../screens/Timer/TimerPage";
 import UploadProfile from "../components/Upload-Profile/UploadProfile";
 
-const Stack = createStackNavigator();
+// Import navigators
+import { AuthNavigator } from "./AuthNavigator";
+import { WorkoutNavigator } from "./WorkoutNavigator";
+import { ProfileNavigator } from "./ProfileNavigator";
+import { WeightNavigator } from "./WeightNavigator";
+
+const Stack = createStackNavigator<RootStackParamList>();
 
 export default function RootNavigator() {
   const { isAuthenticated } = useAuth();
@@ -28,30 +35,15 @@ export default function RootNavigator() {
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
       {!isAuthenticated ? (
-        // Auth screens
-        <>
-          <Stack.Screen name={ROUTES.HOME} component={Home} />
-          <Stack.Screen name={ROUTES.PRESIGNUP} component={PreSignUp} />
-          <Stack.Screen name={ROUTES.SIGNUP} component={SignUp} />
-          <Stack.Screen name={ROUTES.LOGIN} component={Login} />
-        </>
+        // Auth Navigator - use literal "Auth" instead of ROUTES.AUTH
+        <Stack.Screen name="Auth" component={AuthNavigator} />
       ) : (
-        // Main app screens
+        // Main App Navigators - use literal strings that match TypeScript types
         <>
-          <Stack.Screen name="MainApp" component={MainTabNavigator} />
-          <Stack.Screen name={ROUTES.LOG_WEIGHT} component={LogWeight} />
-          <Stack.Screen name={ROUTES.WEIGHTS} component={AllWeights} />
-          <Stack.Screen name={ROUTES.ROUTINE} component={Routine} />
-          <Stack.Screen
-            name={ROUTES.ROUTINE_SESSION}
-            component={RoutineSession}
-          />
-          <Stack.Screen name={ROUTES.SETTINGS} component={Settings} />
-          <Stack.Screen
-            name={ROUTES.UPLOAD_PROFILE_PICTURE}
-            component={UploadProfile}
-          />
-          <Stack.Screen name={ROUTES.TIMER} component={TimerPage} />
+          <Stack.Screen name="MainTabs" component={MainTabNavigator} />
+          <Stack.Screen name="WorkoutStack" component={WorkoutNavigator} />
+          <Stack.Screen name="ProfileStack" component={ProfileNavigator} />
+          <Stack.Screen name="WeightStack" component={WeightNavigator} />
         </>
       )}
     </Stack.Navigator>

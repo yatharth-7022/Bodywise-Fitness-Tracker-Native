@@ -4,12 +4,13 @@ import { Platform } from "react-native";
 // Get the correct API URL based on platform
 const getApiBaseUrl = () => {
   // If running in Android emulator
-  // if (Platform.OS === "android" && !Platform.constants.Brand) {
-  //   return "http://10.0.2.2:5000"; // Android emulator special IP
-  // }
+  if (Platform.OS === "android" && !Platform.constants.Brand) {
+    return "http://10.0.2.2:5000"; // Android emulator special IP
+  }
 
   // For physical devices or iOS simulator
-  return Constants.expoConfig?.extra?.apiUrl || "http://192.168.29.195:5000"; // Your laptop's IP
+  return "http://192.168.29.195:5000"; // Your laptop's IP
+  //change this later to env
 };
 
 const API_CONFIG = {
