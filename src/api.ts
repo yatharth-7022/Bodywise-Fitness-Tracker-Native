@@ -9,7 +9,7 @@ const getApiBaseUrl = () => {
   }
 
   // For physical devices or iOS simulator
-  return "http://192.168.29.195:5000"; // Your laptop's IP
+  return "http://192.168.29.194:5000"; // Your laptop's IP
   //change this later to env
 };
 

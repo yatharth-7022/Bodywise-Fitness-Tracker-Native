@@ -46,7 +46,9 @@ export const useAuth = () => {
       await AsyncStorage.setItem("token", data.token);
       setIsAuthenticated(true);
       Alert.alert("Success", "Account created successfully!");
-      navigation.navigate(ROUTES.UPLOAD_PROFILE_PICTURE as never);
+      navigation.navigate("MainTabs", {
+        screen: "Dashboard",
+      });
     },
     onError: (error: Error) => {
       Alert.alert("Error", error.message);
@@ -64,7 +66,9 @@ export const useAuth = () => {
       await AsyncStorage.setItem("token", data.token);
       setIsAuthenticated(true);
       Alert.alert("Success", "Logged in successfully!");
-      navigation.navigate(ROUTES.DASHBOARD as never);
+      navigation.navigate("MainTabs", {
+        screen: "Dashboard",
+      });
     },
     onError: (error: Error) => {
       Alert.alert("Error", error.message);
@@ -82,7 +86,9 @@ export const useAuth = () => {
       await AsyncStorage.removeItem("token");
       setIsAuthenticated(false);
       Alert.alert("Success", "Logged out successfully!");
-      navigation.navigate(ROUTES.LOGIN as never);
+      navigation.navigate("Auth", {
+        screen: "Login",
+      });
     },
     onError: (error: Error) => {
       Alert.alert("Error", error.message);

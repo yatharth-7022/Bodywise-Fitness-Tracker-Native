@@ -111,7 +111,11 @@ export const Settings = () => {
       <View className="px-6 py-4 flex flex-row items-center">
         <TouchableOpacity
           className="mr-2"
-          onPress={() => navigation.navigate(ROUTES.DASHBOARD as never)}
+          onPress={() =>
+            navigation.navigate("MainTabs", {
+              screen: "Dashboard",
+            })
+          }
         >
           <Icon name="arrow-left" size={20} color="white" />
         </TouchableOpacity>
