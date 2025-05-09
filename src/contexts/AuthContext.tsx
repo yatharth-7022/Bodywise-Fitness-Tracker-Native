@@ -1,7 +1,8 @@
 // src/contexts/AuthContext.tsx
-import React, { createContext, useState, useEffect } from 'react';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import api from '../interceptor';
+import React, { createContext, useState, useEffect } from "react";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import api from "../interceptor";
+import { LOGIN, LOGOUT, SIGNUP } from "../api";
 
 type AuthContextType = {
   isAuthenticated: boolean;
@@ -30,15 +31,15 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     const checkAuth = async () => {
       try {
-        const token = await AsyncStorage.getItem('token');
+        const token = await AsyncStorage.getItem("token");
         if (token) {
-          const response = await api.get('/api/auth/user');
+          const response = await api.get("/api/auth/user");
           setUser(response.data.user);
           setIsAuthenticated(true);
         }
       } catch (error) {
-        console.error('Auth check error:', error);
-        await AsyncStorage.removeItem('token');
+        console.error("Auth check error:", error);
+        await AsyncStorage.removeItem("token");
       } finally {
         setIsLoading(false);
       }
@@ -50,12 +51,12 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const login = async (email: string, password: string) => {
     setIsLoading(true);
     try {
-      const response = await api.post('/api/auth/login', { email, password });
-      await AsyncStorage.setItem('token', response.data.token);
+      const response = await api.post(LOGIN, { email, password });
+      await AsyncStorage.setItem("token", response.data.token);
       setUser(response.data.user);
       setIsAuthenticated(true);
     } catch (error) {
-      console.error('Login error:', error);
+      console.error("Login error:", error);
       throw error;
     } finally {
       setIsLoading(false);
@@ -65,16 +66,16 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const signup = async (name: string, email: string, password: string) => {
     setIsLoading(true);
     try {
-      const response = await api.post('/api/auth/signup', {
+      const response = await api.post(SIGNUP, {
         name,
         email,
         password,
       });
-      await AsyncStorage.setItem('token', response.data.token);
+      await AsyncStorage.setItem("token", response.data.token);
       setUser(response.data.user);
       setIsAuthenticated(true);
     } catch (error) {
-      console.error('Signup error:', error);
+      console.error("Signup error:", error);
       throw error;
     } finally {
       setIsLoading(false);
@@ -84,14 +85,14 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const logout = async () => {
     setIsLoading(true);
     try {
-      await api.post('/api/auth/logout');
-      await AsyncStorage.removeItem('token');
+      await api.post(LOGOUT);
+      await AsyncStorage.removeItem("token");
       setUser(null);
       setIsAuthenticated(false);
     } catch (error) {
-      console.error('Logout error:', error);
+      console.error("Logout error:", error);
       // If API fails, still clear local storage
-      await AsyncStorage.removeItem('token');
+      await AsyncStorage.removeItem("token");
       setUser(null);
       setIsAuthenticated(false);
     } finally {

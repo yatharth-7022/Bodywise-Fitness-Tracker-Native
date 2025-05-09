@@ -1,7 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import api from "../interceptor";
 import { DEFAULT_ROUTINE, ROUTINE_BY_ID } from "../api";
-import { ROUTES } from "../navigation/routes";
 import { useState } from "react";
 import { DefaultRoutine, Routine } from "../types/dashboard";
 

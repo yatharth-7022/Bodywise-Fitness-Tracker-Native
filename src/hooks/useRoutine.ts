@@ -13,7 +13,7 @@ export const useRoutine = () => {
     queryKey: ["routine-by-id", routineId],
     queryFn: async () => {
       const response = await api.get(
-        `${ROUTINE_BY_ID}${routineId}?includezExercises=true`
+        `${ROUTINE_BY_ID}${routineId}?includeExercises=true`
       );
       return response.data;
     },

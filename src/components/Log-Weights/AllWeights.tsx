@@ -20,11 +20,9 @@ type WeightStackParamList = {
   LOG_WEIGHT: undefined;
 };
 
-type NavigationProp = NativeStackNavigationProp<WeightStackParamList>;
-
 export const AllWeights = () => {
   const { allWeights } = useWeights();
-  const navigation = useNavigation<NavigationProp>();
+  const navigation = useNavigation();
 
   // Function to format date without using date-fns
   const formatDate = (dateString: string) => {
@@ -43,7 +41,11 @@ export const AllWeights = () => {
         <View className="flex-row items-center p-6 mb-4">
           <TouchableOpacity
             className="mr-3"
-            onPress={() => navigation.navigate("LOG_WEIGHT")}
+            onPress={() =>
+              navigation.navigate("WeightStack", {
+                screen: "LogWeight",
+              })
+            }
           >
             <Feather name="arrow-left" size={24} color="white" />
           </TouchableOpacity>
