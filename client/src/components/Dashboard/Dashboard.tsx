@@ -22,19 +22,18 @@ export const Dashboard = () => {
   const { defaultRoutines } = useDashboard();
   const { user } = useAuth();
   const navigation = useNavigation<DashboardScreenNavigationProp>();
-
+  console.log({user});
   const defaultRoutinesWithImage = defaultRoutines?.filter(
     (routine) => routine.imageUrl !== null
   );
 
-  // Function to get greeting based on time of day
   const getGreeting = () => {
     const hour = new Date().getHours();
-    if (hour < 12) return "Good morning!";
-    if (hour < 18) return "Good afternoon!";
-    return "Good evening!";
+    if (hour < 12) return "Good Morning!";
+    if (hour < 18) return "Good Afternoon!";
+    return "Good Evening!";
   };
-
+  console.log(user?.name);
   return (
     <View className="flex-1 bg-zinc-950">
       <ScrollView className="flex-1" showsVerticalScrollIndicator={false}>
@@ -48,7 +47,7 @@ export const Dashboard = () => {
               <View>
                 <Text className="text-zinc-400 text-sm">{getGreeting()}</Text>
                 <Text className="text-xl font-semibold text-white">
-                  {user?.name || "Fitness Enthusiast"}
+                  {user?.username ?? "Fitness Enthusiast"}
                 </Text>
               </View>
             </View>
