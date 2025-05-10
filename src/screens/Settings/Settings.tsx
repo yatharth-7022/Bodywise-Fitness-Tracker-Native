@@ -12,17 +12,20 @@ import {
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useNavigation } from "@react-navigation/native";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import Icon from "react-native-vector-icons/Feather";
 import * as ImagePicker from "expo-image-picker";
-import { useAuth } from "../../hooks/useAuth";
+import { useAuth } from "../../contexts/AuthContext";
 import api from "../../interceptor";
 import { API_CONFIG } from "../../api";
 import { ROUTES } from "../../navigation/routes";
+import { RootStackParamList } from "../../types/navigation";
+
+type SettingsScreenNavigationProp = NativeStackNavigationProp<RootStackParamList>;
 
 export const Settings = () => {
-  const navigation = useNavigation();
-  const { handleLogout, isLogoutLoading, profileData, refetchProfile } =
-    useAuth();
+  const navigation = useNavigation<SettingsScreenNavigationProp>();
+  const { logout, isLoading, user } = useAuth();
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const [isUploading, setIsUploading] = useState(false);
   const [uploadProgress, setUploadProgress] = useState(0);
@@ -69,7 +72,6 @@ export const Settings = () => {
       setUploadProgress(100);
 
       setSelectedImage(null);
-      await refetchProfile();
       Alert.alert("Success", "Profile picture updated successfully!");
     } catch (error) {
       console.error(error);
@@ -89,7 +91,7 @@ export const Settings = () => {
       },
       {
         text: "Logout",
-        onPress: handleLogout,
+        onPress: logout,
         style: "destructive",
       },
     ]);
@@ -97,7 +99,7 @@ export const Settings = () => {
 
   return (
     <SafeAreaView className="flex-1 bg-background">
-      {isLogoutLoading && (
+      {isLoading && (
         <View className="absolute inset-0 bg-black/70 backdrop-blur-sm z-50 flex items-center justify-center">
           <View className="flex flex-col items-center gap-4">
             <ActivityIndicator size="large" color="#D6FC03" />
@@ -137,8 +139,8 @@ export const Settings = () => {
                     source={
                       selectedImage
                         ? { uri: selectedImage }
-                        : profileData?.user?.profilePicture
-                        ? { uri: profileData.user.profilePicture }
+                        : user?.profilePicture
+                        ? { uri: user.profilePicture }
                         : require("../../assets/image/phyphoto.jpg")
                     }
                     className="w-full h-full"
@@ -197,11 +199,11 @@ export const Settings = () => {
               <Text className="text-sm font-medium text-zinc-400">
                 Username
               </Text>
-              <Text className="text-white">{profileData?.user?.name}</Text>
+              <Text className="text-white">{user?.name}</Text>
             </View>
             <View className="space-y-1">
               <Text className="text-sm font-medium text-zinc-400">Email</Text>
-              <Text className="text-white">{profileData?.user?.email}</Text>
+              <Text className="text-white">{user?.email}</Text>
             </View>
             <View className="space-y-1">
               <Text className="text-sm font-medium text-zinc-400">

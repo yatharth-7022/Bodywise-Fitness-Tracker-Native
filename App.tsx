@@ -5,37 +5,26 @@ import { NavigationContainer } from "@react-navigation/native";
 import { StatusBar } from "expo-status-bar";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import RootNavigator from "./src/navigation";
-import { LoadingScreen } from "./src/screens/LoadingScreen";
-import { useAuth } from "./src/hooks/useAuth";
+import { AuthProvider } from "./src/contexts/AuthContext";
 import "react-native-reanimated";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 
 // Create a client
 const queryClient = new QueryClient();
 
-// Separate component for navigation to use auth hook
-function NavigationWithAuth() {
-  const { isAuthenticated } = useAuth();
-
-  // Show loading while checking auth status
-  if (isAuthenticated === null) {
-    return <LoadingScreen />;
-  }
-
-  return <RootNavigator />;
-}
-
 export default function App() {
   return (
-    <GestureHandlerRootView style={{ flex: 1 }}>
-      <QueryClientProvider client={queryClient}>
+    <QueryClientProvider client={queryClient}>
+      <GestureHandlerRootView style={{ flex: 1 }}>
         <SafeAreaProvider>
-          <StatusBar style="light" />
-          <NavigationContainer>
-            <NavigationWithAuth />
-          </NavigationContainer>
+          <AuthProvider>
+            <NavigationContainer>
+              <StatusBar style="light" />
+              <RootNavigator />
+            </NavigationContainer>
+          </AuthProvider>
         </SafeAreaProvider>
-      </QueryClientProvider>
-    </GestureHandlerRootView>
+      </GestureHandlerRootView>
+    </QueryClientProvider>
   );
 }

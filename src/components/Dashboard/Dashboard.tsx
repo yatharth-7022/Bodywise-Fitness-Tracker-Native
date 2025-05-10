@@ -2,6 +2,7 @@
 import React from "react";
 import { View, Text, ScrollView, TouchableOpacity } from "react-native";
 import { useNavigation } from "@react-navigation/native";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { Feather } from "@expo/vector-icons";
 import { Button } from "../ui/Button";
 import { Card } from "../ui/Card";
@@ -9,19 +10,30 @@ import { WorkoutCard } from "./WorkoutCard";
 import { WeeklyActivityChart } from "./WeeklyActivityChart";
 import { MonthlyVolumeChart } from "./MonthlyVolumeChart";
 import { ROUTES } from "../../navigation/routes";
+import { RootStackParamList } from "../../types/navigation";
 
 import { ProfilePicture } from "../Upload-Profile/ProfilePicture";
 import { useDashboard } from "../../hooks/useDashboard";
-import { useAuth } from "../../hooks/useAuth";
+import { useAuth } from "../../contexts/AuthContext";
+
+type DashboardScreenNavigationProp = NativeStackNavigationProp<RootStackParamList>;
 
 export const Dashboard = () => {
   const { defaultRoutines } = useDashboard();
-  const { profileData } = useAuth();
-  const navigation = useNavigation();
+  const { user } = useAuth();
+  const navigation = useNavigation<DashboardScreenNavigationProp>();
 
   const defaultRoutinesWithImage = defaultRoutines?.filter(
     (routine) => routine.imageUrl !== null
   );
+
+  // Function to get greeting based on time of day
+  const getGreeting = () => {
+    const hour = new Date().getHours();
+    if (hour < 12) return "Good morning!";
+    if (hour < 18) return "Good afternoon!";
+    return "Good evening!";
+  };
 
   return (
     <View className="flex-1 bg-zinc-950">
@@ -30,13 +42,13 @@ export const Dashboard = () => {
           <View className="flex-row justify-between items-center pb-6">
             <View className="flex-row items-center gap-3">
               <ProfilePicture
-                src={profileData?.user?.profilePicture}
+                src={user?.profilePicture}
                 size="md"
               />
               <View>
-                <Text className="text-zinc-400 text-sm">Good morning!</Text>
+                <Text className="text-zinc-400 text-sm">{getGreeting()}</Text>
                 <Text className="text-xl font-semibold text-white">
-                  {profileData?.user?.name}
+                  {user?.name || "Fitness Enthusiast"}
                 </Text>
               </View>
             </View>

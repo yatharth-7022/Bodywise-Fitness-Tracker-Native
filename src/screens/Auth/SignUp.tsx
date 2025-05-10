@@ -1,33 +1,68 @@
 // SignUp.tsx
-import React from "react";
+import React, { useState } from "react";
 import {
   View,
   Text,
   TouchableOpacity,
   TextInput,
   ScrollView,
-  GestureResponderEvent,
+  ActivityIndicator,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useNavigation } from "@react-navigation/native";
 import Icon from "react-native-vector-icons/Feather";
-import { useAuth } from "../../hooks/useAuth";
-import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-
-// Define navigation types
-type AuthStackParamList = {
-  Login: undefined;
-};
-
-type NavigationProp = NativeStackNavigationProp<AuthStackParamList>;
+import { useAuth } from "../../contexts/AuthContext";
+import { ROUTES } from "../../navigation/routes";
+import { SignupData } from "../../types/auth";
 
 const SignUp = () => {
-  const navigation = useNavigation<NavigationProp>();
-  const { handleInputChange, handleSignupSubmit, errors, formData, isLoading } =
-    useAuth();
+  const navigation = useNavigation();
+  const { signup, isLoading, formData, setFormData } = useAuth();
+  const [signupData, setSignupData] = useState<SignupData>({
+    name: "",
+    email: formData.email || "",
+    password: formData.password || "",
+  });
+  const [localErrors, setLocalErrors] = useState<{
+    name?: string;
+    email?: string;
+    password?: string;
+  }>({});
 
-  const handleSubmit = (event: GestureResponderEvent) => {
-    handleSignupSubmit();
+  const validateInputs = () => {
+    const newErrors: {name?: string; email?: string; password?: string} = {};
+    let isValid = true;
+
+    if (!signupData.name) {
+      newErrors.name = "Name is required";
+      isValid = false;
+    }
+
+    if (!signupData.email) {
+      newErrors.email = "Email is required";
+      isValid = false;
+    } else if (!/\S+@\S+\.\S+/.test(signupData.email)) {
+      newErrors.email = "Invalid email format";
+      isValid = false;
+    }
+
+    if (!signupData.password) {
+      newErrors.password = "Password is required";
+      isValid = false;
+    } else if (signupData.password.length < 6) {
+      newErrors.password = "Password must be at least 6 characters";
+      isValid = false;
+    }
+
+    setLocalErrors(newErrors);
+    return isValid;
+  };
+
+  const handleSignUp = async () => {
+    if (validateInputs()) {
+      await signup(signupData);
+      // Navigation is handled in the AuthContext if signup succeeds
+    }
   };
 
   return (
@@ -59,22 +94,47 @@ const SignUp = () => {
 
         <View className="space-y-4">
           <View className="space-y-2">
+            <Text className="text-sm font-medium text-zinc-300">Name</Text>
+            <TextInput
+              className={`bg-zinc-900 border ${
+                localErrors.name ? "border-red-500" : "border-zinc-700"
+              } text-white h-12 px-4 rounded-md`}
+              placeholder="Your name"
+              placeholderTextColor="#666"
+              autoCapitalize="words"
+              value={signupData.name}
+              onChangeText={(text) => {
+                setSignupData(prev => ({...prev, name: text}));
+                if (localErrors.name) {
+                  setLocalErrors(prev => ({...prev, name: undefined}));
+                }
+              }}
+            />
+            {localErrors.name && (
+              <Text className="text-red-500 text-xs mt-1">{localErrors.name}</Text>
+            )}
+          </View>
+
+          <View className="space-y-2">
             <Text className="text-sm font-medium text-zinc-300">Email</Text>
             <TextInput
               className={`bg-zinc-900 border ${
-                errors.email ? "border-red-500" : "border-zinc-700"
+                localErrors.email ? "border-red-500" : "border-zinc-700"
               } text-white h-12 px-4 rounded-md`}
               placeholder="you@example.com"
               placeholderTextColor="#666"
               keyboardType="email-address"
               autoCapitalize="none"
-              value={formData.email}
-              onChangeText={(text) =>
-                handleInputChange({ id: "email", value: text })
-              }
+              value={signupData.email}
+              onChangeText={(text) => {
+                setSignupData(prev => ({...prev, email: text}));
+                if (localErrors.email) {
+                  setLocalErrors(prev => ({...prev, email: undefined}));
+                }
+              }}
             />
-            {errors.email && (
-              <Text className="text-red-500 text-xs mt-1">{errors.email}</Text>
+            {localErrors.email && (
+              <Text className="text-red-500 text-xs mt-1">{localErrors.email}</Text>
             )}
           </View>
 
@@ -82,37 +142,35 @@ const SignUp = () => {
             <Text className="text-sm font-medium text-zinc-300">Password</Text>
             <TextInput
               className={`bg-zinc-900 border ${
-                errors.password ? "border-red-500" : "border-zinc-700"
+                localErrors.password ? "border-red-500" : "border-zinc-700"
               } text-white h-12 px-4 rounded-md`}
               placeholder="••••••••"
               placeholderTextColor="#666"
               secureTextEntry
-              value={formData.password}
-              onChangeText={(text) =>
-                handleInputChange({ id: "password", value: text })
-              }
+              value={signupData.password}
+              onChangeText={(text) => {
+                setSignupData(prev => ({...prev, password: text}));
+                if (localErrors.password) {
+                  setLocalErrors(prev => ({...prev, password: undefined}));
+                }
+              }}
             />
-            {errors.password && (
+            {localErrors.password && (
               <Text className="text-red-500 text-xs mt-1">
-                {errors.password}
+                {localErrors.password}
               </Text>
             )}
           </View>
 
           <TouchableOpacity
             className="w-full bg-primary hover:bg-lime-500 text-black font-bold h-12 rounded-md flex-row items-center justify-center mt-4"
-            onPress={handleSubmit}
+            onPress={handleSignUp}
             disabled={isLoading}
           >
             {isLoading ? (
               <View className="flex-row items-center justify-center">
-                <Icon
-                  name="loader"
-                  size={20}
-                  color="black"
-                  className="animate-spin mr-2"
-                />
-                <Text className="text-black font-bold">
+                <ActivityIndicator size="small" color="black" />
+                <Text className="text-black font-bold ml-2">
                   Creating account...
                 </Text>
               </View>
@@ -129,7 +187,7 @@ const SignUp = () => {
             Already have an account?{" "}
             <Text
               className="text-primary font-medium"
-              onPress={() => navigation.navigate("Login")}
+              onPress={() => navigation.navigate(ROUTES.LOGIN as never)}
             >
               Log in
             </Text>

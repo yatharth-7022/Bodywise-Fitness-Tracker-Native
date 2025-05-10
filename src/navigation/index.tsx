@@ -1,9 +1,10 @@
 // src/navigation/index.tsx
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
-import { useAuth } from "../hooks/useAuth";
+import { useAuth } from "../contexts/AuthContext";
 import { ROUTES } from "./routes";
 import { RootStackParamList } from "../types/navigation";
+import { LoadingScreen } from "../screens/LoadingScreen";
 
 // Screens
 import { Home } from "../screens/Home/Home";
@@ -30,15 +31,17 @@ import { WeightNavigator } from "./WeightNavigator";
 const Stack = createStackNavigator<RootStackParamList>();
 
 export default function RootNavigator() {
-  const { isAuthenticated } = useAuth();
+  const { isAuthenticated, isLoading } = useAuth();
+
 
   return (
-    <Stack.Navigator screenOptions={{ headerShown: false }}>
+    <Stack.Navigator 
+      screenOptions={{ headerShown: false }}
+      initialRouteName={isAuthenticated ? "MainTabs" : "Auth"}
+    >
       {!isAuthenticated ? (
-        // Auth Navigator - use literal "Auth" instead of ROUTES.AUTH
         <Stack.Screen name="Auth" component={AuthNavigator} />
       ) : (
-        // Main App Navigators - use literal strings that match TypeScript types
         <>
           <Stack.Screen name="MainTabs" component={MainTabNavigator} />
           <Stack.Screen name="WorkoutStack" component={WorkoutNavigator} />

@@ -1,21 +1,71 @@
 // Login.tsx
-import React from "react";
+import React, { useState, useEffect } from "react";
 import {
   View,
   Text,
   TouchableOpacity,
   TextInput,
   ScrollView,
+  ActivityIndicator,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useNavigation } from "@react-navigation/native";
 import Icon from "react-native-vector-icons/Feather";
-import { useAuth } from "../../hooks/useAuth";
+import { useAuth } from "../../contexts/AuthContext";
 import { ROUTES } from "../../navigation/routes";
+
 const Login = () => {
   const navigation = useNavigation();
-  const { isLoginLoading, handleInputChange, handleSubmit, errors, formData } =
-    useAuth();
+  const { login, isLoading, formData, setFormData, errors, handleInputChange } = useAuth();
+  const [localErrors, setLocalErrors] = useState<{email?: string; password?: string}>({});
+  const [isLocalLoading, setIsLocalLoading] = useState(false);
+
+  // Reset local loading state if context loading state changes
+  useEffect(() => {
+    if (!isLoading) {
+      setIsLocalLoading(false);
+    }
+  }, [isLoading]);
+
+  const validateInputs = () => {
+    const newErrors: {email?: string; password?: string} = {};
+    let isValid = true;
+
+    if (!formData.email) {
+      newErrors.email = "Email is required";
+      isValid = false;
+    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
+      newErrors.email = "Invalid email format";
+      isValid = false;
+    }
+
+    if (!formData.password) {
+      newErrors.password = "Password is required";
+      isValid = false;
+    } else if (formData.password.length < 6) {
+      newErrors.password = "Password must be at least 6 characters";
+      isValid = false;
+    }
+
+    setLocalErrors(newErrors);
+    return isValid;
+  };
+
+  const handleLogin = async () => {
+    if (validateInputs()) {
+      try {
+        setIsLocalLoading(true);
+        await login(formData);
+      } catch (error) {
+        // Error is already handled in the context
+      } finally {
+        setIsLocalLoading(false);
+      }
+    }
+  };
+
+  // Determine if button should show loading state
+  const showLoadingState = isLoading || isLocalLoading;
 
   return (
     <SafeAreaView className="flex-1 bg-black">
@@ -52,19 +102,22 @@ const Login = () => {
             <Text className="text-sm font-medium text-zinc-300">Email</Text>
             <TextInput
               className={`bg-zinc-900 border ${
-                errors.email ? "border-red-500" : "border-zinc-700"
+                localErrors.email || errors.email ? "border-red-500" : "border-zinc-700"
               } text-white h-12 px-4 rounded-md`}
               placeholder="you@example.com"
               placeholderTextColor="#666"
               keyboardType="email-address"
               autoCapitalize="none"
               value={formData.email}
-              onChangeText={(text) =>
-                handleInputChange({ target: { id: "email", value: text } })
-              }
+              onChangeText={(text) => {
+                setFormData(prev => ({...prev, email: text}));
+                if (localErrors.email) {
+                  setLocalErrors(prev => ({...prev, email: undefined}));
+                }
+              }}
             />
-            {errors.email && (
-              <Text className="text-red-500 text-xs mt-1">{errors.email}</Text>
+            {(localErrors.email || errors.email) && (
+              <Text className="text-red-500 text-xs mt-1">{localErrors.email || errors.email}</Text>
             )}
           </View>
 
@@ -79,37 +132,35 @@ const Login = () => {
             </View>
             <TextInput
               className={`bg-zinc-900 border ${
-                errors.password ? "border-red-500" : "border-zinc-700"
+                localErrors.password || errors.password ? "border-red-500" : "border-zinc-700"
               } text-white h-12 px-4 rounded-md`}
               placeholder="••••••••"
               placeholderTextColor="#666"
               secureTextEntry
               value={formData.password}
-              onChangeText={(text) =>
-                handleInputChange({ target: { id: "password", value: text } })
-              }
+              onChangeText={(text) => {
+                setFormData(prev => ({...prev, password: text}));
+                if (localErrors.password) {
+                  setLocalErrors(prev => ({...prev, password: undefined}));
+                }
+              }}
             />
-            {errors.password && (
+            {(localErrors.password || errors.password) && (
               <Text className="text-red-500 text-xs mt-1">
-                {errors.password}
+                {localErrors.password || errors.password}
               </Text>
             )}
           </View>
 
           <TouchableOpacity
             className="w-full bg-primary hover:bg-lime-500 text-black font-bold h-12 rounded-md flex-row items-center justify-center mt-4"
-            onPress={() => handleSubmit()}
-            disabled={isLoginLoading}
+            onPress={handleLogin}
+            disabled={showLoadingState}
           >
-            {isLoginLoading ? (
+            {showLoadingState ? (
               <View className="flex-row items-center justify-center">
-                <Icon
-                  name="loader"
-                  size={20}
-                  color="black"
-                  className="animate-spin mr-2"
-                />
-                <Text className="text-black font-bold">Logging in...</Text>
+                <ActivityIndicator size="small" color="black" />
+                <Text className="text-black font-bold ml-2">Logging in...</Text>
               </View>
             ) : (
               <Text className="text-black font-bold">Log In</Text>

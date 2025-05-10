@@ -19,7 +19,6 @@ let failedQueue: QueueItem[] = [];
 const processQueue = (error: Error | null, token: string | null = null) => {
   failedQueue.forEach((prom) => {
     if (error) {
-      console.log("Error in processQueue:", error);
       prom.reject(error);
     } else {
       prom.resolve(token);
@@ -29,21 +28,36 @@ const processQueue = (error: Error | null, token: string | null = null) => {
 };
 
 api.interceptors.request.use(async (config: InternalAxiosRequestConfig) => {
-  // Use AsyncStorage instead of localStorage
-  const token = await AsyncStorage.getItem("token");
-  if (token) {
-    config.headers = config.headers || {};
-    config.headers.Authorization = `Bearer ${token}`;
+  try {
+    const token = await AsyncStorage.getItem("token");
+    if (token) {
+      config.headers = config.headers || {};
+      config.headers.Authorization = `Bearer ${token}`;
+    }
+    return config;
+  } catch (error) {
+    return config;
   }
-  return config;
 });
 
 api.interceptors.response.use(
   (response) => response,
   async (originalError) => {
     const originalRequest = originalError.config;
+    
+    // If we have no response at all (e.g., network error)
+    if (!originalError.response) {
+      return Promise.reject(originalError);
+    }
 
-    if (originalError.response?.status === 401 && !originalRequest._retry) {
+    // Don't attempt to refresh token for login/signup/refresh endpoints
+    const url = originalRequest.url || '';
+    const isAuthEndpoint = 
+      url.includes(API_CONFIG.endpoints.auth.login) || 
+      url.includes(API_CONFIG.endpoints.auth.signup) || 
+      url.includes(API_CONFIG.endpoints.auth.refresh);
+    
+    if (originalError.response?.status === 401 && !originalRequest._retry && !isAuthEndpoint) {
       if (isRefreshing) {
         return new Promise<string | null>((resolve, reject) => {
           failedQueue.push({ resolve, reject });
@@ -62,13 +76,10 @@ api.interceptors.response.use(
       isRefreshing = true;
 
       try {
-        // Use the refresh endpoint directly without trying to combine baseURL
         const response = await api.post(API_CONFIG.endpoints.auth.refresh);
         const { token: newToken } = response.data;
 
-        // Use AsyncStorage instead of localStorage
         await AsyncStorage.setItem("token", newToken);
-
         originalRequest.headers.Authorization = `Bearer ${newToken}`;
         processQueue(null, newToken);
 
@@ -76,9 +87,6 @@ api.interceptors.response.use(
       } catch (refreshError) {
         processQueue(refreshError as Error, null);
         await AsyncStorage.removeItem("token");
-
-        // We can't redirect directly in React Native
-        // This will be handled by auth state
         return Promise.reject(refreshError);
       } finally {
         isRefreshing = false;
