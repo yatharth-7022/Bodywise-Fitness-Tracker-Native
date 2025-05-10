@@ -24,7 +24,7 @@ const allowedOrigins = process.env.ALLOWED_ORIGINS?.split(",") || [
 
 app.use(
   cors({
-    origin: (origin, callback) => {
+    origin: (origin: string | undefined, callback: (err: Error | null, allow?: boolean) => void) => {
       // Allow requests with no origin (like mobile apps)
       if (!origin) return callback(null, true);
 
@@ -45,7 +45,7 @@ app.use(express.static(path.join(__dirname, "../public")));
 app.use(cookieParser());
 app.use(
   morgan("combined", {
-    stream: { write: (message) => logger.info(message.trim()) },
+    stream: { write: (message: string) => logger.info(message.trim()) },
   })
 );
 
