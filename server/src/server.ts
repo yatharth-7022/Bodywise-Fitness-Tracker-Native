@@ -9,6 +9,7 @@ import exerciseRoutes from "./routes/routes";
 import routineRoutes from "./routes/routes";
 import path from "path";
 import cookieParser from "cookie-parser";
+import setup from "./setup";
 
 dotenv.config();
 
@@ -74,6 +75,18 @@ app.use(
 );
 
 const PORT = parseInt(process.env.PORT || "5000", 10);
+
+// Run database setup in production
+if (process.env.NODE_ENV === 'production') {
+  setup()
+    .then(() => {
+      logger.info('Database setup completed, starting server...');
+    })
+    .catch((error) => {
+      logger.error('Failed to set up database:', error);
+      // Continue starting the server even if setup fails
+    });
+}
 
 app.listen(PORT, "0.0.0.0", () => {
   logger.info(`Server is running on port ${PORT}`);
