@@ -2,14 +2,23 @@
 import { Platform } from 'react-native';
 import Constants from 'expo-constants';
 
+// TOGGLE THIS to override development mode and use production API
+// Set to true to force using production API even during development
+const USE_PRODUCTION_API = false;
+
 // Get the API URL based on the platform and environment
 const getApiUrl = () => {
-  // Your deployed API URL - confirmed working in production
+  // Your deployed API URL
   const PRODUCTION_API_URL = 'https://bodywise-fitness-api.onrender.com';
   
   // For local development with USB-connected device
   // Run `hostname -I | awk '{print $1}'` to get your actual IP
   const LOCAL_IP = '192.168.29.194'; // Replace this with your actual IP address
+  
+  // If USE_PRODUCTION_API is true, always use production API regardless of environment
+  if (USE_PRODUCTION_API) {
+    return PRODUCTION_API_URL;
+  }
   
   if (__DEV__) {
     // In development
