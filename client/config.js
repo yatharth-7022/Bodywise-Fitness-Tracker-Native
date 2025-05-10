@@ -4,12 +4,12 @@ import Constants from 'expo-constants';
 
 // Get the API URL based on the platform and environment
 const getApiUrl = () => {
-  // Production API URL - replace after deployment with your actual Render URL
+  // Your deployed API URL - confirmed working in production
   const PRODUCTION_API_URL = 'https://bodywise-fitness-api.onrender.com';
   
-  // Get your computer's local IP address
-  // You need to replace this with your actual local IP address
-  const LOCAL_IP = '192.168.29.194';
+  // For local development with USB-connected device
+  // Run `hostname -I | awk '{print $1}'` to get your actual IP
+  const LOCAL_IP = '192.168.29.194'; // Replace this with your actual IP address
   
   if (__DEV__) {
     // In development
@@ -20,7 +20,6 @@ const getApiUrl = () => {
       }
       
       // USB connected device
-      // This works with Expo Go when device is connected via USB
       return `http://${LOCAL_IP}:5000`;
     } else if (Platform.OS === 'ios') {
       // iOS simulator
@@ -28,7 +27,7 @@ const getApiUrl = () => {
     }
   }
   
-  // Production fallback
+  // Production mode - use the deployed API
   return PRODUCTION_API_URL;
 };
 
