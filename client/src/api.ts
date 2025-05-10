@@ -1,21 +1,16 @@
 import Constants from "expo-constants";
 import { Platform } from "react-native";
+import Config from "../config";
 
-// Get the correct API URL based on platform
 const getApiBaseUrl = () => {
-  // If running in Android emulator
-  if (Platform.OS === "android" && !Platform.constants.Brand) {
-    return "http://10.0.2.2:5000"; // Android emulator special IP
-  }
-
-  // For physical devices or iOS simulator
-  return "http://192.168.199.142:5000"; // Your laptop's IP
-  //change this later to env
+  const configUrl = Config.API_URL;
+  
+  return configUrl.endsWith('/') ? configUrl.slice(0, -1) : configUrl;
 };
 
 const API_CONFIG = {
   baseUrl: getApiBaseUrl(),
-  timeout: Number(Constants.expoConfig?.extra?.apiTimeout) || 30000,
+  timeout: Number(Constants.expoConfig?.extra?.apiTimeout) || Number(Config.API_TIMEOUT),
   endpoints: {
     auth: {
       login: "/api/auth/login",
@@ -44,7 +39,11 @@ const API_CONFIG = {
 // For debugging - remove in production
 console.log("API Base URL:", API_CONFIG.baseUrl);
 
-const buildUrl = (endpoint: string) => `${API_CONFIG.baseUrl}${endpoint}`;
+const buildUrl = (endpoint: string) => {
+  const base = API_CONFIG.baseUrl;
+  const path = endpoint.startsWith('/') ? endpoint : `/${endpoint}`;
+  return `${base}${path}`;
+};
 
 export const LOGIN = buildUrl(API_CONFIG.endpoints.auth.login);
 export const SIGNUP = buildUrl(API_CONFIG.endpoints.auth.signup);

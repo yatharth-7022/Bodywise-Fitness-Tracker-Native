@@ -1,11 +1,18 @@
 import axios, { InternalAxiosRequestConfig } from "axios";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { Alert } from "react-native";
 import { API_CONFIG } from "./api";
+import Config from "../config";
+import { isFreeTierHosting, getServerErrorMessage } from "./utils/serverStatus";
 
 const api = axios.create({
   baseURL: API_CONFIG.baseUrl,
   timeout: API_CONFIG.timeout,
-  withCredentials: true,
+  withCredentials: false,
+  headers: {
+    'Content-Type': 'application/json',
+    'Accept': 'application/json'
+  }
 });
 
 interface QueueItem {
@@ -15,6 +22,7 @@ interface QueueItem {
 
 let isRefreshing = false;
 let failedQueue: QueueItem[] = [];
+let networkErrorShown = false;
 
 const processQueue = (error: Error | null, token: string | null = null) => {
   failedQueue.forEach((prom) => {
@@ -45,12 +53,45 @@ api.interceptors.response.use(
   async (originalError) => {
     const originalRequest = originalError.config;
     
-    // If we have no response at all (e.g., network error)
     if (!originalError.response) {
+      console.error("Network error detected:", originalError.message);
+      
+      if (originalError.message.includes("Network Error") || 
+          originalError.message.includes("ECONNREFUSED") ||
+          originalError.message.includes("connect ETIMEDOUT") ||
+          originalError.message.includes("timeout")) {
+        
+        if (Config.API_URL.includes('https')) {
+          console.error("Production API connection failed:", originalError.message);
+          
+          if (!networkErrorShown) {
+            networkErrorShown = true;
+            
+            const errorMessage = getServerErrorMessage(originalError);
+            
+            Alert.alert(
+              "Connection Error",
+              errorMessage,
+              [
+                {
+                  text: "OK",
+                  onPress: () => {
+                    setTimeout(() => {
+                      networkErrorShown = false;
+                    }, 5000);
+                  }
+                }
+              ]
+            );
+          }
+        } else {
+          console.error("Development API connection failed:", originalError.message);
+        }
+      }
+      
       return Promise.reject(originalError);
     }
 
-    // Don't attempt to refresh token for login/signup/refresh endpoints
     const url = originalRequest.url || '';
     const isAuthEndpoint = 
       url.includes(API_CONFIG.endpoints.auth.login) || 
