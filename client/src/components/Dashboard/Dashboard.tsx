@@ -18,6 +18,7 @@ import { useAuth } from "../../contexts/AuthContext";
 import { useQuery } from "@tanstack/react-query";
 import { GET_PROFILE_PICTURE } from "../../api";
 import api from "../../interceptor";
+import config from "../../../config";
 
 type DashboardScreenNavigationProp = NativeStackNavigationProp<RootStackParamList>;
 
@@ -37,8 +38,7 @@ export const Dashboard = () => {
     }
 
   })
-  console.log({profilePicture})
-
+console.log({defaultRoutinesWithImage})
   const getGreeting = () => {
     const hour = new Date().getHours();
     if (hour < 12) return "Good Morning!";
@@ -146,7 +146,7 @@ export const Dashboard = () => {
                   title={routine?.name}
                   duration="35 min"
                   calories="90 cals"
-                  image={routine?.imageUrl || ""}
+                  image={`${config.API_URL}${routine?.imageUrl}` || ""}
                   description={routine?.description}
                 />
               ))}

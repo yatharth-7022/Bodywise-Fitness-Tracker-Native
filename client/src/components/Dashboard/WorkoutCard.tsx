@@ -34,10 +34,11 @@ export const WorkoutCard = ({
   description,
 }: WorkoutCardProps) => {
   const navigation = useNavigation();
+  console.log({image})
 
   return (
     <TouchableOpacity
-      className="w-64 h-[190px] bg-zinc-900 rounded-lg overflow-hidden mr-4"
+      className="w-64 h-fit bg-zinc-900 rounded-lg overflow-hidden mr-4"
       onPress={() =>
         navigation.navigate("WorkoutStack", {
           screen: "Routine",

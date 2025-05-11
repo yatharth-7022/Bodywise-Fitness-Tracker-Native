@@ -283,3 +283,9 @@
 {"level":"info","message":"192.168.97.117 - - [11/May/2025:07:18:28 +0000] \"POST /api/auth/upload-profile-picture HTTP/1.1\" 200 252 \"-\" \"okhttp/4.12.0\"","timestamp":"2025-05-11T07:18:28.485Z"}
 {"level":"info","message":"192.168.97.117 - - [11/May/2025:07:18:28 +0000] \"GET /api/auth/profile HTTP/1.1\" 200 202 \"-\" \"okhttp/4.12.0\"","timestamp":"2025-05-11T07:18:28.563Z"}
 {"level":"info","message":"192.168.97.117 - - [11/May/2025:07:18:31 +0000] \"GET /api/auth/profile HTTP/1.1\" 304 - \"-\" \"okhttp/4.12.0\"","timestamp":"2025-05-11T07:18:31.623Z"}
+{"level":"info","message":"192.168.97.117 - - [11/May/2025:07:21:09 +0000] \"GET /api/auth/profile HTTP/1.1\" 304 - \"-\" \"okhttp/4.12.0\"","timestamp":"2025-05-11T07:21:09.612Z"}
+{"level":"info","message":"192.168.97.117 - - [11/May/2025:07:31:47 +0000] \"GET /api/auth/profile HTTP/1.1\" 304 - \"-\" \"okhttp/4.12.0\"","timestamp":"2025-05-11T07:31:47.667Z"}
+{"level":"info","message":"192.168.97.117 - - [11/May/2025:07:32:30 +0000] \"GET /api/auth/profile HTTP/1.1\" 304 - \"-\" \"okhttp/4.12.0\"","timestamp":"2025-05-11T07:32:30.284Z"}
+{"level":"info","message":"192.168.97.117 - - [11/May/2025:07:33:50 +0000] \"GET /api/auth/profile HTTP/1.1\" 304 - \"-\" \"okhttp/4.12.0\"","timestamp":"2025-05-11T07:33:50.611Z"}
+{"level":"info","message":"192.168.97.117 - - [11/May/2025:07:34:14 +0000] \"GET /api/auth/profile HTTP/1.1\" 304 - \"-\" \"okhttp/4.12.0\"","timestamp":"2025-05-11T07:34:14.584Z"}
+{"level":"info","message":"192.168.97.117 - - [11/May/2025:07:34:20 +0000] \"GET /api/auth/profile HTTP/1.1\" 304 - \"-\" \"okhttp/4.12.0\"","timestamp":"2025-05-11T07:34:20.933Z"}
