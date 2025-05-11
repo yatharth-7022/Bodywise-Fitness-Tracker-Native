@@ -15,6 +15,9 @@ import { RootStackParamList } from "../../types/navigation";
 import { ProfilePicture } from "../Upload-Profile/ProfilePicture";
 import { useDashboard } from "../../hooks/useDashboard";
 import { useAuth } from "../../contexts/AuthContext";
+import { useQuery } from "@tanstack/react-query";
+import { GET_PROFILE_PICTURE } from "../../api";
+import api from "../../interceptor";
 
 type DashboardScreenNavigationProp = NativeStackNavigationProp<RootStackParamList>;
 
@@ -26,6 +29,15 @@ export const Dashboard = () => {
   const defaultRoutinesWithImage = defaultRoutines?.filter(
     (routine) => routine.imageUrl !== null
   );
+  const {data: profilePicture} = useQuery({
+    queryKey: ['profilePicture'],
+    queryFn: async () => {
+      const response = await api.get(GET_PROFILE_PICTURE)
+      return response?.data?.user
+    }
+
+  })
+  console.log({profilePicture})
 
   const getGreeting = () => {
     const hour = new Date().getHours();
@@ -41,7 +53,7 @@ export const Dashboard = () => {
           <View className="flex-row justify-between items-center pb-6">
             <View className="flex-row items-center gap-3">
               <ProfilePicture
-                src={user?.profilePicture}
+                src={profilePicture?.profilePicture}
                 size="md"
               />
               <View>

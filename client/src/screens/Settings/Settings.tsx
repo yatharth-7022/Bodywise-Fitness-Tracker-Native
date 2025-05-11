@@ -17,9 +17,10 @@ import Icon from "react-native-vector-icons/Feather";
 import * as ImagePicker from "expo-image-picker";
 import { useAuth } from "../../contexts/AuthContext";
 import api from "../../interceptor";
-import { API_CONFIG } from "../../api";
+import { API_CONFIG, GET_PROFILE_PICTURE, UPLOAD_PROFILE_PICTURE } from "../../api";
 import { ROUTES } from "../../navigation/routes";
 import { RootStackParamList } from "../../types/navigation";
+import { useQuery } from "@tanstack/react-query";
 
 type SettingsScreenNavigationProp = NativeStackNavigationProp<RootStackParamList>;
 
@@ -33,7 +34,7 @@ export const Settings = () => {
 
   const pickImage = async () => {
     const result = await ImagePicker.launchImageLibraryAsync({
-      mediaTypes: ImagePicker.MediaTypeOptions.Images,
+      mediaTypes: ['images'],
       allowsEditing: true,
       aspect: [1, 1],
       quality: 1,
@@ -43,6 +44,13 @@ export const Settings = () => {
       setSelectedImage(result.assets[0].uri);
     }
   };
+  const {data: profilePicture,refetch: refetchProfilePicture} = useQuery({
+    queryKey: ['profilePicture'],
+    queryFn: async () => {
+      const response = await api.get(GET_PROFILE_PICTURE)
+      return response?.data?.user
+    }
+  })
 
   const handleUpload = async () => {
     if (!selectedImage) return;
@@ -66,11 +74,15 @@ export const Settings = () => {
         type: "image/jpeg",
       });
 
-      await api.post(API_CONFIG.endpoints.auth.uploadProfilePic, formData);
+      await api.post(UPLOAD_PROFILE_PICTURE, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
 
       clearInterval(progressInterval);
       setUploadProgress(100);
-
+      refetchProfilePicture()
       setSelectedImage(null);
       Alert.alert("Success", "Profile picture updated successfully!");
     } catch (error) {
@@ -96,6 +108,7 @@ export const Settings = () => {
       },
     ]);
   };
+ 
 
   return (
     <SafeAreaView className="flex-1 bg-background">
@@ -139,8 +152,8 @@ export const Settings = () => {
                     source={
                       selectedImage
                         ? { uri: selectedImage }
-                        : user?.profilePicture
-                        ? { uri: user.profilePicture }
+                        : profilePicture?.profilePicture
+                        ? { uri: profilePicture.profilePicture }
                         : require("../../assets/image/phyphoto.jpg")
                     }
                     className="w-full h-full"

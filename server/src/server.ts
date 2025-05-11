@@ -25,18 +25,20 @@ const allowedOrigins = process.env.ALLOWED_ORIGINS?.split(",") || [
 
 app.use(
   cors({
-    origin: (origin: string | undefined, callback: (err: Error | null, allow?: boolean) => void) => {
-      // Allow requests with no origin (like mobile apps)
-      if (!origin) return callback(null, true);
+    origin: process.env.NODE_ENV === 'development' 
+      ? '*'  
+      : (origin: string | undefined, callback: (err: Error | null, allow?: boolean) => void) => {
+         
+          if (!origin) return callback(null, true);
 
-      if (allowedOrigins.indexOf(origin) === -1 && 
-          !allowedOrigins.some(allowed => origin.startsWith(allowed))) {
-        const msg =
-          "The CORS policy for this site does not allow access from the specified Origin.";
-        return callback(new Error(msg), false);
-      }
-      return callback(null, true);
-    },
+          if (allowedOrigins.indexOf(origin) === -1 && 
+              !allowedOrigins.some(allowed => origin.startsWith(allowed))) {
+            const msg =
+              "The CORS policy for this site does not allow access from the specified Origin.";
+            return callback(new Error(msg), false);
+          }
+          return callback(null, true);
+        },
     credentials: true,
   })
 );

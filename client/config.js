@@ -7,13 +7,13 @@ const USE_PRODUCTION_API = false;
 const getApiUrl = () => {
   const PRODUCTION_API_URL = 'https://bodywise-fitness-api.onrender.com';
   
-  const LOCAL_IP = '192.168.29.194';
+  const LOCAL_IP = '192.168.97.142';
   
   if (USE_PRODUCTION_API) {
     console.log("Using production API URL:", PRODUCTION_API_URL);
     return PRODUCTION_API_URL;
   }
-  
+
   if (__DEV__) {
     let devUrl;
     

@@ -228,3 +228,58 @@
 {"level":"info","message":"192.168.29.175 - - [10/May/2025:12:56:23 +0000] \"POST /api/auth/logout HTTP/1.1\" 200 37 \"-\" \"okhttp/4.12.0\"","timestamp":"2025-05-10T12:56:23.986Z"}
 {"level":"info","message":"192.168.29.175 - - [10/May/2025:12:56:45 +0000] \"POST /api/auth/signup HTTP/1.1\" 400 33 \"-\" \"okhttp/4.12.0\"","timestamp":"2025-05-10T12:56:45.003Z"}
 {"level":"info","message":"192.168.29.175 - - [10/May/2025:12:56:58 +0000] \"POST /api/auth/login HTTP/1.1\" 200 216 \"-\" \"okhttp/4.12.0\"","timestamp":"2025-05-10T12:56:58.933Z"}
+{"level":"info","message":"Server is running on port 5000","timestamp":"2025-05-11T05:21:02.305Z"}
+{"level":"info","message":"Server is running on port 5000","timestamp":"2025-05-11T05:28:22.093Z"}
+{"level":"info","message":"Server is running on port 5000","timestamp":"2025-05-11T05:28:49.316Z"}
+{"level":"info","message":"Server is running on port 5000","timestamp":"2025-05-11T05:28:53.511Z"}
+{"level":"info","message":"Server is running on port 5000","timestamp":"2025-05-11T05:42:42.024Z"}
+{"level":"info","message":"192.168.97.117 - - [11/May/2025:05:44:15 +0000] \"POST /api/auth/login HTTP/1.1\" 200 226 \"-\" \"okhttp/4.12.0\"","timestamp":"2025-05-11T05:44:15.649Z"}
+{"level":"info","message":"192.168.97.117 - - [11/May/2025:05:44:16 +0000] \"GET /api/routines/routines/default?includeExercises=false HTTP/1.1\" 200 1218 \"-\" \"okhttp/4.12.0\"","timestamp":"2025-05-11T05:44:16.559Z"}
+{"level":"info","message":"192.168.97.117 - - [11/May/2025:05:49:41 +0000] \"POST /api/auth/upload-profile-picture HTTP/1.1\" 400 30 \"-\" \"okhttp/4.12.0\"","timestamp":"2025-05-11T05:49:41.588Z"}
+{"level":"info","message":"192.168.97.117 - - [11/May/2025:05:52:02 +0000] \"POST /api/auth/upload-profile-picture HTTP/1.1\" 400 30 \"-\" \"okhttp/4.12.0\"","timestamp":"2025-05-11T05:52:02.738Z"}
+{"level":"info","message":"Server is running on port 5000","timestamp":"2025-05-11T05:58:26.919Z"}
+{"level":"info","message":"Server is running on port 5000","timestamp":"2025-05-11T06:01:20.951Z"}
+{"level":"info","message":"192.168.97.117 - - [11/May/2025:06:02:49 +0000] \"GET /api/auth/profile HTTP/1.1\" 200 96 \"-\" \"okhttp/4.12.0\"","timestamp":"2025-05-11T06:02:49.035Z"}
+{"level":"info","message":"192.168.97.117 - - [11/May/2025:06:02:49 +0000] \"GET /api/auth/profile HTTP/1.1\" 304 - \"-\" \"okhttp/4.12.0\"","timestamp":"2025-05-11T06:02:49.682Z"}
+{"level":"info","message":"192.168.97.117 - - [11/May/2025:06:02:49 +0000] \"GET /api/routines/routines/default?includeExercises=false HTTP/1.1\" 304 - \"-\" \"okhttp/4.12.0\"","timestamp":"2025-05-11T06:02:49.830Z"}
+{"level":"info","message":"192.168.97.117 - - [11/May/2025:06:03:00 +0000] \"POST /api/auth/logout HTTP/1.1\" 200 37 \"-\" \"okhttp/4.12.0\"","timestamp":"2025-05-11T06:03:00.099Z"}
+{"level":"info","message":"192.168.97.117 - - [11/May/2025:06:03:10 +0000] \"POST /api/auth/login HTTP/1.1\" 200 226 \"-\" \"okhttp/4.12.0\"","timestamp":"2025-05-11T06:03:10.217Z"}
+{"level":"info","message":"192.168.97.117 - - [11/May/2025:06:03:22 +0000] \"POST /api/auth/upload-profile-picture HTTP/1.1\" 400 30 \"-\" \"okhttp/4.12.0\"","timestamp":"2025-05-11T06:03:22.123Z"}
+{"level":"info","message":"Server is running on port 5000","timestamp":"2025-05-11T06:44:10.732Z"}
+{"level":"info","message":"Server is running on port 5000","timestamp":"2025-05-11T06:45:12.748Z"}
+{"level":"info","message":"192.168.97.117 - - [11/May/2025:06:45:56 +0000] \"GET /api/auth/profile HTTP/1.1\" 304 - \"-\" \"okhttp/4.12.0\"","timestamp":"2025-05-11T06:45:56.436Z"}
+{"level":"info","message":"192.168.97.117 - - [11/May/2025:06:45:57 +0000] \"GET /api/auth/profile HTTP/1.1\" 304 - \"-\" \"okhttp/4.12.0\"","timestamp":"2025-05-11T06:45:57.133Z"}
+{"level":"info","message":"192.168.97.117 - - [11/May/2025:06:45:57 +0000] \"GET /api/routines/routines/default?includeExercises=false HTTP/1.1\" 304 - \"-\" \"okhttp/4.12.0\"","timestamp":"2025-05-11T06:45:57.291Z"}
+{"level":"info","message":"192.168.97.117 - - [11/May/2025:06:46:02 +0000] \"POST /api/auth/logout HTTP/1.1\" 200 37 \"-\" \"okhttp/4.12.0\"","timestamp":"2025-05-11T06:46:02.453Z"}
+{"level":"info","message":"192.168.97.117 - - [11/May/2025:06:46:15 +0000] \"POST /api/auth/login HTTP/1.1\" 200 226 \"-\" \"okhttp/4.12.0\"","timestamp":"2025-05-11T06:46:15.339Z"}
+{"level":"info","message":"192.168.97.117 - - [11/May/2025:06:54:33 +0000] \"POST /api/auth/upload-profile-picture HTTP/1.1\" 400 30 \"-\" \"okhttp/4.12.0\"","timestamp":"2025-05-11T06:54:33.479Z"}
+{"level":"info","message":"192.168.97.117 - - [11/May/2025:06:55:56 +0000] \"GET /api/auth/profile HTTP/1.1\" 304 - \"-\" \"okhttp/4.12.0\"","timestamp":"2025-05-11T06:55:56.301Z"}
+{"level":"info","message":"192.168.97.117 - - [11/May/2025:06:55:57 +0000] \"GET /api/auth/profile HTTP/1.1\" 304 - \"-\" \"okhttp/4.12.0\"","timestamp":"2025-05-11T06:55:57.019Z"}
+{"level":"info","message":"192.168.97.117 - - [11/May/2025:06:55:57 +0000] \"GET /api/routines/routines/default?includeExercises=false HTTP/1.1\" 304 - \"-\" \"okhttp/4.12.0\"","timestamp":"2025-05-11T06:55:57.066Z"}
+{"level":"info","message":"192.168.97.117 - - [11/May/2025:06:56:08 +0000] \"POST /api/auth/logout HTTP/1.1\" 200 37 \"-\" \"okhttp/4.12.0\"","timestamp":"2025-05-11T06:56:08.109Z"}
+{"level":"info","message":"192.168.97.117 - - [11/May/2025:06:56:19 +0000] \"POST /api/auth/login HTTP/1.1\" 200 226 \"-\" \"okhttp/4.12.0\"","timestamp":"2025-05-11T06:56:19.074Z"}
+{"level":"info","message":"192.168.97.117 - - [11/May/2025:06:56:33 +0000] \"POST /api/auth/upload-profile-picture HTTP/1.1\" 400 30 \"-\" \"okhttp/4.12.0\"","timestamp":"2025-05-11T06:56:33.474Z"}
+{"level":"info","message":"Server is running on port 5000","timestamp":"2025-05-11T07:06:32.497Z"}
+{"level":"info","message":"192.168.97.117 - - [11/May/2025:07:06:34 +0000] \"POST /api/auth/upload-profile-picture HTTP/1.1\" 400 30 \"-\" \"okhttp/4.12.0\"","timestamp":"2025-05-11T07:06:34.625Z"}
+{"level":"info","message":"192.168.97.117 - - [11/May/2025:07:08:56 +0000] \"POST /api/auth/upload-profile-picture HTTP/1.1\" 200 252 \"-\" \"okhttp/4.12.0\"","timestamp":"2025-05-11T07:08:56.843Z"}
+{"level":"info","message":"192.168.97.117 - - [11/May/2025:07:12:27 +0000] \"GET /api/auth/profile HTTP/1.1\" 200 202 \"-\" \"okhttp/4.12.0\"","timestamp":"2025-05-11T07:12:27.251Z"}
+{"level":"info","message":"192.168.97.117 - - [11/May/2025:07:12:30 +0000] \"GET /api/auth/profile HTTP/1.1\" 304 - \"-\" \"okhttp/4.12.0\"","timestamp":"2025-05-11T07:12:30.921Z"}
+{"level":"info","message":"192.168.97.117 - - [11/May/2025:07:13:21 +0000] \"GET /api/auth/profile HTTP/1.1\" 304 - \"-\" \"okhttp/4.12.0\"","timestamp":"2025-05-11T07:13:21.991Z"}
+{"level":"info","message":"192.168.97.117 - - [11/May/2025:07:13:52 +0000] \"GET /api/auth/profile HTTP/1.1\" 304 - \"-\" \"okhttp/4.12.0\"","timestamp":"2025-05-11T07:13:52.608Z"}
+{"level":"info","message":"192.168.97.117 - - [11/May/2025:07:15:09 +0000] \"GET /api/auth/profile HTTP/1.1\" 304 - \"-\" \"okhttp/4.12.0\"","timestamp":"2025-05-11T07:15:09.060Z"}
+{"level":"info","message":"192.168.97.117 - - [11/May/2025:07:15:26 +0000] \"GET /api/auth/profile HTTP/1.1\" 304 - \"-\" \"okhttp/4.12.0\"","timestamp":"2025-05-11T07:15:26.426Z"}
+{"level":"info","message":"192.168.97.117 - - [11/May/2025:07:15:56 +0000] \"POST /api/auth/upload-profile-picture HTTP/1.1\" 200 252 \"-\" \"okhttp/4.12.0\"","timestamp":"2025-05-11T07:15:56.197Z"}
+{"level":"info","message":"192.168.97.117 - - [11/May/2025:07:16:40 +0000] \"GET /api/auth/profile HTTP/1.1\" 200 202 \"-\" \"okhttp/4.12.0\"","timestamp":"2025-05-11T07:16:40.181Z"}
+{"level":"info","message":"192.168.97.117 - - [11/May/2025:07:16:41 +0000] \"GET /api/auth/profile HTTP/1.1\" 304 - \"-\" \"okhttp/4.12.0\"","timestamp":"2025-05-11T07:16:41.299Z"}
+{"level":"info","message":"192.168.97.117 - - [11/May/2025:07:16:43 +0000] \"GET /api/auth/profile HTTP/1.1\" 304 - \"-\" \"okhttp/4.12.0\"","timestamp":"2025-05-11T07:16:43.403Z"}
+{"level":"info","message":"192.168.97.117 - - [11/May/2025:07:16:50 +0000] \"GET /api/auth/profile HTTP/1.1\" 304 - \"-\" \"okhttp/4.12.0\"","timestamp":"2025-05-11T07:16:50.860Z"}
+{"level":"info","message":"192.168.97.117 - - [11/May/2025:07:16:55 +0000] \"POST /api/auth/logout HTTP/1.1\" 200 37 \"-\" \"okhttp/4.12.0\"","timestamp":"2025-05-11T07:16:55.326Z"}
+{"level":"info","message":"192.168.97.117 - - [11/May/2025:07:16:59 +0000] \"POST /api/auth/login HTTP/1.1\" 200 226 \"-\" \"okhttp/4.12.0\"","timestamp":"2025-05-11T07:16:59.396Z"}
+{"level":"info","message":"192.168.97.117 - - [11/May/2025:07:16:59 +0000] \"GET /api/auth/profile HTTP/1.1\" 304 - \"-\" \"okhttp/4.12.0\"","timestamp":"2025-05-11T07:16:59.966Z"}
+{"level":"info","message":"192.168.97.117 - - [11/May/2025:07:17:03 +0000] \"GET /api/auth/profile HTTP/1.1\" 304 - \"-\" \"okhttp/4.12.0\"","timestamp":"2025-05-11T07:17:03.368Z"}
+{"level":"info","message":"192.168.97.117 - - [11/May/2025:07:17:21 +0000] \"POST /api/auth/upload-profile-picture HTTP/1.1\" 200 252 \"-\" \"okhttp/4.12.0\"","timestamp":"2025-05-11T07:17:21.516Z"}
+{"level":"info","message":"192.168.97.117 - - [11/May/2025:07:17:53 +0000] \"GET /api/auth/profile HTTP/1.1\" 200 202 \"-\" \"okhttp/4.12.0\"","timestamp":"2025-05-11T07:17:53.848Z"}
+{"level":"info","message":"192.168.97.117 - - [11/May/2025:07:18:04 +0000] \"GET /api/auth/profile HTTP/1.1\" 304 - \"-\" \"okhttp/4.12.0\"","timestamp":"2025-05-11T07:18:04.094Z"}
+{"level":"info","message":"192.168.97.117 - - [11/May/2025:07:18:28 +0000] \"POST /api/auth/upload-profile-picture HTTP/1.1\" 200 252 \"-\" \"okhttp/4.12.0\"","timestamp":"2025-05-11T07:18:28.485Z"}
+{"level":"info","message":"192.168.97.117 - - [11/May/2025:07:18:28 +0000] \"GET /api/auth/profile HTTP/1.1\" 200 202 \"-\" \"okhttp/4.12.0\"","timestamp":"2025-05-11T07:18:28.563Z"}
+{"level":"info","message":"192.168.97.117 - - [11/May/2025:07:18:31 +0000] \"GET /api/auth/profile HTTP/1.1\" 304 - \"-\" \"okhttp/4.12.0\"","timestamp":"2025-05-11T07:18:31.623Z"}
