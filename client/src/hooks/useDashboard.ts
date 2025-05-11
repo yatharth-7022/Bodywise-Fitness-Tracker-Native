@@ -3,14 +3,19 @@ import api from "../interceptor";
 import { DEFAULT_ROUTINE, ROUTINE_BY_ID } from "../api";
 import { useState } from "react";
 import { DefaultRoutine, Routine } from "../types/dashboard";
+import { useRoute, RouteProp } from "@react-navigation/native";
 
-// Define types needed for this hook
+type RouteParams = {
+  id?: string;
+};
 
 export const useDashboard = () => {
-  // Using useState to track active route instead of useLocation/useParams from react-router
-  const [selectedRoutineId, setSelectedRoutineId] = useState<string | null>(
-    null
-  );
+  const [selectedRoutineId, setSelectedRoutineId] = useState<string | null>(null);
+  
+  const route = useRoute<RouteProp<Record<string, RouteParams>, string>>();
+  const id = route.params?.id;
+  
+  const routineId = id || selectedRoutineId;
 
   const { data: defaultRoutines } = useQuery<DefaultRoutine[]>({
     queryKey: ["default-routines"],
@@ -25,14 +30,14 @@ export const useDashboard = () => {
   });
 
   const { data: routineById, isLoading: isRoutineLoading } = useQuery<Routine>({
-    queryKey: ["routine-by-id", selectedRoutineId],
+    queryKey: ["routine-by-id", routineId],
     queryFn: async () => {
       const response = await api.get(
-        `${ROUTINE_BY_ID}${selectedRoutineId}?includeExercises=true`
+        `${ROUTINE_BY_ID}${routineId}?includeExercises=true`
       );
       return response.data;
     },
-    enabled: !!selectedRoutineId,
+    enabled: !!routineId,
     refetchOnWindowFocus: false,
   });
 

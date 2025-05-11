@@ -24,14 +24,12 @@ type DashboardScreenNavigationProp = NativeStackNavigationProp<RootStackParamLis
 
 export const Dashboard = () => {
   const { defaultRoutines } = useDashboard();
-  const { user } = useAuth();
   const navigation = useNavigation<DashboardScreenNavigationProp>();
-  console.log({user});
   const defaultRoutinesWithImage = defaultRoutines?.filter(
     (routine) => routine.imageUrl !== null
   );
-  const {data: profilePicture} = useQuery({
-    queryKey: ['profilePicture'],
+  const {data: userInfo} = useQuery({
+    queryKey: ['userInfo'],
     queryFn: async () => {
       const response = await api.get(GET_PROFILE_PICTURE)
       return response?.data?.user
@@ -45,7 +43,7 @@ console.log({defaultRoutinesWithImage})
     if (hour < 18) return "Good Afternoon!";
     return "Good Evening!";
   };
-  console.log(user?.name);
+  console.log({userInfo})
   return (
     <View className="flex-1 bg-zinc-950">
       <ScrollView className="flex-1" showsVerticalScrollIndicator={false}>
@@ -53,13 +51,13 @@ console.log({defaultRoutinesWithImage})
           <View className="flex-row justify-between items-center pb-6">
             <View className="flex-row items-center gap-3">
               <ProfilePicture
-                src={profilePicture?.profilePicture}
+                src={userInfo?.profilePicture}
                 size="md"
               />
               <View>
                 <Text className="text-zinc-400 text-sm">{getGreeting()}</Text>
                 <Text className="text-xl font-semibold text-white">
-                  {user?.username ?? "Fitness Enthusiast"}
+                  {userInfo?.name ?? "Fitness Enthusiast"}
                 </Text>
               </View>
             </View>

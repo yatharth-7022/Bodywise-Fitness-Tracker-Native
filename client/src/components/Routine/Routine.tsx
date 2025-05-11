@@ -15,6 +15,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { useDashboard } from "../../hooks/useDashboard";
 import { firstLetterUppercase } from "../../utils/handlerFunctions";
 import { ROUTES } from "../../navigation/routes";
+import config from "../../../config";
 
 // Define navigation types
 // type RootStackParamList = {
@@ -27,6 +28,7 @@ import { ROUTES } from "../../navigation/routes";
 const Routine = () => {
   const { routineById, isRoutineLoading } = useDashboard();
   const navigation = useNavigation();
+  console.log({routineById})
 
   if (isRoutineLoading) {
     return (
@@ -61,7 +63,7 @@ const Routine = () => {
       <View className="flex-1">
         <View className="h-64 relative">
           <Image
-            source={{ uri: routineById?.imageUrl }}
+            source={{ uri: `${config.API_URL}${routineById?.imageUrl}` }}
             className="w-full h-full"
             resizeMode="cover"
           />
@@ -111,7 +113,7 @@ const Routine = () => {
                 >
                   <View className="w-14 h-14 rounded-lg overflow-hidden bg-gray-800 mr-3">
                     <Image
-                      source={{ uri: exercise?.exercise?.imageUrl }}
+                      source={{ uri: `${config.API_URL}${exercise?.exercise?.imageUrl}` }}
                       className="w-full h-full"
                       resizeMode="cover"
                     />
