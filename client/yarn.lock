@@ -1972,30 +1972,7 @@
     "@tamagui/portal" "1.126.12"
     "@tamagui/z-index-stack" "1.126.12"
 
-"@tamagui/alert-dialog@1.126.12":
-  version "1.126.12"
-  resolved "https://registry.npmjs.org/@tamagui/alert-dialog/-/alert-dialog-1.126.12.tgz"
-  integrity sha512-fJMuZSU1aK247kcuf32WJDQ0gumKQMwqHHquPxkdXZqxhSqZXFAf3jULMzTI/sOzjQa1lEBL920vWMWDTLzuvw==
-  dependencies:
-    "@tamagui/animate-presence" "1.126.12"
-    "@tamagui/aria-hidden" "1.126.12"
-    "@tamagui/compose-refs" "1.126.12"
-    "@tamagui/constants" "1.126.12"
-    "@tamagui/core" "1.126.12"
-    "@tamagui/create-context" "1.126.12"
-    "@tamagui/dialog" "1.126.12"
-    "@tamagui/dismissable" "1.126.12"
-    "@tamagui/focus-scope" "1.126.12"
-    "@tamagui/helpers" "1.126.12"
-    "@tamagui/polyfill-dev" "1.126.12"
-    "@tamagui/popper" "1.126.12"
-    "@tamagui/portal" "1.126.12"
-    "@tamagui/remove-scroll" "1.126.12"
-    "@tamagui/stacks" "1.126.12"
-    "@tamagui/text" "1.126.12"
-    "@tamagui/use-controllable-state" "1.126.12"
-
-"@tamagui/alert-dialog@^1.126.12":
+"@tamagui/alert-dialog@1.126.12", "@tamagui/alert-dialog@^1.126.12":
   version "1.126.12"
   resolved "https://registry.yarnpkg.com/@tamagui/alert-dialog/-/alert-dialog-1.126.12.tgz#b115ef2e47de4ea21e6e639b5a6f89baae8bca23"
   integrity sha512-fJMuZSU1aK247kcuf32WJDQ0gumKQMwqHHquPxkdXZqxhSqZXFAf3jULMzTI/sOzjQa1lEBL920vWMWDTLzuvw==
@@ -5450,6 +5427,11 @@ lru-cache@^5.1.1:
   integrity sha512-KpNARQA3Iwv+jTA0utUVVbrh+Jlrr1Fv0e56GGzAFOXN7dk/FviaDW8LHmK52DlcH4WP2n6gI8vN1aesBFgo9w==
   dependencies:
     yallist "^3.0.2"
+
+lucide-react-native@0.264.0:
+  version "0.264.0"
+  resolved "https://registry.yarnpkg.com/lucide-react-native/-/lucide-react-native-0.264.0.tgz#161329ff584b4b00b47f0c106836d00ee3a462b8"
+  integrity sha512-9cvvposJPdP8zBxHoyAhbNRUqUuZFssshw6m9YcRc+eNIq8Yt3JxhyjTK/3ECiszF0Zs7riNBd763H/qo7/ewA==
 
 make-dir@^3.0.2:
   version "3.1.0"
