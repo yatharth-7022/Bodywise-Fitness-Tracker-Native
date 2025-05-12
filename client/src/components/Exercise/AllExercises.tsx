@@ -59,14 +59,16 @@ export const AllExercises = () => {
         </View>
       )}
 
-      <View className="flex-1 px-4 pb-20 pt-4">
+      <View className="flex-1 pt-5 px-2">
         <View className="mb-6">
-          <View className="flex-row justify-between items-center mb-4">
-            <Text className="text-2xl font-bold text-white">Exercises</Text>
-            <View className="relative">
+          <View className="flex-row gap-2 items-center mb-4">
+            <Text className="text-2xl w-1/4 font-bold text-white">
+              Exercises
+            </Text>
+            <View className="relative w-3/4">
               <TextInput
                 placeholder="Search exercises..."
-                className="bg-gray-800 rounded-full py-2 px-10 text-sm text-white"
+                className="bg-gray-800 rounded-full h-11 py-2 px-10 text-sm text-white"
                 placeholderTextColor="#9ca3af"
                 value={searchQuery}
                 onChangeText={setSearchQuery}
@@ -75,7 +77,7 @@ export const AllExercises = () => {
                 name="search"
                 size={16}
                 color="#9ca3af"
-                style={{ position: "absolute", left: 12, top: 12 }}
+                style={{ position: "absolute", left: 12, top: 14 }}
               />
             </View>
           </View>

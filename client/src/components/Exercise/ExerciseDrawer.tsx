@@ -1,17 +1,22 @@
 // components/Exercise/ExerciseDrawer.tsx
-import React from "react";
+import React, { useState, useRef, useCallback } from "react";
 import {
   View,
   Text,
-  Image,
   TouchableOpacity,
   ScrollView,
   Modal,
   StyleSheet,
+  Image,
+  Button,
+  Alert,
 } from "react-native";
+import { Video, ResizeMode } from "expo-av";
 import { Feather } from "@expo/vector-icons";
 import { ExerciseCard } from "../../types/exercises";
 import { firstLetterUppercase } from "../../utils/handlerFunctions";
+import config from "../../../config";
+import YoutubePlayer from "react-native-youtube-iframe";
 
 interface ExerciseDrawerProps {
   exercise: ExerciseCard | null;
@@ -25,6 +30,39 @@ export const ExerciseDrawer = ({
   onClose,
 }: ExerciseDrawerProps) => {
   if (!exercise) return null;
+  const videoRef = useRef(null);
+  const [status, setStatus] = useState({});
+
+  // Extract YouTube video ID from embed URL
+  const getYoutubeVideoId = (url: string | undefined): string | null => {
+    if (!url) return null;
+
+    // Match patterns like youtube.com/embed/VIDEO_ID or youtu.be/VIDEO_ID
+    const regExp =
+      /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
+    const match = url.match(regExp);
+
+    return match && match[2].length === 11 ? match[2] : null;
+  };
+  const [playing, setPlaying] = useState(false);
+
+  const onStateChange = useCallback((state: string) => {
+    if (state === "ended") {
+      setPlaying(false);
+      Alert.alert("video has finished playing!");
+    }
+  }, []);
+
+  const togglePlaying = useCallback(() => {
+    setPlaying((prev) => !prev);
+  }, []);
+
+  const videoId = getYoutubeVideoId(exercise.videoUrl);
+
+  // Use thumbnail image URL for YouTube video
+  const getThumbnailUrl = (videoId: string) => {
+    return `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`;
+  };
 
   return (
     <Modal
@@ -33,15 +71,26 @@ export const ExerciseDrawer = ({
       transparent={true}
       onRequestClose={onClose}
     >
-      <View className="flex-1 bg-black/50 justify-end">
-        <View className="bg-zinc-900 rounded-t-3xl h-3/4">
-          <ScrollView className="flex-1">
+      <View className="flex-1 bg-black/50  justify-end">
+        <View className="bg-zinc-900 h-3/4 rounded-t-3xl">
+          <ScrollView className="flex-1  rounded-t-3xl">
             <View className="relative">
-              <Image
-                source={{ uri: `${exercise.imageUrl}` }}
-                className="w-full h-64"
-                resizeMode="cover"
-              />
+              {videoId ? (
+                <View className="w-full" style={{ height: 220 }}>
+                  <YoutubePlayer
+                    height={300}
+                    play={playing}
+                    videoId={videoId}
+                    onChangeState={onStateChange}
+                  />
+                </View>
+              ) : exercise.imageUrl ? (
+                <Image
+                  source={{ uri: `${config.API_URL}${exercise.imageUrl}` }}
+                  className="w-full h-64"
+                  resizeMode="cover"
+                />
+              ) : null}
               <TouchableOpacity
                 className="absolute top-4 right-4 bg-black/30 rounded-full p-2"
                 onPress={onClose}
