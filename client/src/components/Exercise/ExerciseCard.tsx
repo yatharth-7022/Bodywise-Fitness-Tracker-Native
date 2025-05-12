@@ -5,6 +5,7 @@ import { View, Text, Image, TouchableOpacity } from "react-native";
 import { Feather } from "@expo/vector-icons";
 import { firstLetterUppercase } from "../../utils/handlerFunctions";
 import { ExerciseCard } from "../../types/exercises";
+import config from "../../../config";
 
 export const ExerciseCardContent = ({
   exercise,
@@ -15,13 +16,13 @@ export const ExerciseCardContent = ({
 }) => {
   return (
     <TouchableOpacity
-      className="bg-zinc-900 rounded-lg overflow-hidden flex-1"
+      className="bg-zinc-900 rounded-lg overflow-hidden w-full mb-3"
       onPress={onClick}
       activeOpacity={0.7}
     >
       <View>
         <Image
-          source={{ uri: `${exercise?.imageUrl}` }}
+          source={{ uri: `${config.API_URL}${exercise?.imageUrl}` }}
           className="w-full h-40"
           resizeMode="cover"
         />

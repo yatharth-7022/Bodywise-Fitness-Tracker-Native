@@ -28,7 +28,6 @@ export const useExercises = () => {
       const response = await api.get(ALL_EXERCISES);
       return response?.data;
     },
-    enabled: isExercisesScreen,
     staleTime: 1000 * 60 * 60 * 24,
     refetchOnWindowFocus: false,
   });

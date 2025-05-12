@@ -17,10 +17,10 @@ import {
   Dumbbell,
   Home,
 } from "lucide-react-native";
+import { AllExercises } from "../components/Exercise/AllExercises";
 
 // Use empty components as placeholders for screens we haven't created yet
 const EmptyComponent = () => null;
-const AllExercises = EmptyComponent;
 const ChartScreen = EmptyComponent;
 
 const Tab = createBottomTabNavigator<MainTabParamList>();

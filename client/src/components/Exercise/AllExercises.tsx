@@ -114,9 +114,7 @@ export const AllExercises = () => {
               onClick={() => handleExerciseClick(item)}
             />
           )}
-          numColumns={2}
-          columnWrapperStyle={{ gap: 12 }}
-          contentContainerStyle={{ gap: 12 }}
+          contentContainerStyle={{ paddingHorizontal: 4, paddingBottom: 20 }}
           showsVerticalScrollIndicator={false}
         />
       </View>
