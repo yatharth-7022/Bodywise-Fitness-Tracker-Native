@@ -28,7 +28,7 @@ import config from "../../../config";
 const Routine = () => {
   const { routineById, isRoutineLoading } = useDashboard();
   const navigation = useNavigation();
-  console.log({routineById})
+  console.log({ routineById });
 
   if (isRoutineLoading) {
     return (
@@ -106,14 +106,16 @@ const Routine = () => {
             </View>
 
             <View className="space-y-4">
-              {routineById?.exercises.map((exercise) => (
+              {routineById?.exercises?.map((exercise) => (
                 <View
                   key={exercise?.id}
                   className="flex-row items-center border-b border-gray-700 pb-4"
                 >
                   <View className="w-14 h-14 rounded-lg overflow-hidden bg-gray-800 mr-3">
                     <Image
-                      source={{ uri: `${config.API_URL}${exercise?.exercise?.imageUrl}` }}
+                      source={{
+                        uri: `${config.API_URL}${exercise?.exercise?.imageUrl}`,
+                      }}
                       className="w-full h-full"
                       resizeMode="cover"
                     />

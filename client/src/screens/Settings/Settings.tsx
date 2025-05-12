@@ -17,12 +17,18 @@ import Icon from "react-native-vector-icons/Feather";
 import * as ImagePicker from "expo-image-picker";
 import { useAuth } from "../../contexts/AuthContext";
 import api from "../../interceptor";
-import { API_CONFIG, GET_PROFILE_PICTURE, UPLOAD_PROFILE_PICTURE } from "../../api";
+import {
+  API_CONFIG,
+  GET_PROFILE_PICTURE,
+  UPLOAD_PROFILE_PICTURE,
+} from "../../api";
 import { ROUTES } from "../../navigation/routes";
 import { RootStackParamList } from "../../types/navigation";
 import { useQuery } from "@tanstack/react-query";
-
-type SettingsScreenNavigationProp = NativeStackNavigationProp<RootStackParamList>;
+import { firstLetterUppercase } from "../../utils/handlerFunctions";
+import { AlertDialog, Button, Dialog, YStack } from "tamagui";
+type SettingsScreenNavigationProp =
+  NativeStackNavigationProp<RootStackParamList>;
 
 export const Settings = () => {
   const navigation = useNavigation<SettingsScreenNavigationProp>();
@@ -31,10 +37,11 @@ export const Settings = () => {
   const [isUploading, setIsUploading] = useState(false);
   const [uploadProgress, setUploadProgress] = useState(0);
   const [isDarkMode, setIsDarkMode] = useState(true);
+  const [dialogOpen, setDialogOpen] = useState(false);
 
   const pickImage = async () => {
     const result = await ImagePicker.launchImageLibraryAsync({
-      mediaTypes: ['images'],
+      mediaTypes: ["images"],
       allowsEditing: true,
       aspect: [1, 1],
       quality: 1,
@@ -44,13 +51,13 @@ export const Settings = () => {
       setSelectedImage(result.assets[0].uri);
     }
   };
-  const {data: profilePicture,refetch: refetchProfilePicture} = useQuery({
-    queryKey: ['profilePicture'],
+  const { data: profilePicture, refetch: refetchProfilePicture } = useQuery({
+    queryKey: ["profilePicture"],
     queryFn: async () => {
-      const response = await api.get(GET_PROFILE_PICTURE)
-      return response?.data?.user
-    }
-  })
+      const response = await api.get(GET_PROFILE_PICTURE);
+      return response?.data?.user;
+    },
+  });
 
   const handleUpload = async () => {
     if (!selectedImage) return;
@@ -82,7 +89,7 @@ export const Settings = () => {
 
       clearInterval(progressInterval);
       setUploadProgress(100);
-      refetchProfilePicture()
+      refetchProfilePicture();
       setSelectedImage(null);
       Alert.alert("Success", "Profile picture updated successfully!");
     } catch (error) {
@@ -96,22 +103,51 @@ export const Settings = () => {
   };
 
   const confirmLogout = () => {
-    Alert.alert("Logout", "Are you sure you want to logout?", [
-      {
-        text: "Cancel",
-        style: "cancel",
-      },
-      {
-        text: "Logout",
-        onPress: logout,
-        style: "destructive",
-      },
-    ]);
+    setDialogOpen(true);
   };
- 
 
   return (
-    <SafeAreaView className="flex-1 bg-background">
+    <SafeAreaView className="flex-1 bg-black">
+      <Dialog
+        open={dialogOpen}
+        onOpenChange={setDialogOpen}
+        key="logout-dialog"
+      >
+        <Dialog.Portal>
+          <Dialog.Overlay
+            key="logout-dialog-overlay"
+            className="bg-black/75 backdrop-blur-sm"
+            animation="quick"
+            enterStyle={{ opacity: 0 }}
+            exitStyle={{ opacity: 0 }}
+          />
+
+          <Dialog.Content
+            key="logout-dialog-content"
+            className="bg-zinc-900 px-10 py-10 rounded-lg"
+            animation="bouncy"
+            enterStyle={{ scale: 0.9, opacity: 0, y: 10 }}
+            exitStyle={{ scale: 0.95, opacity: 0, y: 10 }}
+          >
+            <Dialog.Title className="text-xl font-bold text-white">
+              Logout
+            </Dialog.Title>
+            <Dialog.Description className="text-gray-300 mt-2">
+              Are you sure you want to logout?
+            </Dialog.Description>
+            <YStack marginTop="$4" space="$3">
+              <Dialog.Close asChild>
+                <Button onPress={logout} backgroundColor="$red10" size="$4">
+                  Logout
+                </Button>
+              </Dialog.Close>
+              <Dialog.Close asChild>
+                <Button size="$4">Cancel</Button>
+              </Dialog.Close>
+            </YStack>
+          </Dialog.Content>
+        </Dialog.Portal>
+      </Dialog>
       {isLoading && (
         <View className="absolute inset-0 bg-black/70 backdrop-blur-sm z-50 flex items-center justify-center">
           <View className="flex flex-col items-center gap-4">
@@ -122,7 +158,6 @@ export const Settings = () => {
           </View>
         </View>
       )}
-
       <View className="px-6 py-4 flex flex-row items-center">
         <TouchableOpacity
           className="mr-2"
@@ -136,9 +171,7 @@ export const Settings = () => {
         </TouchableOpacity>
         <Text className="text-2xl font-bold text-white">Settings</Text>
       </View>
-
       <View className="h-px bg-zinc-800 mb-6" />
-
       <ScrollView className="px-6">
         <View className="space-y-4 mb-6">
           <Text className="text-xl font-semibold text-primary">
@@ -212,7 +245,9 @@ export const Settings = () => {
               <Text className="text-sm font-medium text-zinc-400">
                 Username
               </Text>
-              <Text className="text-white">{user?.name}</Text>
+              <Text className="text-white">
+                {firstLetterUppercase(user?.name)}
+              </Text>
             </View>
             <View className="space-y-1">
               <Text className="text-sm font-medium text-zinc-400">Email</Text>

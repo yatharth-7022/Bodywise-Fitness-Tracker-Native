@@ -1,13 +1,14 @@
 // src/navigation/MainTabNavigator.tsx
 import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { TouchableOpacity } from "react-native";
+import { TouchableOpacity, TouchableOpacityProps } from "react-native";
 import { Feather } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import { ROUTES } from "./routes";
 import { MainTabParamList } from "../types/navigation";
 import Dashboard from "../components/Dashboard/Dashboard";
 import { TimerPage } from "../screens/Timer/TimerPage";
+import TamaguiDemoScreen from "../screens/TamaguiDemoScreen";
 
 // Screens
 
@@ -44,7 +45,7 @@ export function MainTabNavigator() {
             iconName = "clock";
           } else if (route.name === ROUTES.CHART) {
             iconName = "bar-chart-2";
-          }
+          } 
 
           // @ts-ignore - Feather icon names
           return <Feather name={iconName} size={size} color={color} />;
@@ -59,7 +60,7 @@ export function MainTabNavigator() {
         options={{
           tabBarButton: (props) => (
             <TouchableOpacity
-              {...props}
+              {...props as TouchableOpacityProps}
               style={{
                 width: 64,
                 height: 64,

@@ -19,7 +19,7 @@ import { useQuery } from "@tanstack/react-query";
 import { GET_PROFILE_PICTURE } from "../../api";
 import api from "../../interceptor";
 import config from "../../../config";
-
+import { firstLetterUppercase } from "../../utils/handlerFunctions";
 type DashboardScreenNavigationProp = NativeStackNavigationProp<RootStackParamList>;
 
 export const Dashboard = () => {
@@ -57,7 +57,7 @@ console.log({defaultRoutinesWithImage})
               <View>
                 <Text className="text-zinc-400 text-sm">{getGreeting()}</Text>
                 <Text className="text-xl font-semibold text-white">
-                  {userInfo?.name ?? "Fitness Enthusiast"}
+                  {firstLetterUppercase(userInfo?.name ?? "Fitness Enthusiast")}
                 </Text>
               </View>
             </View>
