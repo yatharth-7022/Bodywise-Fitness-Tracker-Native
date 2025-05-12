@@ -72,7 +72,7 @@ export const Settings = () => {
 
       // Create form data
       const formData = new FormData();
-      const filename = selectedImage.split("/").pop();
+      const filename = selectedImage?.split("/").pop();
 
       // @ts-ignore
       formData.append("profilePicture", {
@@ -246,7 +246,7 @@ export const Settings = () => {
                 Username
               </Text>
               <Text className="text-white">
-                {firstLetterUppercase(user?.name)}
+                {firstLetterUppercase(user?.username)}
               </Text>
             </View>
             <View className="space-y-1">

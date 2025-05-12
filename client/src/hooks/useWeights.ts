@@ -45,7 +45,6 @@ export const useWeights = () => {
       const response = await api.get(ALL_WEIGHTS);
       return response.data;
     },
-    enabled: isWeightsScreen,
   });
 
   const { data: recentWeights, isLoading: isLoadingRecent } = useQuery({
@@ -54,7 +53,6 @@ export const useWeights = () => {
       const response = await api.get(RECENT_WEIGHTS);
       return response.data;
     },
-    enabled: isLogWeightScreen,
     refetchOnWindowFocus: false,
   });
 

@@ -33,9 +33,8 @@ const Stack = createStackNavigator<RootStackParamList>();
 export default function RootNavigator() {
   const { isAuthenticated, isLoading } = useAuth();
 
-
   return (
-    <Stack.Navigator 
+    <Stack.Navigator
       screenOptions={{ headerShown: false }}
       initialRouteName={isAuthenticated ? "MainTabs" : "Auth"}
     >

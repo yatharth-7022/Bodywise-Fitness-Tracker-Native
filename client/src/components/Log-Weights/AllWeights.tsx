@@ -14,6 +14,7 @@ import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { Card } from "../ui/Card";
 import { useWeights } from "../../hooks/useWeights";
 import { WeightResponse } from "../../types/weights";
+import FontAwesome from "react-native-vector-icons/FontAwesome5";
 
 // Define navigation types
 type WeightStackParamList = {
@@ -37,7 +38,7 @@ export const AllWeights = () => {
 
   return (
     <SafeAreaView className="flex-1 bg-zinc-950">
-      <View className="flex-1">
+      <View className="flex-1 mt-6">
         <View className="flex-row items-center p-6 mb-4">
           <TouchableOpacity
             className="mr-3"
@@ -49,7 +50,10 @@ export const AllWeights = () => {
           >
             <Feather name="arrow-left" size={24} color="white" />
           </TouchableOpacity>
-          <Text className="text-xl font-semibold text-white">Weight Log</Text>
+          <View className="flex-row items-center gap-2">
+            <Text className="text-xl font-semibold text-white">Weight Log</Text>
+            <FontAwesome name="weight-hanging" size={16} color="white" />
+          </View>
         </View>
 
         <FlatList

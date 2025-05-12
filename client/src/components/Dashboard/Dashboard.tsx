@@ -20,7 +20,9 @@ import { GET_PROFILE_PICTURE } from "../../api";
 import api from "../../interceptor";
 import config from "../../../config";
 import { firstLetterUppercase } from "../../utils/handlerFunctions";
-type DashboardScreenNavigationProp = NativeStackNavigationProp<RootStackParamList>;
+import { Clock } from "lucide-react-native";
+type DashboardScreenNavigationProp =
+  NativeStackNavigationProp<RootStackParamList>;
 
 export const Dashboard = () => {
   const { defaultRoutines } = useDashboard();
@@ -28,32 +30,28 @@ export const Dashboard = () => {
   const defaultRoutinesWithImage = defaultRoutines?.filter(
     (routine) => routine.imageUrl !== null
   );
-  const {data: userInfo} = useQuery({
-    queryKey: ['userInfo'],
+  const { data: userInfo } = useQuery({
+    queryKey: ["userInfo"],
     queryFn: async () => {
-      const response = await api.get(GET_PROFILE_PICTURE)
-      return response?.data?.user
-    }
-
-  })
-console.log({defaultRoutinesWithImage})
+      const response = await api.get(GET_PROFILE_PICTURE);
+      return response?.data?.user;
+    },
+  });
+  console.log({ defaultRoutinesWithImage });
   const getGreeting = () => {
     const hour = new Date().getHours();
     if (hour < 12) return "Good Morning!";
     if (hour < 18) return "Good Afternoon!";
     return "Good Evening!";
   };
-  console.log({userInfo})
+  console.log({ userInfo });
   return (
     <View className="flex-1 bg-zinc-950">
       <ScrollView className="flex-1" showsVerticalScrollIndicator={false}>
-        <View className="px-6 pt-4">
+        <View className="px-6  pt-8">
           <View className="flex-row justify-between items-center pb-6">
             <View className="flex-row items-center gap-3">
-              <ProfilePicture
-                src={userInfo?.profilePicture}
-                size="md"
-              />
+              <ProfilePicture src={userInfo?.profilePicture} size="md" />
               <View>
                 <Text className="text-zinc-400 text-sm">{getGreeting()}</Text>
                 <Text className="text-xl font-semibold text-white">
@@ -77,47 +75,60 @@ console.log({defaultRoutinesWithImage})
             <Text className="text-lg font-semibold mb-4 text-white">
               Quick Actions
             </Text>
-            <View className="flex-row gap-2 mb-8">
+
+            {/* Row 1: Log Weight and Start Timer */}
+            <View className="flex-row justify-between space-x-3 mb-3">
               <Button
-                className="flex-1 bg-blue-600"
-                textClassName="text-white text-xs"
+                className="flex-1 bg-primary"
+                textClassName="text-black text-sm"
                 onPress={() =>
                   navigation.navigate("WeightStack", {
                     screen: "LogWeight",
                   })
                 }
-                icon={<Feather name="activity" size={16} color="white" />}
+                icon={<Feather name="activity" size={16} color="black" />}
               >
-                <Text className="ml-1 text-white">Log Weight</Text>
+                <Text className="text-black">Log Weight</Text>
               </Button>
+
               <Button
-                className="flex-1 bg-blue-600"
-                textClassName="text-white text-xs"
+                className="flex-1 bg-primary"
+                textClassName="text-black text-sm"
                 onPress={() =>
                   navigation.navigate("MainTabs", {
                     screen: "Timer",
                   })
                 }
-                icon={<Feather name="clock" size={16} color="white" />}
+                icon={<Clock size={16} className="mr-1" color="black" />}
               >
-                <Text className="ml-1 text-white">Start Timer</Text>
+                <Text className="text-black ml-1">Start Timer</Text>
               </Button>
+            </View>
+
+            {/* Row 2: Start Session and Make Routine */}
+            <View className="flex-row justify-between space-x-3">
               <Button
-                className="flex-1 bg-yellow-600"
-                textClassName="text-white text-xs"
-                onPress={() => {
-                  if (
-                    defaultRoutinesWithImage &&
-                    defaultRoutinesWithImage.length > 0
-                  ) {
-                    navigation.navigate("WorkoutStack", {
-                      screen: "Routine",
-                      params: { id: defaultRoutinesWithImage[0]?.id },
-                    });
-                  }
-                }}
+                className="flex-1 bg-primary"
+                textClassName="text-black text-sm"
+                // onPress={() => {
+                //   if (defaultRoutinesWithImage?.length > 0) {
+                //     navigation.navigate("WorkoutStack", {
+                //       screen: "Routine",
+                //       params: { id: defaultRoutinesWithImage[0]?.id },
+                //     });
+                //   }
+                // }}
+                icon={<Feather name="play" size={16} color="black" />}
               >
-                Start Session →
+                <Text className="text-black">Start Session</Text>
+              </Button>
+
+              <Button
+                className="flex-1 bg-primary"
+                textClassName="text-black text-sm"
+                icon={<Feather name="plus-circle" size={16} color="black" />}
+              >
+                <Text className="text-black">Make Routine</Text>
               </Button>
             </View>
           </View>
@@ -128,7 +139,7 @@ console.log({defaultRoutinesWithImage})
                 Start A Workout
               </Text>
               <TouchableOpacity>
-                <Text className="text-blue-400">See all</Text>
+                <Text className="text-primary">See all</Text>
               </TouchableOpacity>
             </View>
 
@@ -155,7 +166,7 @@ console.log({defaultRoutinesWithImage})
             <View className="flex-row justify-between items-center mb-4">
               <Text className="text-lg font-semibold text-white">History</Text>
               <TouchableOpacity>
-                <Text className="text-blue-400">See all</Text>
+                <Text className="text-primary">See all</Text>
               </TouchableOpacity>
             </View>
 

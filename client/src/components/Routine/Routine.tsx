@@ -60,7 +60,7 @@ const Routine = () => {
 
   return (
     <SafeAreaView className="flex-1 bg-zinc-950" edges={["bottom"]}>
-      <View className="flex-1">
+      <View className="flex-1 rounded-t-2xl">
         <View className="h-64 relative">
           <Image
             source={{ uri: `${config.API_URL}${routineById?.imageUrl}` }}
@@ -82,7 +82,7 @@ const Routine = () => {
           </TouchableOpacity>
         </View>
 
-        <View className="flex-1 bg-zinc-950 -mt-8 rounded-t-3xl">
+        <View className="flex-1  bg-zinc-950 rounded-t-2xl">
           <ScrollView className="flex-1 px-4 pt-4 pb-5">
             <Text className="text-2xl font-bold mb-2 text-white">
               {routineById?.name}
