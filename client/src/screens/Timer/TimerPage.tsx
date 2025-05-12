@@ -89,17 +89,20 @@ export const TimerPage = () => {
         >
           <Icon name="arrow-left" size={20} color="white" />
         </TouchableOpacity>
-        <Text
-          style={{
-            fontSize: 24,
-            fontWeight: "bold",
-            color: "white",
-            flexDirection: "row",
-            alignItems: "center",
-          }}
-        >
-          <Icon name="clock" size={20} color="#D6FC03" /> Timer & Stopwatch
-        </Text>
+        <View className="flex-row items-center gap-2">
+          <Text
+            style={{
+              fontSize: 24,
+              fontWeight: "bold",
+              color: "white",
+              flexDirection: "row",
+              alignItems: "center",
+            }}
+          >
+            Timer & Stopwatch
+          </Text>
+          <Icon name="clock" size={20} color="#D6FC03" />
+        </View>
       </View>
 
       <View
@@ -157,11 +160,7 @@ export const TimerPage = () => {
       </View>
 
       {tab === "timer" ? (
-        <Animated.View
-          style={{ width: "100%", alignItems: "center" }}
-          entering={FadeIn}
-          exiting={FadeOut}
-        >
+        <Animated.View style={{ width: "100%", alignItems: "center" }}>
           <Timer
             setTimerFromInput={setTimerFromInput}
             resetTimer={resetTimer}
@@ -175,11 +174,7 @@ export const TimerPage = () => {
           />
         </Animated.View>
       ) : (
-        <Animated.View
-          style={{ width: "100%", alignItems: "center" }}
-          entering={FadeIn}
-          exiting={FadeOut}
-        >
+        <Animated.View style={{ width: "100%", alignItems: "center" }}>
           <Stopwatch
             laps={laps}
             pad={pad}

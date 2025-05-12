@@ -158,7 +158,7 @@ export const Timer: React.FC<TimerProps> = ({
         >
           <TouchableOpacity
             style={{
-              backgroundColor: "#22c55e",
+              backgroundColor: "#D6FC03",
               paddingVertical: 12,
               paddingHorizontal: 24,
               borderRadius: 8,
@@ -168,12 +168,12 @@ export const Timer: React.FC<TimerProps> = ({
               startTimer();
             }}
           >
-            <Text style={{ color: "white", fontWeight: "bold" }}>Start</Text>
+            <Text style={{ color: "black", fontWeight: "bold" }}>Start</Text>
           </TouchableOpacity>
 
           <TouchableOpacity
             style={{
-              backgroundColor: "#6b7280",
+              backgroundColor: "#ef4444",
               paddingVertical: 12,
               paddingHorizontal: 24,
               borderRadius: 8,

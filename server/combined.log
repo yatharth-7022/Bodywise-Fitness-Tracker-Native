@@ -1290,3 +1290,8 @@
 {"level":"info","message":"Found 8 weights for user 1","timestamp":"2025-05-12T12:24:01.714Z"}
 {"level":"info","message":"192.168.29.175 - - [12/May/2025:12:24:01 +0000] \"GET /api/weight HTTP/1.1\" 304 - \"-\" \"okhttp/4.12.0\"","timestamp":"2025-05-12T12:24:01.716Z"}
 {"level":"info","message":"192.168.29.175 - - [12/May/2025:12:24:01 +0000] \"GET /api/weight/recent-weights HTTP/1.1\" 304 - \"-\" \"okhttp/4.12.0\"","timestamp":"2025-05-12T12:24:01.718Z"}
+{"level":"info","message":"192.168.29.175 - - [12/May/2025:12:24:53 +0000] \"GET /api/auth/profile HTTP/1.1\" 304 - \"-\" \"okhttp/4.12.0\"","timestamp":"2025-05-12T12:24:53.832Z"}
+{"level":"info","message":"192.168.29.175 - - [12/May/2025:12:47:39 +0000] \"GET /api/auth/profile HTTP/1.1\" 304 - \"-\" \"okhttp/4.12.0\"","timestamp":"2025-05-12T12:47:39.460Z"}
+{"level":"info","message":"192.168.29.175 - - [12/May/2025:12:47:44 +0000] \"GET /api/auth/profile HTTP/1.1\" 304 - \"-\" \"okhttp/4.12.0\"","timestamp":"2025-05-12T12:47:44.263Z"}
+{"level":"info","message":"192.168.29.175 - - [12/May/2025:12:47:47 +0000] \"GET /api/routines/routines/4?includeExercises=true HTTP/1.1\" 200 2282 \"-\" \"okhttp/4.12.0\"","timestamp":"2025-05-12T12:47:47.109Z"}
+{"level":"info","message":"192.168.29.175 - - [12/May/2025:12:47:53 +0000] \"GET /api/auth/profile HTTP/1.1\" 304 - \"-\" \"okhttp/4.12.0\"","timestamp":"2025-05-12T12:47:53.749Z"}
