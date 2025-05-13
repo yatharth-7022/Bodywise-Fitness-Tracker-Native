@@ -10,6 +10,7 @@ import Animated, {
   withSpring,
 } from "react-native-reanimated";
 import { Button } from "../ui/Button";
+import { normalText } from "../../utils/fontStyles";
 
 interface TimerProps {
   setTimerFromInput: () => void;
@@ -66,7 +67,12 @@ export const Timer: React.FC<TimerProps> = ({
         style={{ flexDirection: "row", marginBottom: 30, alignItems: "center" }}
       >
         <View style={{ alignItems: "center" }}>
-          <Text style={{ color: "#a1a1aa", fontSize: 12, marginBottom: 4 }}>
+          <Text
+            style={[
+              normalText,
+              { color: "#a1a1aa", fontSize: 12, marginBottom: 4 },
+            ]}
+          >
             Hours
           </Text>
           <TextInput
@@ -78,6 +84,7 @@ export const Timer: React.FC<TimerProps> = ({
               fontSize: 24,
               width: 80,
               textAlign: "center",
+              fontFamily: "DMSans",
             }}
             keyboardType="number-pad"
             maxLength={2}
@@ -91,12 +98,22 @@ export const Timer: React.FC<TimerProps> = ({
           />
         </View>
 
-        <Text style={{ color: "white", fontSize: 24, marginHorizontal: 10 }}>
+        <Text
+          style={[
+            normalText,
+            { color: "white", fontSize: 24, marginHorizontal: 10 },
+          ]}
+        >
           :
         </Text>
 
         <View style={{ alignItems: "center" }}>
-          <Text style={{ color: "#a1a1aa", fontSize: 12, marginBottom: 4 }}>
+          <Text
+            style={[
+              normalText,
+              { color: "#a1a1aa", fontSize: 12, marginBottom: 4 },
+            ]}
+          >
             Minutes
           </Text>
           <TextInput
@@ -108,6 +125,7 @@ export const Timer: React.FC<TimerProps> = ({
               fontSize: 24,
               width: 80,
               textAlign: "center",
+              fontFamily: "DMSans",
             }}
             keyboardType="number-pad"
             maxLength={2}
@@ -121,12 +139,22 @@ export const Timer: React.FC<TimerProps> = ({
           />
         </View>
 
-        <Text style={{ color: "white", fontSize: 24, marginHorizontal: 10 }}>
+        <Text
+          style={[
+            normalText,
+            { color: "white", fontSize: 24, marginHorizontal: 10 },
+          ]}
+        >
           :
         </Text>
 
         <View style={{ alignItems: "center" }}>
-          <Text style={{ color: "#a1a1aa", fontSize: 12, marginBottom: 4 }}>
+          <Text
+            style={[
+              normalText,
+              { color: "#a1a1aa", fontSize: 12, marginBottom: 4 },
+            ]}
+          >
             Seconds
           </Text>
           <TextInput
@@ -138,6 +166,7 @@ export const Timer: React.FC<TimerProps> = ({
               fontSize: 24,
               width: 80,
               textAlign: "center",
+              fontFamily: "DMSans",
             }}
             keyboardType="number-pad"
             maxLength={2}

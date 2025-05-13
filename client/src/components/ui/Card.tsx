@@ -1,7 +1,8 @@
 // components/ui/Card.tsx
-import React from 'react';
-import { View, Text, ViewStyle } from 'react-native';
-import { twMerge } from 'tailwind-merge';
+import React from "react";
+import { View, Text, ViewStyle } from "react-native";
+import { twMerge } from "tailwind-merge";
+import { cardTitle, normalText } from "../../utils/fontStyles";
 
 interface CardProps {
   children: React.ReactNode;
@@ -12,7 +13,10 @@ interface CardProps {
 export const Card = ({ children, className, style }: CardProps) => {
   return (
     <View
-      className={twMerge("bg-zinc-900 border-zinc-800 rounded-lg overflow-hidden", className)}
+      className={twMerge(
+        "bg-zinc-900 border-zinc-800 rounded-lg overflow-hidden",
+        className
+      )}
       style={style}
     >
       {children}
@@ -26,11 +30,7 @@ interface CardHeaderProps {
 }
 
 export const CardHeader = ({ children, className }: CardHeaderProps) => {
-  return (
-    <View className={twMerge("p-4", className)}>
-      {children}
-    </View>
-  );
+  return <View className={twMerge("p-4", className)}>{children}</View>;
 };
 
 interface CardContentProps {
@@ -39,11 +39,7 @@ interface CardContentProps {
 }
 
 export const CardContent = ({ children, className }: CardContentProps) => {
-  return (
-    <View className={twMerge("p-4 pt-0", className)}>
-      {children}
-    </View>
-  );
+  return <View className={twMerge("p-4 pt-0", className)}>{children}</View>;
 };
 
 interface CardTitleProps {
@@ -53,7 +49,10 @@ interface CardTitleProps {
 
 export const CardTitle = ({ children, className }: CardTitleProps) => {
   return (
-    <Text className={twMerge("text-lg font-semibold text-white", className)}>
+    <Text
+      className={twMerge("text-lg font-semibold text-white", className)}
+      style={cardTitle}
+    >
       {children}
     </Text>
   );
@@ -64,9 +63,15 @@ interface CardDescriptionProps {
   className?: string;
 }
 
-export const CardDescription = ({ children, className }: CardDescriptionProps) => {
+export const CardDescription = ({
+  children,
+  className,
+}: CardDescriptionProps) => {
   return (
-    <Text className={twMerge("text-sm text-zinc-400", className)}>
+    <Text
+      className={twMerge("text-sm text-zinc-400", className)}
+      style={normalText}
+    >
       {children}
     </Text>
   );

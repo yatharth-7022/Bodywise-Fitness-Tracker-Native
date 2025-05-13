@@ -3,6 +3,7 @@ import { View, Text, TouchableOpacity, Image } from "react-native";
 import { Feather } from "@expo/vector-icons";
 import Animated, { FadeIn } from "react-native-reanimated";
 import { Exercise } from "../../types/routine";
+import { headingText, normalText, buttonText } from "../../utils/fontStyles";
 
 // First define the SessionSetRow component
 interface SetRowProps {
@@ -28,26 +29,36 @@ const SessionSetRow: React.FC<SetRowProps> = ({ set, idx, onChange }) => {
       }`}
     >
       <View className="flex-row items-center flex-1">
-        <Text className="text-zinc-400 mr-3 w-10">Set {idx + 1}</Text>
+        <Text style={normalText} className="text-zinc-400 mr-3 w-10">
+          Set {idx + 1}
+        </Text>
 
         <View className="flex-row">
           <View className="items-center mr-4">
-            <Text className="text-zinc-400 text-xs mb-1">Weight</Text>
+            <Text style={normalText} className="text-zinc-400 text-xs mb-1">
+              Weight
+            </Text>
             <TouchableOpacity
               className="bg-zinc-700 w-16 h-8 rounded items-center justify-center"
               onPress={() => onChange("kg", set.weight + 2.5)}
             >
-              <Text className="text-white">{set.weight} kg</Text>
+              <Text style={normalText} className="text-white">
+                {set.weight} kg
+              </Text>
             </TouchableOpacity>
           </View>
 
           <View className="items-center">
-            <Text className="text-zinc-400 text-xs mb-1">Reps</Text>
+            <Text style={normalText} className="text-zinc-400 text-xs mb-1">
+              Reps
+            </Text>
             <TouchableOpacity
               className="bg-zinc-700 w-16 h-8 rounded items-center justify-center"
               onPress={() => onChange("reps", set.reps + 1)}
             >
-              <Text className="text-white">{set.reps}</Text>
+              <Text style={normalText} className="text-white">
+                {set.reps}
+              </Text>
             </TouchableOpacity>
           </View>
         </View>
@@ -99,14 +110,19 @@ const SessionExerciseCard: React.FC<SessionExerciseCardProps> = ({
               resizeMode="cover"
             />
           ) : (
-            <Text className="text-zinc-400">No Img</Text>
+            <Text style={normalText} className="text-zinc-400">
+              No Img
+            </Text>
           )}
         </View>
         <View>
-          <Text className="font-semibold text-lg text-white">
+          <Text
+            style={headingText}
+            className="font-semibold text-lg text-white"
+          >
             {exercise.exercise.name}
           </Text>
-          <Text className="text-zinc-400 text-xs">
+          <Text style={normalText} className="text-zinc-400 text-xs">
             {exercise.exercise.bodyPart}
           </Text>
         </View>
@@ -129,7 +145,9 @@ const SessionExerciseCard: React.FC<SessionExerciseCardProps> = ({
           onPress={() => onAddSet(exerciseIdx)}
         >
           <Feather name="plus" size={16} color="#d6fc03" />
-          <Text className="ml-2 text-lime-400">Add Set</Text>
+          <Text style={buttonText} className="ml-2 text-lime-400">
+            Add Set
+          </Text>
         </TouchableOpacity>
       </View>
     </View>

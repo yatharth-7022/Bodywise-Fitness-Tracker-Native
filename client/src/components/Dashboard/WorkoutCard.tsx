@@ -2,9 +2,8 @@
 import React from "react";
 import { View, Text, Image, TouchableOpacity } from "react-native";
 import { Feather } from "@expo/vector-icons";
-import { NavigationProp, useNavigation } from "@react-navigation/native";
-import { ROUTES } from "../../../src/navigation/routes";
-import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import { useNavigation } from "@react-navigation/native";
+import { headingText, normalText } from "../../utils/fontStyles";
 
 // Define the navigation param list
 // type RootStackParamList = {
@@ -34,7 +33,7 @@ export const WorkoutCard = ({
   description,
 }: WorkoutCardProps) => {
   const navigation = useNavigation();
-  console.log({image})
+  console.log({ image });
 
   return (
     <TouchableOpacity
@@ -53,18 +52,28 @@ export const WorkoutCard = ({
         resizeMode="cover"
       />
       <View className="p-3">
-        <Text className="text-white font-semibold mb-1">{title}</Text>
-        <Text className="text-zinc-400 text-sm mb-2" numberOfLines={1}>
+        <Text style={headingText} className="text-white mb-1">
+          {title}
+        </Text>
+        <Text
+          style={normalText}
+          className="text-zinc-400 text-sm mb-2"
+          numberOfLines={1}
+        >
           {description}
         </Text>
         <View className="flex-row gap-3 mt-auto">
           <View className="flex-row items-center">
             <Feather name="clock" size={12} color="#a1a1aa" />
-            <Text className="text-zinc-400 text-xs ml-1">{duration}</Text>
+            <Text style={normalText} className="text-zinc-400 text-xs ml-1">
+              {duration}
+            </Text>
           </View>
           <View className="flex-row items-center">
             <Feather name="zap" size={12} color="#a1a1aa" />
-            <Text className="text-zinc-400 text-xs ml-1">{calories}</Text>
+            <Text style={normalText} className="text-zinc-400 text-xs ml-1">
+              {calories}
+            </Text>
           </View>
         </View>
       </View>

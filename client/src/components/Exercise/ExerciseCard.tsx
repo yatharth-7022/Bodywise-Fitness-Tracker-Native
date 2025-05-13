@@ -6,6 +6,7 @@ import { Feather } from "@expo/vector-icons";
 import { firstLetterUppercase } from "../../utils/handlerFunctions";
 import { ExerciseCard } from "../../types/exercises";
 import config from "../../../config";
+import { headingText, normalText } from "../../utils/fontStyles";
 
 export const ExerciseCardContent = ({
   exercise,
@@ -28,10 +29,13 @@ export const ExerciseCardContent = ({
         />
       </View>
       <View className="p-4">
-        <Text className="font-semibold text-lg mb-1 text-white">
+        <Text
+          className="font-semibold text-lg mb-1 text-white"
+          style={headingText}
+        >
           {exercise?.name}
         </Text>
-        <Text className="text-gray-400 text-sm mb-2">
+        <Text className="text-gray-400 text-sm mb-2" style={normalText}>
           {firstLetterUppercase(exercise?.bodyPart)}
         </Text>
         <View className="flex-row items-center text-gray-500 text-sm">

@@ -14,6 +14,7 @@ import SessionHeader from "./SessionHeader";
 import SessionExerciseCard from "./SessionExerciseCard";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { Exercise, ExerciseSet } from "../../types/routine";
+import { headingText, normalText, buttonText } from "../../utils/fontStyles";
 
 // Define navigation types
 type RoutineStackParamList = {
@@ -134,7 +135,9 @@ const RoutineSession = () => {
     return (
       <View className="flex-1 items-center justify-center bg-zinc-950">
         <ActivityIndicator size="large" color="#d6fc03" />
-        <Text className="text-white mt-4">Loading workout...</Text>
+        <Text style={normalText} className="text-white mt-4">
+          Loading workout...
+        </Text>
       </View>
     );
   }
@@ -142,11 +145,16 @@ const RoutineSession = () => {
   if (!routineById) {
     return (
       <View className="flex-1 items-center justify-center bg-zinc-950">
-        <Text className="text-xl font-semibold text-white mb-2">
+        <Text
+          style={headingText}
+          className="text-xl font-semibold text-white mb-2"
+        >
           Routine not found
         </Text>
         <TouchableOpacity onPress={() => navigation.goBack()} className="py-2">
-          <Text className="text-lime-400">Go Back</Text>
+          <Text style={normalText} className="text-lime-400">
+            Go Back
+          </Text>
         </TouchableOpacity>
       </View>
     );
@@ -175,7 +183,9 @@ const RoutineSession = () => {
           className="bg-lime-500 py-4 rounded-xl items-center"
           onPress={handleSubmit}
         >
-          <Text className="text-black font-bold">Submit Session</Text>
+          <Text style={buttonText} className="text-black font-bold">
+            Submit Session
+          </Text>
         </TouchableOpacity>
       </View>
     </SafeAreaView>

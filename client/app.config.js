@@ -13,6 +13,8 @@ export default {
     backgroundColor: "#111111",
   },
   assetBundlePatterns: ["**/*"],
+  plugins: ["expo-font"],
+
   ios: {
     supportsTablet: true,
   },

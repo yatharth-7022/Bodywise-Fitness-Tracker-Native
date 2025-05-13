@@ -18,6 +18,7 @@ import {
   Home,
 } from "lucide-react-native";
 import { AllExercises } from "../components/Exercise/AllExercises";
+import { ToastExample } from "../components/ToastExample";
 
 // Use empty components as placeholders for screens we haven't created yet
 const EmptyComponent = () => null;
@@ -90,7 +91,7 @@ export function MainTabNavigator() {
         }}
       />
       <Tab.Screen name="Exercises" component={AllExercises} />
-      <Tab.Screen name="Chart" component={ChartScreen} />
+      <Tab.Screen name="Chart" component={ToastExample} />
     </Tab.Navigator>
   );
 }

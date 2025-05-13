@@ -27,6 +27,8 @@ import { RootStackParamList } from "../../types/navigation";
 import { useQuery } from "@tanstack/react-query";
 import { firstLetterUppercase } from "../../utils/handlerFunctions";
 import { AlertDialog, Button, Dialog, YStack } from "tamagui";
+import { headingText, normalText, buttonText } from "../../utils/fontStyles";
+
 type SettingsScreenNavigationProp =
   NativeStackNavigationProp<RootStackParamList>;
 
@@ -152,7 +154,7 @@ export const Settings = () => {
         <View className="absolute inset-0 bg-black/70 backdrop-blur-sm z-50 flex items-center justify-center">
           <View className="flex flex-col items-center gap-4">
             <ActivityIndicator size="large" color="#D6FC03" />
-            <Text className="text-lg text-white font-medium">
+            <Text style={normalText} className="text-lg text-white font-medium">
               Logging out...
             </Text>
           </View>
@@ -169,12 +171,17 @@ export const Settings = () => {
         >
           <Icon name="arrow-left" size={20} color="white" />
         </TouchableOpacity>
-        <Text className="text-2xl font-bold text-white">Settings</Text>
+        <Text style={headingText} className="text-2xl font-bold text-white">
+          Settings
+        </Text>
       </View>
       <View className="h-px bg-zinc-800 mb-6" />
       <ScrollView className="px-6">
         <View className="space-y-4 mb-6">
-          <Text className="text-xl font-semibold text-primary">
+          <Text
+            style={headingText}
+            className="text-xl font-semibold text-primary"
+          >
             Profile Picture
           </Text>
           <View className="bg-zinc-900 rounded-lg p-6">
@@ -220,15 +227,19 @@ export const Settings = () => {
                   {isUploading ? (
                     <View className="flex-row items-center gap-2">
                       <Icon name="upload" size={20} color="black" />
-                      <Text className="text-black font-bold">Uploading...</Text>
+                      <Text style={buttonText} className="text-black font-bold">
+                        Uploading...
+                      </Text>
                     </View>
                   ) : uploadProgress === 100 ? (
                     <View className="flex-row items-center gap-2">
                       <Icon name="check-circle" size={20} color="black" />
-                      <Text className="text-black font-bold">Done!</Text>
+                      <Text style={buttonText} className="text-black font-bold">
+                        Done!
+                      </Text>
                     </View>
                   ) : (
-                    <Text className="text-black font-bold">
+                    <Text style={buttonText} className="text-black font-bold">
                       Update Profile Picture
                     </Text>
                   )}
@@ -239,38 +250,63 @@ export const Settings = () => {
         </View>
 
         <View className="space-y-4 mb-6">
-          <Text className="text-xl font-semibold text-primary">Account</Text>
+          <Text
+            style={headingText}
+            className="text-xl font-semibold text-primary"
+          >
+            Account
+          </Text>
           <View className="bg-zinc-900 rounded-lg p-4 space-y-4">
             <View className="space-y-1">
-              <Text className="text-sm font-medium text-zinc-400">
+              <Text
+                style={normalText}
+                className="text-sm font-medium text-zinc-400"
+              >
                 Username
               </Text>
-              <Text className="text-white">
+              <Text style={normalText} className="text-white">
                 {firstLetterUppercase(user?.username)}
               </Text>
             </View>
             <View className="space-y-1">
-              <Text className="text-sm font-medium text-zinc-400">Email</Text>
-              <Text className="text-white">{user?.email}</Text>
+              <Text
+                style={normalText}
+                className="text-sm font-medium text-zinc-400"
+              >
+                Email
+              </Text>
+              <Text style={normalText} className="text-white">
+                {user?.email}
+              </Text>
             </View>
             <View className="space-y-1">
-              <Text className="text-sm font-medium text-zinc-400">
+              <Text
+                style={normalText}
+                className="text-sm font-medium text-zinc-400"
+              >
                 Account Type
               </Text>
-              <Text className="text-white">Free Plan</Text>
+              <Text style={normalText} className="text-white">
+                Free Plan
+              </Text>
             </View>
           </View>
         </View>
 
         <View className="space-y-4 mb-6">
-          <Text className="text-xl font-semibold text-primary">
+          <Text
+            style={headingText}
+            className="text-xl font-semibold text-primary"
+          >
             Preferences
           </Text>
           <View className="bg-zinc-900 rounded-lg p-4 space-y-4">
             <View className="flex-row items-center justify-between">
               <View>
-                <Text className="font-medium text-white">Dark Mode</Text>
-                <Text className="text-sm text-zinc-400">
+                <Text style={normalText} className="font-medium text-white">
+                  Dark Mode
+                </Text>
+                <Text style={normalText} className="text-sm text-zinc-400">
                   Toggle between light and dark theme
                 </Text>
               </View>
@@ -285,8 +321,12 @@ export const Settings = () => {
 
             <View className="flex-row items-center justify-between">
               <View>
-                <Text className="font-medium text-white">Notifications</Text>
-                <Text className="text-sm text-zinc-400">Workout reminders</Text>
+                <Text style={normalText} className="font-medium text-white">
+                  Notifications
+                </Text>
+                <Text style={normalText} className="text-sm text-zinc-400">
+                  Workout reminders
+                </Text>
               </View>
               <Switch
                 trackColor={{ false: "#767577", true: "#D6FC03" }}
@@ -304,7 +344,12 @@ export const Settings = () => {
           onPress={confirmLogout}
         >
           <Icon name="log-out" size={20} color="white" className="mr-2" />
-          <Text className="text-white font-semibold text-base">Logout</Text>
+          <Text
+            style={buttonText}
+            className="text-white font-semibold text-base"
+          >
+            Logout
+          </Text>
         </TouchableOpacity>
       </ScrollView>
     </SafeAreaView>

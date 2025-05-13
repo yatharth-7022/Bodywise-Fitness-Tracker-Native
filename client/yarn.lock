@@ -2895,6 +2895,26 @@
   resolved "https://registry.npmjs.org/@tamagui/timer/-/timer-1.126.12.tgz"
   integrity sha512-RSkpQegOBT4swVXPQjjDRqJP9eC8Mzv8ObmoIcbxwoWm/vS0fbn6UwHhHiQrKQvZHHIciXB8HzjRc8ljKxbuuQ==
 
+"@tamagui/toast@^1.126.12":
+  version "1.126.12"
+  resolved "https://registry.yarnpkg.com/@tamagui/toast/-/toast-1.126.12.tgz#7db7a7771b6b7941a69003cc75a03b8b122078cd"
+  integrity sha512-RKKZQSe8wBoX8NDlbOyI/6fa80staHFc74qvlFTRIyohaBQyku1BGWx9g7aHnhs204IxEapLPay5+Qx3nHKXgQ==
+  dependencies:
+    "@tamagui/animate-presence" "1.126.12"
+    "@tamagui/compose-refs" "1.126.12"
+    "@tamagui/constants" "1.126.12"
+    "@tamagui/core" "1.126.12"
+    "@tamagui/create-context" "1.126.12"
+    "@tamagui/dismissable" "1.126.12"
+    "@tamagui/helpers" "1.126.12"
+    "@tamagui/polyfill-dev" "1.126.12"
+    "@tamagui/portal" "1.126.12"
+    "@tamagui/stacks" "1.126.12"
+    "@tamagui/start-transition" "1.126.12"
+    "@tamagui/text" "1.126.12"
+    "@tamagui/use-controllable-state" "1.126.12"
+    "@tamagui/visually-hidden" "1.126.12"
+
 "@tamagui/toggle-group@1.126.12":
   version "1.126.12"
   resolved "https://registry.npmjs.org/@tamagui/toggle-group/-/toggle-group-1.126.12.tgz"
@@ -3614,6 +3634,14 @@ buffer@^5.4.3:
   dependencies:
     base64-js "^1.3.1"
     ieee754 "^1.1.13"
+
+burnt@^0.13.0:
+  version "0.13.0"
+  resolved "https://registry.yarnpkg.com/burnt/-/burnt-0.13.0.tgz#e234e2281fa264815e670b5ded52901e02cab359"
+  integrity sha512-LjlQa7CLkGWUdz08YUIaGCJ8BLXib31/ztKqowgwqd7UH283A/kmdCj+1PYAQwDQEMPNmvSUfFHrjXbcwZibFQ==
+  dependencies:
+    sf-symbols-typescript "^1.0.0"
+    sonner "^2.0.1"
 
 bytes@3.1.2:
   version "3.1.2"
@@ -6830,6 +6858,11 @@ setprototypeof@1.2.0:
   resolved "https://registry.npmjs.org/setprototypeof/-/setprototypeof-1.2.0.tgz"
   integrity sha512-E5LDX7Wrp85Kil5bhZv46j8jOeboKq5JMmYM3gVGdGH8xFpPWXUMsNrlODCrkoxMEeNi/XZIwuRvY4XNwYMJpw==
 
+sf-symbols-typescript@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/sf-symbols-typescript/-/sf-symbols-typescript-1.0.0.tgz#94e9210bf27e7583f9749a0d07bd4f4937ea488f"
+  integrity sha512-DkS7q3nN68dEMb4E18HFPDAvyrjDZK9YAQQF2QxeFu9gp2xRDXFMF8qLJ1EmQ/qeEGQmop4lmMM1WtYJTIcCMw==
+
 shebang-command@^2.0.0:
   version "2.0.0"
   resolved "https://registry.npmjs.org/shebang-command/-/shebang-command-2.0.0.tgz"
@@ -6901,6 +6934,11 @@ slugify@^1.3.4, slugify@^1.6.6:
   version "1.6.6"
   resolved "https://registry.npmjs.org/slugify/-/slugify-1.6.6.tgz"
   integrity sha512-h+z7HKHYXj6wJU+AnS/+IH8Uh9fdcX1Lrhg1/VMdf9PwoBQXFcXiAdsy2tSK0P6gKwJLXp02r90ahUCqHk9rrw==
+
+sonner@^2.0.1:
+  version "2.0.3"
+  resolved "https://registry.yarnpkg.com/sonner/-/sonner-2.0.3.tgz#de7cdbc4b6a25ac3f0a9e0aed3748e0b3d6e092e"
+  integrity sha512-njQ4Hht92m0sMqqHVDL32V2Oun9W1+PHO9NDv9FHfJjT3JT22IG4Jpo3FPQy+mouRKCXFWO+r67v6MrHX2zeIA==
 
 source-map-js@^1.2.1:
   version "1.2.1"

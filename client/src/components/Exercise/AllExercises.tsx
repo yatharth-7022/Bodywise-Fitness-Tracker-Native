@@ -13,6 +13,7 @@ import { Feather } from "@expo/vector-icons";
 import { ExerciseCardContent } from "./ExerciseCard";
 import { ExerciseDrawer } from "./ExerciseDrawer";
 import { useExercises } from "../../hooks/useExercises";
+import { headingText, normalText } from "../../utils/fontStyles";
 
 const bodyParts = ["All", "Chest", "Back", "Arms", "Shoulders", "Legs"];
 
@@ -52,7 +53,7 @@ export const AllExercises = () => {
         <View className="absolute inset-0 bg-black/70 z-50 flex items-center justify-center">
           <View className="flex flex-col items-center gap-4">
             <ActivityIndicator size="large" color="#D6FC03" />
-            <Text className="text-lg text-white font-medium">
+            <Text style={normalText} className="text-lg text-white font-medium">
               Getting exercises...
             </Text>
           </View>
@@ -62,7 +63,10 @@ export const AllExercises = () => {
       <View className="flex-1 pt-5 px-2">
         <View className="mb-6">
           <View className="flex-row gap-2 items-center mb-4">
-            <Text className="text-2xl w-1/4 font-bold text-white">
+            <Text
+              style={headingText}
+              className="text-2xl w-1/4 font-bold text-white"
+            >
               Exercises
             </Text>
             <View className="relative w-3/4">
@@ -94,6 +98,7 @@ export const AllExercises = () => {
                 onPress={() => setActiveFilter(item)}
               >
                 <Text
+                  style={normalText}
                   className={`text-sm ${
                     activeFilter === item ? "text-white" : "text-gray-300"
                   }`}

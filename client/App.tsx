@@ -11,18 +11,55 @@ import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { TamaguiProvider } from "tamagui";
 import tamaguiConfig from "./tamagui.config";
 import { useColorScheme } from "react-native";
+import Toast, { BaseToast, ErrorToast } from "react-native-toast-message";
+import { useFonts } from "expo-font";
+import { LoadingScreen } from "./src/screens/LoadingScreen";
 
 // Import for web support
-import './tamagui-web.css';
+import "./tamagui-web.css";
 
 // Create a client
 const queryClient = new QueryClient();
 
+// Custom toast config
+const toastConfig = {
+  success: (props) => (
+    <BaseToast
+      {...props}
+      style={{ borderLeftColor: "#D6FC03", backgroundColor: "#222" }}
+      contentContainerStyle={{ paddingHorizontal: 15 }}
+      text1Style={{ fontSize: 16, fontWeight: "bold", color: "#FFF" }}
+      text2Style={{ fontSize: 14, color: "#DDD" }}
+    />
+  ),
+  error: (props) => (
+    <ErrorToast
+      {...props}
+      style={{ borderLeftColor: "#FF4444", backgroundColor: "#222" }}
+      contentContainerStyle={{ paddingHorizontal: 15 }}
+      text1Style={{ fontSize: 16, fontWeight: "bold", color: "#FFF" }}
+      text2Style={{ fontSize: 14, color: "#DDD" }}
+    />
+  ),
+};
+
 export default function App() {
   const colorScheme = useColorScheme();
 
+  const [fontsLoaded] = useFonts({
+    Montserrat: require("./assets/fonts/Montserrat-VariableFont_wght.ttf"),
+    DMSans: require("./assets/fonts/DMSans-VariableFont_opsz,wght.ttf"),
+  });
+
+  if (!fontsLoaded) {
+    return <LoadingScreen />;
+  }
+
   return (
-    <TamaguiProvider config={tamaguiConfig} defaultTheme={colorScheme || "light"}>
+    <TamaguiProvider
+      config={tamaguiConfig}
+      defaultTheme={colorScheme || "light"}
+    >
       <QueryClientProvider client={queryClient}>
         <GestureHandlerRootView style={{ flex: 1 }}>
           <SafeAreaProvider>
@@ -33,6 +70,7 @@ export default function App() {
               </NavigationContainer>
             </AuthProvider>
           </SafeAreaProvider>
+          <Toast config={toastConfig} />
         </GestureHandlerRootView>
       </QueryClientProvider>
     </TamaguiProvider>

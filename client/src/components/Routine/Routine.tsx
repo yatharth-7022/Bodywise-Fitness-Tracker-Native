@@ -16,6 +16,7 @@ import { useDashboard } from "../../hooks/useDashboard";
 import { firstLetterUppercase } from "../../utils/handlerFunctions";
 import { ROUTES } from "../../navigation/routes";
 import config from "../../../config";
+import { headingText, normalText, buttonText } from "../../utils/fontStyles";
 
 // Define navigation types
 // type RootStackParamList = {
@@ -41,7 +42,10 @@ const Routine = () => {
   if (!isRoutineLoading && !routineById) {
     return (
       <View className="flex-1 items-center justify-center bg-zinc-950">
-        <Text className="text-xl font-semibold mb-2 text-white">
+        <Text
+          style={headingText}
+          className="text-xl font-semibold mb-2 text-white"
+        >
           Routine not found
         </Text>
         <TouchableOpacity
@@ -52,7 +56,9 @@ const Routine = () => {
           }
           className="mt-2"
         >
-          <Text className="text-blue-500">Return to Dashboard</Text>
+          <Text style={normalText} className="text-blue-500">
+            Return to Dashboard
+          </Text>
         </TouchableOpacity>
       </View>
     );
@@ -84,7 +90,10 @@ const Routine = () => {
 
         <View className="flex-1  bg-zinc-950 rounded-t-2xl">
           <ScrollView className="flex-1 px-4 pt-4 pb-5">
-            <Text className="text-2xl font-bold mb-2 text-white">
+            <Text
+              style={headingText}
+              className="text-2xl font-bold mb-2 text-white"
+            >
               {routineById?.name}
             </Text>
 
@@ -92,15 +101,21 @@ const Routine = () => {
               <View className="flex-row ml-auto space-x-4">
                 <View className="flex-row items-center">
                   <Feather name="clock" size={16} color="white" />
-                  <Text className="text-white ml-1">46m</Text>
+                  <Text style={normalText} className="text-white ml-1">
+                    46m
+                  </Text>
                 </View>
                 <View className="flex-row items-center">
                   <Feather name="activity" size={16} color="white" />
-                  <Text className="text-white ml-1">7695 Kg</Text>
+                  <Text style={normalText} className="text-white ml-1">
+                    7695 Kg
+                  </Text>
                 </View>
                 <View className="flex-row items-center">
                   <Feather name="award" size={16} color="white" />
-                  <Text className="text-white ml-1">2 PRs</Text>
+                  <Text style={normalText} className="text-white ml-1">
+                    2 PRs
+                  </Text>
                 </View>
               </View>
             </View>
@@ -121,20 +136,26 @@ const Routine = () => {
                     />
                   </View>
                   <View className="flex-1">
-                    <Text className="font-medium text-white">
+                    <Text
+                      style={headingText}
+                      className="font-medium text-white"
+                    >
                       {firstLetterUppercase(exercise?.exercise?.name)}
                     </Text>
-                    <Text className="text-gray-500 text-sm">
+                    <Text style={normalText} className="text-gray-500 text-sm">
                       {firstLetterUppercase(exercise?.exercise?.bodyPart)}
                     </Text>
                   </View>
                   <View className="items-end">
-                    <Text className="text-sm text-blue-500 font-medium">
+                    <Text
+                      style={normalText}
+                      className="text-sm text-blue-500 font-medium"
+                    >
                       Free Weight
                     </Text>
                     <View className="flex-row items-center text-gray-500 text-sm mt-1">
                       <Feather name="clock" size={14} color="#6b7280" />
-                      <Text className="text-gray-500 ml-1">
+                      <Text style={normalText} className="text-gray-500 ml-1">
                         {exercise?.sets} Sets x {exercise?.reps} Reps
                       </Text>
                     </View>
@@ -156,7 +177,9 @@ const Routine = () => {
                 })
               }
             >
-              <Text className="text-white font-medium">Start Session</Text>
+              <Text style={buttonText} className="text-white font-medium">
+                Start Session
+              </Text>
             </TouchableOpacity>
           </View>
         </View>

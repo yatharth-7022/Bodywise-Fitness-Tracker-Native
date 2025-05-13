@@ -6,9 +6,11 @@ import {
   ActivityIndicator,
   ViewStyle,
   TextStyle,
+  StyleSheet,
 } from "react-native";
 import { twMerge } from "tailwind-merge";
 import { clsx } from "clsx";
+import { buttonText } from "../../utils/fontStyles";
 
 type ButtonVariant =
   | "default"
@@ -136,7 +138,7 @@ export const Button = ({
       ) : (
         <>
           {icon && iconPosition === "left" && <>{icon}</>}
-          <Text className={textStyles} style={textStyle}>
+          <Text className={textStyles} style={[buttonText, textStyle]}>
             {children}
           </Text>
           {icon && iconPosition === "right" && <>{icon}</>}
@@ -145,3 +147,10 @@ export const Button = ({
     </TouchableOpacity>
   );
 };
+
+const styles = StyleSheet.create({
+  buttonText: {
+    fontFamily: "DMSans",
+    fontWeight: "600",
+  },
+});

@@ -17,6 +17,7 @@ import { ExerciseCard } from "../../types/exercises";
 import { firstLetterUppercase } from "../../utils/handlerFunctions";
 import config from "../../../config";
 import YoutubePlayer from "react-native-youtube-iframe";
+import { headingText, normalText, buttonText } from "../../utils/fontStyles";
 
 interface ExerciseDrawerProps {
   exercise: ExerciseCard | null;
@@ -102,10 +103,13 @@ export const ExerciseDrawer = ({
             <View className="p-6">
               <View className="flex-row items-center justify-between mb-4">
                 <View>
-                  <Text className="text-2xl font-bold text-white">
+                  <Text
+                    style={headingText}
+                    className="text-2xl font-bold text-white"
+                  >
                     {exercise.name}
                   </Text>
-                  <Text className="text-blue-500">
+                  <Text style={normalText} className="text-blue-500">
                     {firstLetterUppercase(exercise.bodyPart)} Exercise
                   </Text>
                 </View>
@@ -116,37 +120,62 @@ export const ExerciseDrawer = ({
 
               <View className="flex-row justify-between bg-zinc-800 rounded-lg p-4 mb-6">
                 <View className="items-center">
-                  <Text className="text-zinc-400 text-sm mb-1">Target</Text>
-                  <Text className="text-white font-semibold">
+                  <Text
+                    style={normalText}
+                    className="text-zinc-400 text-sm mb-1"
+                  >
+                    Target
+                  </Text>
+                  <Text style={normalText} className="text-white font-semibold">
                     {firstLetterUppercase(exercise.bodyPart)}
                   </Text>
                 </View>
                 <View className="items-center">
-                  <Text className="text-zinc-400 text-sm mb-1">Equipment</Text>
-                  <Text className="text-white font-semibold">Bodyweight</Text>
+                  <Text
+                    style={normalText}
+                    className="text-zinc-400 text-sm mb-1"
+                  >
+                    Equipment
+                  </Text>
+                  <Text style={normalText} className="text-white font-semibold">
+                    Bodyweight
+                  </Text>
                 </View>
                 <View className="items-center">
-                  <Text className="text-zinc-400 text-sm mb-1">Difficulty</Text>
-                  <Text className="text-white font-semibold">Intermediate</Text>
+                  <Text
+                    style={normalText}
+                    className="text-zinc-400 text-sm mb-1"
+                  >
+                    Difficulty
+                  </Text>
+                  <Text style={normalText} className="text-white font-semibold">
+                    Intermediate
+                  </Text>
                 </View>
               </View>
 
               <View className="mb-6">
-                <Text className="text-lg font-semibold mb-2 text-white">
+                <Text
+                  style={headingText}
+                  className="text-lg font-semibold mb-2 text-white"
+                >
                   Description
                 </Text>
-                <Text className="text-zinc-400 leading-5">
+                <Text style={normalText} className="text-zinc-400 leading-5">
                   {exercise.description ||
                     "No description available for this exercise."}
                 </Text>
               </View>
 
               <View className="mb-6">
-                <Text className="text-lg font-semibold mb-2 text-white">
+                <Text
+                  style={headingText}
+                  className="text-lg font-semibold mb-2 text-white"
+                >
                   Instructions
                 </Text>
                 <View className="space-y-2">
-                  <Text className="text-zinc-400">
+                  <Text style={normalText} className="text-zinc-400">
                     No instructions available for this exercise.
                   </Text>
                 </View>
@@ -156,7 +185,9 @@ export const ExerciseDrawer = ({
 
           <View className="p-4 border-t border-zinc-800">
             <TouchableOpacity className="bg-blue-600 py-4 rounded-lg items-center">
-              <Text className="text-white font-semibold">Add to Routine</Text>
+              <Text style={buttonText} className="text-white font-semibold">
+                Add to Routine
+              </Text>
             </TouchableOpacity>
           </View>
         </View>
