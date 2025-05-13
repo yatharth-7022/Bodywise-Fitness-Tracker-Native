@@ -180,7 +180,7 @@ export const Settings = () => {
         <View className="space-y-4 mb-6">
           <Text
             style={headingText}
-            className="text-xl font-semibold text-primary"
+            className="text-xl font-semibold text-white"
           >
             Profile Picture
           </Text>
@@ -200,10 +200,10 @@ export const Settings = () => {
                   />
                 </View>
                 <TouchableOpacity
-                  className="absolute bottom-0 right-0 bg-primary rounded-full p-2"
+                  className="absolute bottom-0 right-0 bg-blue-500 rounded-full p-2"
                   onPress={pickImage}
                 >
-                  <Icon name="camera" size={16} color="black" />
+                  <Icon name="camera" size={16} color="white" />
                 </TouchableOpacity>
               </View>
 
@@ -211,7 +211,7 @@ export const Settings = () => {
                 <View className="w-full mb-4">
                   <View className="h-2 bg-zinc-800 rounded-full overflow-hidden">
                     <View
-                      className="h-full bg-primary"
+                      className="h-full bg-blue-500"
                       style={{ width: `${uploadProgress}%` }}
                     />
                   </View>
@@ -220,26 +220,26 @@ export const Settings = () => {
 
               {selectedImage && (
                 <TouchableOpacity
-                  className="w-full bg-primary text-black font-bold py-3 rounded-md items-center disabled:bg-zinc-800 disabled:text-zinc-500"
+                  className="w-full bg-blue-500 text-white font-bold py-3 rounded-md items-center disabled:bg-zinc-800 disabled:text-zinc-500"
                   onPress={handleUpload}
                   disabled={isUploading}
                 >
                   {isUploading ? (
                     <View className="flex-row items-center gap-2">
-                      <Icon name="upload" size={20} color="black" />
-                      <Text style={buttonText} className="text-black font-bold">
+                      <Icon name="upload" size={20} color="white" />
+                      <Text style={buttonText} className="text-white font-bold">
                         Uploading...
                       </Text>
                     </View>
                   ) : uploadProgress === 100 ? (
                     <View className="flex-row items-center gap-2">
-                      <Icon name="check-circle" size={20} color="black" />
-                      <Text style={buttonText} className="text-black font-bold">
+                      <Icon name="check-circle" size={20} color="white" />
+                      <Text style={buttonText} className="text-white font-bold">
                         Done!
                       </Text>
                     </View>
                   ) : (
-                    <Text style={buttonText} className="text-black font-bold">
+                    <Text style={buttonText} className="text-white font-bold">
                       Update Profile Picture
                     </Text>
                   )}
@@ -252,7 +252,7 @@ export const Settings = () => {
         <View className="space-y-4 mb-6">
           <Text
             style={headingText}
-            className="text-xl font-semibold text-primary"
+            className="text-xl font-semibold text-white"
           >
             Account
           </Text>
@@ -296,7 +296,7 @@ export const Settings = () => {
         <View className="space-y-4 mb-6">
           <Text
             style={headingText}
-            className="text-xl font-semibold text-primary"
+            className="text-xl font-semibold text-white"
           >
             Preferences
           </Text>
@@ -311,7 +311,7 @@ export const Settings = () => {
                 </Text>
               </View>
               <Switch
-                trackColor={{ false: "#767577", true: "#D6FC03" }}
+                trackColor={{ false: "#767577", true: "#3B82F6" }}
                 thumbColor={isDarkMode ? "#fff" : "#f4f3f4"}
                 ios_backgroundColor="#3e3e3e"
                 onValueChange={() => setIsDarkMode(!isDarkMode)}
@@ -329,7 +329,7 @@ export const Settings = () => {
                 </Text>
               </View>
               <Switch
-                trackColor={{ false: "#767577", true: "#D6FC03" }}
+                trackColor={{ false: "#767577", true: "#3B82F6" }}
                 thumbColor={true ? "#fff" : "#f4f3f4"}
                 ios_backgroundColor="#3e3e3e"
                 onValueChange={() => {}}
@@ -340,7 +340,7 @@ export const Settings = () => {
         </View>
 
         <TouchableOpacity
-          className="bg-red-600 rounded-lg p-4 flex-row justify-center items-center mb-8"
+          className="bg-red-500 rounded-lg p-4 flex-row justify-center items-center mb-8"
           onPress={confirmLogout}
         >
           <Icon name="log-out" size={20} color="white" className="mr-2" />

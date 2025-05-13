@@ -1,84 +1,73 @@
 import { StyleSheet } from "react-native";
 
 export const fontStyles = StyleSheet.create({
-  // Montserrat Heading Styles
+  // Gilroy Heading Styles
   heading1: {
-    fontFamily: "Montserrat",
+    fontFamily: "GilroySemiBold",
     fontSize: 32,
     letterSpacing: 0.5,
-    fontWeight: "bold",
   },
   heading2: {
-    fontFamily: "Montserrat",
+    fontFamily: "GilroySemiBold",
     fontSize: 28,
     letterSpacing: 0.5,
-    fontWeight: "bold",
   },
   heading3: {
-    fontFamily: "Montserrat",
+    fontFamily: "GilroySemiBold",
     fontSize: 24,
     letterSpacing: 0.5,
-    fontWeight: "bold",
   },
   heading4: {
-    fontFamily: "Montserrat",
+    fontFamily: "GilroySemiBold",
     fontSize: 20,
     letterSpacing: 0.5,
-    fontWeight: "bold",
   },
   heading5: {
-    fontFamily: "Montserrat",
+    fontFamily: "GilroySemiBold",
     fontSize: 18,
     letterSpacing: 0.5,
-    fontWeight: "bold",
   },
 
-  // DM Sans Styles
+  // Gilroy Body Styles
   bodyRegular: {
-    fontFamily: "DMSans",
+    fontFamily: "GilroyRegular",
     fontSize: 16,
   },
   bodySmall: {
-    fontFamily: "DMSans",
+    fontFamily: "GilroyRegular",
     fontSize: 14,
   },
   bodyXSmall: {
-    fontFamily: "DMSans",
+    fontFamily: "GilroyRegular",
     fontSize: 12,
   },
   bodyBold: {
-    fontFamily: "DMSans",
-    fontWeight: "bold",
+    fontFamily: "GilroyMedium",
     fontSize: 16,
   },
   bodySmallBold: {
-    fontFamily: "DMSans",
-    fontWeight: "bold",
+    fontFamily: "GilroyMedium",
     fontSize: 14,
   },
 
   // Common component styles for consistency
   headingText: {
-    fontFamily: "Montserrat",
+    fontFamily: "GilroySemiBold",
     letterSpacing: 0.5,
-    fontWeight: "bold",
   },
   sectionHeading: {
-    fontFamily: "Montserrat",
+    fontFamily: "GilroySemiBold",
     letterSpacing: 0.5,
-    fontWeight: "bold",
   },
   normalText: {
-    fontFamily: "DMSans",
+    fontFamily: "GilroyRegular",
   },
   buttonText: {
-    fontFamily: "DMSans",
-    fontWeight: "bold",
+    fontFamily: "GilroyMedium",
   },
   cardTitle: {
-    fontFamily: "Montserrat",
+    fontFamily: "GilroySemiBold",
     letterSpacing: 0.5,
-    fontWeight: "bold",
   },
 });
 

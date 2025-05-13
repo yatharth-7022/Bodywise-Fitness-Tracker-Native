@@ -47,8 +47,9 @@ export default function App() {
   const colorScheme = useColorScheme();
 
   const [fontsLoaded] = useFonts({
-    Montserrat: require("./assets/fonts/Montserrat-VariableFont_wght.ttf"),
-    DMSans: require("./assets/fonts/DMSans-VariableFont_opsz,wght.ttf"),
+    GilroyMedium: require("./assets/fonts/Gilroy-Medium.ttf"),
+    GilroyRegular: require("./assets/fonts/Gilroy-Regular.ttf"),
+    GilroySemiBold: require("./assets/fonts/Gilroy-SemiBold.ttf"),
   });
 
   if (!fontsLoaded) {

@@ -62,7 +62,15 @@ export const Dashboard = () => {
           <View className="px-6 pt-8">
             <View className="flex-row justify-between items-center pb-6">
               <View className="flex-row items-center gap-3">
-                <ProfilePicture src={userInfo?.profilePicture} size="md" />
+                <TouchableOpacity
+                  onPress={() =>
+                    navigation.navigate("ProfileStack", {
+                      screen: "Settings",
+                    })
+                  }
+                >
+                  <ProfilePicture src={userInfo?.profilePicture} size="md" />
+                </TouchableOpacity>
                 <View>
                   <Text style={normalText} className="text-zinc-400 text-sm">
                     {getGreeting()}
@@ -87,38 +95,38 @@ export const Dashboard = () => {
             </View>
 
             <View className="mb-8">
-              <Text style={sectionHeading} className="text-lg mb-4 text-white">
-                QUICK ACTIONS
+              <Text style={sectionHeading} className="text-2xl mb-4 text-white">
+                Quick Actions
               </Text>
 
               {/* Row 1: Log Weight and Start Timer */}
               <View className="flex-row justify-between space-x-3 mb-3">
                 <Button
-                  className="flex-1 bg-primary"
-                  textClassName="text-black text-sm"
+                  className="flex-1 bg-blue-500"
+                  textClassName="text-white text-sm"
                   onPress={() =>
                     navigation.navigate("WeightStack", {
                       screen: "LogWeight",
                     })
                   }
-                  icon={<Feather name="activity" size={16} color="black" />}
+                  icon={<Feather name="activity" size={16} color="white" />}
                 >
-                  <Text style={buttonText} className="text-black">
+                  <Text style={buttonText} className="text-white">
                     Log Weight
                   </Text>
                 </Button>
 
                 <Button
-                  className="flex-1 bg-primary"
-                  textClassName="text-black text-sm"
+                  className="flex-1 bg-blue-500"
+                  textClassName="text-white text-sm"
                   onPress={() =>
                     navigation.navigate("MainTabs", {
                       screen: "Timer",
                     })
                   }
-                  icon={<Clock size={16} className="mr-1" color="black" />}
+                  icon={<Clock size={16} className="mr-1" color="white" />}
                 >
-                  <Text style={buttonText} className="text-black ml-1">
+                  <Text style={buttonText} className="text-white ml-1">
                     Start Timer
                   </Text>
                 </Button>
@@ -127,11 +135,11 @@ export const Dashboard = () => {
               {/* Row 2: Start Session and Make Routine */}
               <View className="flex-row justify-between space-x-3">
                 <Button
-                  className="flex-1 bg-primary"
-                  textClassName="text-black text-sm"
-                  icon={<Feather name="play" size={16} color="black" />}
+                  className="flex-1 bg-red-500"
+                  textClassName="text-white text-sm"
+                  icon={<Feather name="play" size={16} color="white" />}
                 >
-                  <Text style={buttonText} className="text-black">
+                  <Text style={buttonText} className="text-white">
                     Start Session
                   </Text>
                 </Button>
@@ -140,11 +148,11 @@ export const Dashboard = () => {
 
             <View className="mb-8">
               <View className="flex-row justify-between items-center mb-4">
-                <Text style={sectionHeading} className="text-lg text-white">
-                  START A WORKOUT
+                <Text style={sectionHeading} className="text-2xl text-white">
+                  Start a workout
                 </Text>
                 <TouchableOpacity>
-                  <Text style={normalText} className="text-primary">
+                  <Text style={normalText} className="text-blue-500">
                     See all
                   </Text>
                 </TouchableOpacity>
@@ -169,13 +177,13 @@ export const Dashboard = () => {
               </ScrollView>
             </View>
 
-            <View className="mb-8 mt-4">
+            <View className="mb-8">
               <View className="flex-row justify-between items-center mb-4">
-                <Text style={sectionHeading} className="text-lg text-white">
-                  HISTORY
+                <Text style={sectionHeading} className="text-2xl text-white">
+                  History
                 </Text>
                 <TouchableOpacity>
-                  <Text style={normalText} className="text-primary">
+                  <Text style={normalText} className="text-blue-500">
                     See all
                   </Text>
                 </TouchableOpacity>

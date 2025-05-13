@@ -40,7 +40,7 @@ export function MainTabNavigator() {
           alignItems: "center", // Center icons vertically
           justifyContent: "center", // Ensure complete centering
         },
-        tabBarActiveTintColor: "#D6FC03", // blue-500
+        tabBarActiveTintColor: "#3B82F6", // blue-500
         tabBarInactiveTintColor: "white",
         tabBarShowLabel: false,
         tabBarIcon: ({ color, size }) => {
@@ -73,7 +73,7 @@ export function MainTabNavigator() {
                 height: 64,
                 marginTop: -24,
                 borderRadius: 32,
-                backgroundColor: "#D6FC03",
+                backgroundColor: "#3B82F6",
                 alignItems: "center",
                 justifyContent: "center",
                 marginHorizontal: 8,
@@ -85,7 +85,7 @@ export function MainTabNavigator() {
                 });
               }}
             >
-              <Feather name="plus" size={24} color="black" />
+              <Feather name="plus" size={24} color="white" />
             </TouchableOpacity>
           ),
         }}

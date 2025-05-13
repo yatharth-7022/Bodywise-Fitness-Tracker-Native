@@ -1598,3 +1598,89 @@
 {"level":"info","message":"192.168.29.175 - - [13/May/2025:13:18:50 +0000] \"GET /api/auth/profile HTTP/1.1\" 304 - \"-\" \"okhttp/4.12.0\"","timestamp":"2025-05-13T13:18:50.190Z"}
 {"level":"info","message":"192.168.29.175 - - [13/May/2025:13:18:50 +0000] \"GET /api/routines/routines/default?includeExercises=false HTTP/1.1\" 304 - \"-\" \"okhttp/4.12.0\"","timestamp":"2025-05-13T13:18:50.405Z"}
 {"level":"info","message":"192.168.29.175 - - [13/May/2025:13:18:52 +0000] \"GET /api/exercises/exercises HTTP/1.1\" 304 - \"-\" \"okhttp/4.12.0\"","timestamp":"2025-05-13T13:18:52.100Z"}
+{"level":"info","message":"192.168.29.175 - - [13/May/2025:13:22:52 +0000] \"GET /api/routines/routines/1?includeExercises=true HTTP/1.1\" 304 - \"-\" \"okhttp/4.12.0\"","timestamp":"2025-05-13T13:22:52.895Z"}
+{"level":"info","message":"192.168.29.175 - - [13/May/2025:13:23:12 +0000] \"GET /api/auth/profile HTTP/1.1\" 304 - \"-\" \"okhttp/4.12.0\"","timestamp":"2025-05-13T13:23:12.879Z"}
+{"level":"info","message":"192.168.29.175 - - [13/May/2025:13:23:42 +0000] \"GET /api/auth/profile HTTP/1.1\" 304 - \"-\" \"okhttp/4.12.0\"","timestamp":"2025-05-13T13:23:42.615Z"}
+{"level":"info","message":"192.168.29.175 - - [13/May/2025:13:23:54 +0000] \"GET /api/auth/profile HTTP/1.1\" 304 - \"-\" \"okhttp/4.12.0\"","timestamp":"2025-05-13T13:23:54.605Z"}
+{"level":"info","message":"192.168.29.175 - - [13/May/2025:13:24:01 +0000] \"GET /api/auth/profile HTTP/1.1\" 304 - \"-\" \"okhttp/4.12.0\"","timestamp":"2025-05-13T13:24:01.882Z"}
+{"level":"info","message":"192.168.29.175 - - [13/May/2025:13:24:22 +0000] \"GET /api/auth/profile HTTP/1.1\" 304 - \"-\" \"okhttp/4.12.0\"","timestamp":"2025-05-13T13:24:22.851Z"}
+{"level":"info","message":"192.168.29.175 - - [13/May/2025:13:24:47 +0000] \"GET /api/auth/profile HTTP/1.1\" 304 - \"-\" \"okhttp/4.12.0\"","timestamp":"2025-05-13T13:24:47.311Z"}
+{"level":"info","message":"192.168.29.175 - - [13/May/2025:13:24:54 +0000] \"GET /api/auth/profile HTTP/1.1\" 304 - \"-\" \"okhttp/4.12.0\"","timestamp":"2025-05-13T13:24:54.961Z"}
+{"level":"info","message":"192.168.29.175 - - [13/May/2025:13:25:07 +0000] \"GET /api/auth/profile HTTP/1.1\" 304 - \"-\" \"okhttp/4.12.0\"","timestamp":"2025-05-13T13:25:07.268Z"}
+{"level":"info","message":"192.168.29.175 - - [13/May/2025:13:25:14 +0000] \"GET /api/auth/profile HTTP/1.1\" 304 - \"-\" \"okhttp/4.12.0\"","timestamp":"2025-05-13T13:25:14.753Z"}
+{"level":"info","message":"192.168.29.175 - - [13/May/2025:13:25:39 +0000] \"GET /api/auth/profile HTTP/1.1\" 304 - \"-\" \"okhttp/4.12.0\"","timestamp":"2025-05-13T13:25:39.803Z"}
+{"level":"info","message":"192.168.29.175 - - [13/May/2025:13:25:48 +0000] \"GET /api/auth/profile HTTP/1.1\" 304 - \"-\" \"okhttp/4.12.0\"","timestamp":"2025-05-13T13:25:48.469Z"}
+{"level":"info","message":"192.168.29.175 - - [13/May/2025:13:25:50 +0000] \"GET /api/auth/profile HTTP/1.1\" 304 - \"-\" \"okhttp/4.12.0\"","timestamp":"2025-05-13T13:25:50.271Z"}
+{"level":"info","message":"192.168.29.175 - - [13/May/2025:13:26:11 +0000] \"GET /api/auth/profile HTTP/1.1\" 304 - \"-\" \"okhttp/4.12.0\"","timestamp":"2025-05-13T13:26:11.914Z"}
+{"level":"info","message":"192.168.29.175 - - [13/May/2025:13:26:27 +0000] \"GET /api/auth/profile HTTP/1.1\" 304 - \"-\" \"okhttp/4.12.0\"","timestamp":"2025-05-13T13:26:27.369Z"}
+{"level":"info","message":"192.168.29.175 - - [13/May/2025:13:27:41 +0000] \"GET /api/auth/profile HTTP/1.1\" 304 - \"-\" \"okhttp/4.12.0\"","timestamp":"2025-05-13T13:27:41.563Z"}
+{"level":"info","message":"192.168.29.175 - - [13/May/2025:13:28:34 +0000] \"GET /api/auth/profile HTTP/1.1\" 304 - \"-\" \"okhttp/4.12.0\"","timestamp":"2025-05-13T13:28:34.834Z"}
+{"level":"info","message":"192.168.29.175 - - [13/May/2025:13:28:35 +0000] \"GET /api/auth/profile HTTP/1.1\" 304 - \"-\" \"okhttp/4.12.0\"","timestamp":"2025-05-13T13:28:35.310Z"}
+{"level":"info","message":"192.168.29.175 - - [13/May/2025:13:28:35 +0000] \"GET /api/auth/profile HTTP/1.1\" 304 - \"-\" \"okhttp/4.12.0\"","timestamp":"2025-05-13T13:28:35.397Z"}
+{"level":"info","message":"192.168.29.175 - - [13/May/2025:13:28:35 +0000] \"GET /api/routines/routines/default?includeExercises=false HTTP/1.1\" 304 - \"-\" \"okhttp/4.12.0\"","timestamp":"2025-05-13T13:28:35.428Z"}
+{"level":"info","message":"192.168.29.175 - - [13/May/2025:13:28:36 +0000] \"GET /api/auth/profile HTTP/1.1\" 304 - \"-\" \"okhttp/4.12.0\"","timestamp":"2025-05-13T13:28:36.960Z"}
+{"level":"info","message":"192.168.29.175 - - [13/May/2025:13:28:45 +0000] \"GET /api/auth/profile HTTP/1.1\" 304 - \"-\" \"okhttp/4.12.0\"","timestamp":"2025-05-13T13:28:45.225Z"}
+{"level":"info","message":"192.168.29.175 - - [13/May/2025:13:28:59 +0000] \"GET /api/auth/profile HTTP/1.1\" 304 - \"-\" \"okhttp/4.12.0\"","timestamp":"2025-05-13T13:28:59.058Z"}
+{"level":"info","message":"192.168.29.175 - - [13/May/2025:13:29:10 +0000] \"GET /api/auth/profile HTTP/1.1\" 304 - \"-\" \"okhttp/4.12.0\"","timestamp":"2025-05-13T13:29:10.177Z"}
+{"level":"info","message":"192.168.29.175 - - [13/May/2025:13:29:11 +0000] \"GET /api/auth/profile HTTP/1.1\" 304 - \"-\" \"okhttp/4.12.0\"","timestamp":"2025-05-13T13:29:11.709Z"}
+{"level":"info","message":"192.168.29.175 - - [13/May/2025:13:29:30 +0000] \"GET /api/auth/profile HTTP/1.1\" 304 - \"-\" \"okhttp/4.12.0\"","timestamp":"2025-05-13T13:29:30.243Z"}
+{"level":"info","message":"192.168.29.175 - - [13/May/2025:13:29:41 +0000] \"GET /api/auth/profile HTTP/1.1\" 304 - \"-\" \"okhttp/4.12.0\"","timestamp":"2025-05-13T13:29:41.056Z"}
+{"level":"info","message":"192.168.29.175 - - [13/May/2025:13:29:59 +0000] \"GET /api/auth/profile HTTP/1.1\" 304 - \"-\" \"okhttp/4.12.0\"","timestamp":"2025-05-13T13:29:59.942Z"}
+{"level":"info","message":"192.168.29.175 - - [13/May/2025:13:30:03 +0000] \"GET /api/auth/profile HTTP/1.1\" 304 - \"-\" \"okhttp/4.12.0\"","timestamp":"2025-05-13T13:30:03.207Z"}
+{"level":"info","message":"192.168.29.175 - - [13/May/2025:13:31:00 +0000] \"GET /api/exercises/exercises HTTP/1.1\" 304 - \"-\" \"okhttp/4.12.0\"","timestamp":"2025-05-13T13:31:00.977Z"}
+{"level":"info","message":"192.168.29.175 - - [13/May/2025:13:31:07 +0000] \"GET /api/routines/routines/1?includeExercises=true HTTP/1.1\" 304 - \"-\" \"okhttp/4.12.0\"","timestamp":"2025-05-13T13:31:07.780Z"}
+{"level":"info","message":"192.168.29.175 - - [13/May/2025:13:31:10 +0000] \"GET /api/routines/routines/2?includeExercises=true HTTP/1.1\" 200 2195 \"-\" \"okhttp/4.12.0\"","timestamp":"2025-05-13T13:31:10.384Z"}
+{"level":"info","message":"192.168.29.175 - - [13/May/2025:13:31:10 +0000] \"GET /exercises/straight-arm-pulldowns.jpg HTTP/1.1\" 404 175 \"-\" \"okhttp/4.12.0\"","timestamp":"2025-05-13T13:31:10.615Z"}
+{"level":"info","message":"192.168.29.175 - - [13/May/2025:13:31:10 +0000] \"GET /exercises/ez-bar-curls.jpg HTTP/1.1\" 404 165 \"-\" \"okhttp/4.12.0\"","timestamp":"2025-05-13T13:31:10.615Z"}
+{"level":"info","message":"Fetching weights for user 1","timestamp":"2025-05-13T13:31:14.834Z"}
+{"level":"info","message":"Found 8 weights for user 1","timestamp":"2025-05-13T13:31:14.928Z"}
+{"level":"info","message":"192.168.29.175 - - [13/May/2025:13:31:14 +0000] \"GET /api/weight HTTP/1.1\" 200 1248 \"-\" \"okhttp/4.12.0\"","timestamp":"2025-05-13T13:31:14.929Z"}
+{"level":"info","message":"192.168.29.175 - - [13/May/2025:13:31:14 +0000] \"GET /api/weight/recent-weights HTTP/1.1\" 200 1085 \"-\" \"okhttp/4.12.0\"","timestamp":"2025-05-13T13:31:14.930Z"}
+{"level":"info","message":"Fetching weights for user 1","timestamp":"2025-05-13T13:31:44.140Z"}
+{"level":"info","message":"192.168.29.175 - - [13/May/2025:13:31:44 +0000] \"GET /api/weight/recent-weights HTTP/1.1\" 304 - \"-\" \"okhttp/4.12.0\"","timestamp":"2025-05-13T13:31:44.142Z"}
+{"level":"info","message":"Found 8 weights for user 1","timestamp":"2025-05-13T13:31:44.161Z"}
+{"level":"info","message":"192.168.29.175 - - [13/May/2025:13:31:44 +0000] \"GET /api/weight HTTP/1.1\" 304 - \"-\" \"okhttp/4.12.0\"","timestamp":"2025-05-13T13:31:44.162Z"}
+{"level":"info","message":"Fetching weights for user 1","timestamp":"2025-05-13T13:31:51.238Z"}
+{"level":"info","message":"Found 8 weights for user 1","timestamp":"2025-05-13T13:31:51.240Z"}
+{"level":"info","message":"192.168.29.175 - - [13/May/2025:13:31:51 +0000] \"GET /api/weight HTTP/1.1\" 304 - \"-\" \"okhttp/4.12.0\"","timestamp":"2025-05-13T13:31:51.241Z"}
+{"level":"info","message":"192.168.29.175 - - [13/May/2025:13:31:51 +0000] \"GET /api/weight/recent-weights HTTP/1.1\" 304 - \"-\" \"okhttp/4.12.0\"","timestamp":"2025-05-13T13:31:51.242Z"}
+{"level":"info","message":"Fetching weights for user 1","timestamp":"2025-05-13T13:32:01.643Z"}
+{"level":"info","message":"192.168.29.175 - - [13/May/2025:13:32:01 +0000] \"GET /api/weight/recent-weights HTTP/1.1\" 304 - \"-\" \"okhttp/4.12.0\"","timestamp":"2025-05-13T13:32:01.649Z"}
+{"level":"info","message":"Found 8 weights for user 1","timestamp":"2025-05-13T13:32:01.651Z"}
+{"level":"info","message":"192.168.29.175 - - [13/May/2025:13:32:01 +0000] \"GET /api/weight HTTP/1.1\" 304 - \"-\" \"okhttp/4.12.0\"","timestamp":"2025-05-13T13:32:01.654Z"}
+{"level":"info","message":"Fetching weights for user 1","timestamp":"2025-05-13T13:32:25.079Z"}
+{"level":"info","message":"Found 8 weights for user 1","timestamp":"2025-05-13T13:32:25.086Z"}
+{"level":"info","message":"192.168.29.175 - - [13/May/2025:13:32:25 +0000] \"GET /api/weight HTTP/1.1\" 304 - \"-\" \"okhttp/4.12.0\"","timestamp":"2025-05-13T13:32:25.088Z"}
+{"level":"info","message":"192.168.29.175 - - [13/May/2025:13:32:25 +0000] \"GET /api/weight/recent-weights HTTP/1.1\" 304 - \"-\" \"okhttp/4.12.0\"","timestamp":"2025-05-13T13:32:25.089Z"}
+{"level":"info","message":"Fetching weights for user 1","timestamp":"2025-05-13T13:32:28.351Z"}
+{"level":"info","message":"Found 8 weights for user 1","timestamp":"2025-05-13T13:32:28.354Z"}
+{"level":"info","message":"192.168.29.175 - - [13/May/2025:13:32:28 +0000] \"GET /api/weight HTTP/1.1\" 304 - \"-\" \"okhttp/4.12.0\"","timestamp":"2025-05-13T13:32:28.355Z"}
+{"level":"info","message":"192.168.29.175 - - [13/May/2025:13:32:28 +0000] \"GET /api/weight/recent-weights HTTP/1.1\" 304 - \"-\" \"okhttp/4.12.0\"","timestamp":"2025-05-13T13:32:28.370Z"}
+{"level":"info","message":"192.168.29.175 - - [13/May/2025:13:32:30 +0000] \"GET /api/auth/profile HTTP/1.1\" 304 - \"-\" \"okhttp/4.12.0\"","timestamp":"2025-05-13T13:32:30.420Z"}
+{"level":"info","message":"192.168.29.175 - - [13/May/2025:13:34:12 +0000] \"GET /api/auth/profile HTTP/1.1\" 304 - \"-\" \"okhttp/4.12.0\"","timestamp":"2025-05-13T13:34:12.617Z"}
+{"level":"info","message":"192.168.29.175 - - [13/May/2025:13:34:12 +0000] \"GET /api/auth/profile HTTP/1.1\" 304 - \"-\" \"okhttp/4.12.0\"","timestamp":"2025-05-13T13:34:12.635Z"}
+{"level":"info","message":"192.168.29.175 - - [13/May/2025:13:34:14 +0000] \"GET /api/auth/profile HTTP/1.1\" 304 - \"-\" \"okhttp/4.12.0\"","timestamp":"2025-05-13T13:34:14.462Z"}
+{"level":"info","message":"192.168.29.175 - - [13/May/2025:13:35:25 +0000] \"GET /api/auth/profile HTTP/1.1\" 304 - \"-\" \"okhttp/4.12.0\"","timestamp":"2025-05-13T13:35:25.368Z"}
+{"level":"info","message":"192.168.29.175 - - [13/May/2025:13:35:30 +0000] \"GET /api/auth/profile HTTP/1.1\" 304 - \"-\" \"okhttp/4.12.0\"","timestamp":"2025-05-13T13:35:30.647Z"}
+{"level":"info","message":"192.168.29.175 - - [13/May/2025:13:35:32 +0000] \"GET /api/auth/profile HTTP/1.1\" 304 - \"-\" \"okhttp/4.12.0\"","timestamp":"2025-05-13T13:35:32.109Z"}
+{"level":"info","message":"192.168.29.175 - - [13/May/2025:13:35:45 +0000] \"GET /api/auth/profile HTTP/1.1\" 304 - \"-\" \"okhttp/4.12.0\"","timestamp":"2025-05-13T13:35:45.599Z"}
+{"level":"info","message":"192.168.29.175 - - [13/May/2025:13:35:47 +0000] \"GET /api/auth/profile HTTP/1.1\" 304 - \"-\" \"okhttp/4.12.0\"","timestamp":"2025-05-13T13:35:47.185Z"}
+{"level":"info","message":"192.168.29.175 - - [13/May/2025:13:35:54 +0000] \"GET /api/auth/profile HTTP/1.1\" 304 - \"-\" \"okhttp/4.12.0\"","timestamp":"2025-05-13T13:35:54.749Z"}
+{"level":"info","message":"192.168.29.175 - - [13/May/2025:13:36:02 +0000] \"GET /api/auth/profile HTTP/1.1\" 304 - \"-\" \"okhttp/4.12.0\"","timestamp":"2025-05-13T13:36:02.282Z"}
+{"level":"info","message":"192.168.29.175 - - [13/May/2025:13:36:28 +0000] \"GET /api/auth/profile HTTP/1.1\" 304 - \"-\" \"okhttp/4.12.0\"","timestamp":"2025-05-13T13:36:28.585Z"}
+{"level":"info","message":"192.168.29.175 - - [13/May/2025:13:36:39 +0000] \"GET /api/auth/profile HTTP/1.1\" 304 - \"-\" \"okhttp/4.12.0\"","timestamp":"2025-05-13T13:36:39.704Z"}
+{"level":"info","message":"192.168.29.175 - - [13/May/2025:13:37:11 +0000] \"GET /api/auth/profile HTTP/1.1\" 304 - \"-\" \"okhttp/4.12.0\"","timestamp":"2025-05-13T13:37:11.714Z"}
+{"level":"info","message":"192.168.29.175 - - [13/May/2025:13:38:03 +0000] \"GET /api/auth/profile HTTP/1.1\" 304 - \"-\" \"okhttp/4.12.0\"","timestamp":"2025-05-13T13:38:03.049Z"}
+{"level":"info","message":"192.168.29.175 - - [13/May/2025:13:38:34 +0000] \"GET /api/auth/profile HTTP/1.1\" 304 - \"-\" \"okhttp/4.12.0\"","timestamp":"2025-05-13T13:38:34.897Z"}
+{"level":"info","message":"192.168.29.175 - - [13/May/2025:13:38:38 +0000] \"GET /api/auth/profile HTTP/1.1\" 304 - \"-\" \"okhttp/4.12.0\"","timestamp":"2025-05-13T13:38:38.196Z"}
+{"level":"info","message":"192.168.29.175 - - [13/May/2025:13:38:49 +0000] \"GET /api/auth/profile HTTP/1.1\" 304 - \"-\" \"okhttp/4.12.0\"","timestamp":"2025-05-13T13:38:49.934Z"}
+{"level":"info","message":"192.168.29.175 - - [13/May/2025:13:38:53 +0000] \"GET /api/auth/profile HTTP/1.1\" 304 - \"-\" \"okhttp/4.12.0\"","timestamp":"2025-05-13T13:38:53.841Z"}
+{"level":"info","message":"192.168.29.175 - - [13/May/2025:13:38:58 +0000] \"GET /api/auth/profile HTTP/1.1\" 304 - \"-\" \"okhttp/4.12.0\"","timestamp":"2025-05-13T13:38:58.158Z"}
+{"level":"info","message":"192.168.29.175 - - [13/May/2025:13:39:20 +0000] \"GET /api/auth/profile HTTP/1.1\" 304 - \"-\" \"okhttp/4.12.0\"","timestamp":"2025-05-13T13:39:20.700Z"}
+{"level":"info","message":"192.168.29.175 - - [13/May/2025:13:39:36 +0000] \"GET /api/auth/profile HTTP/1.1\" 304 - \"-\" \"okhttp/4.12.0\"","timestamp":"2025-05-13T13:39:36.256Z"}
+{"level":"info","message":"192.168.29.175 - - [13/May/2025:13:49:03 +0000] \"GET /api/auth/profile HTTP/1.1\" 304 - \"-\" \"okhttp/4.12.0\"","timestamp":"2025-05-13T13:49:03.999Z"}
+{"level":"info","message":"192.168.29.175 - - [13/May/2025:13:49:04 +0000] \"GET /api/auth/profile HTTP/1.1\" 304 - \"-\" \"okhttp/4.12.0\"","timestamp":"2025-05-13T13:49:04.535Z"}
+{"level":"info","message":"192.168.29.175 - - [13/May/2025:13:49:04 +0000] \"GET /api/auth/profile HTTP/1.1\" 304 - \"-\" \"okhttp/4.12.0\"","timestamp":"2025-05-13T13:49:04.614Z"}
+{"level":"info","message":"192.168.29.175 - - [13/May/2025:13:49:04 +0000] \"GET /api/routines/routines/default?includeExercises=false HTTP/1.1\" 304 - \"-\" \"okhttp/4.12.0\"","timestamp":"2025-05-13T13:49:04.643Z"}
+{"level":"info","message":"192.168.29.175 - - [13/May/2025:13:49:13 +0000] \"GET /api/exercises/exercises HTTP/1.1\" 304 - \"-\" \"okhttp/4.12.0\"","timestamp":"2025-05-13T13:49:13.531Z"}
+{"level":"info","message":"192.168.29.175 - - [13/May/2025:13:49:17 +0000] \"GET /api/auth/profile HTTP/1.1\" 304 - \"-\" \"okhttp/4.12.0\"","timestamp":"2025-05-13T13:49:17.252Z"}

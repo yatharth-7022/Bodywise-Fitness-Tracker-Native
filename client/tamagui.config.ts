@@ -2,8 +2,8 @@ import { defaultConfig } from "@tamagui/config/v4";
 import { createTamagui, createTokens, createFont } from "tamagui";
 
 // Define the custom fonts
-const bebasNeue = createFont({
-  family: "Montserrat",
+const gilroySemiBold = createFont({
+  family: "GilroySemiBold",
   size: {
     1: 12,
     2: 14,
@@ -37,15 +37,15 @@ const bebasNeue = createFont({
     14: 80,
   },
   weight: {
-    4: "400",
+    4: "600",
   },
   letterSpacing: {
     4: 0,
   },
 });
 
-const dmSans = createFont({
-  family: "DMSans",
+const gilroyRegular = createFont({
+  family: "GilroyRegular",
   size: {
     1: 12,
     2: 14,
@@ -99,8 +99,8 @@ const tokens = createTokens({
 // Create the Tamagui configuration with default and custom fonts
 const fonts = {
   ...defaultConfig.fonts,
-  heading: bebasNeue,
-  body: dmSans,
+  heading: gilroySemiBold,
+  body: gilroyRegular,
 };
 
 // Create the Tamagui configuration

@@ -4,10 +4,11 @@ This application uses a centralized font styling system to maintain consistency 
 
 ## Font Families
 
-The application uses two main font families:
+The application uses Gilroy font family with different weights:
 
-- **Montserrat** - For all headings and titles
-- **DMSans** - For all normal text, paragraphs, and labels
+- **GilroySemiBold** - For all headings and titles
+- **GilroyRegular** - For normal text and paragraphs
+- **GilroyMedium** - For emphasized text and buttons
 
 ## Using Font Styles
 
@@ -50,7 +51,7 @@ const MyHeading = withFontStyle(Text, headingText);
 
 The following pre-defined styles are available in `fontStyles.ts`:
 
-### Heading Styles (Montserrat)
+### Heading Styles (GilroySemiBold)
 
 - `heading1` - 32px
 - `heading2` - 28px
@@ -58,21 +59,21 @@ The following pre-defined styles are available in `fontStyles.ts`:
 - `heading4` - 20px
 - `heading5` - 18px
 
-### Body Text Styles (DMSans)
+### Body Text Styles (GilroyRegular/Medium)
 
-- `bodyRegular` - 16px
-- `bodySmall` - 14px
-- `bodyXSmall` - 12px
-- `bodyBold` - 16px, bold
-- `bodySmallBold` - 14px, bold
+- `bodyRegular` - 16px, GilroyRegular
+- `bodySmall` - 14px, GilroyRegular
+- `bodyXSmall` - 12px, GilroyRegular
+- `bodyBold` - 16px, GilroyMedium
+- `bodySmallBold` - 14px, GilroyMedium
 
 ### Component Styles
 
-- `headingText` - Montserrat, bold
-- `sectionHeading` - Montserrat, bold
-- `normalText` - DMSans
-- `buttonText` - DMSans, bold
-- `cardTitle` - Montserrat, bold
+- `headingText` - GilroySemiBold
+- `sectionHeading` - GilroySemiBold
+- `normalText` - GilroyRegular
+- `buttonText` - GilroyMedium
+- `cardTitle` - GilroySemiBold
 
 ## Best Practices
 
