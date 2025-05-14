@@ -89,21 +89,15 @@ const Login = () => {
         <View className="py-4">
           <TouchableOpacity
             className="flex-row items-center"
-            onPress={() => navigation.navigate(ROUTES.HOME as never)}
+            onPress={() => navigation.navigate(ROUTES.PRESIGNUP as never)}
           >
-            <Icon name="arrow-left" size={20} color="#D6FC03" />
-            <Text
-              className="text-primary font-medium ml-1"
-              style={styles.normalText}
-            >
-              Back
-            </Text>
+            <Icon name="arrow-left" size={22} color="white" />
           </TouchableOpacity>
         </View>
 
         <View className="flex-row items-center justify-center mb-6">
           <View className="bg-primary rounded-full p-2 mr-2">
-            <Icon name="activity" size={24} color="black" />
+            <Icon name="activity" size={24} color="white" />
           </View>
           <Text
             className="text-2xl font-bold text-white"
@@ -115,7 +109,7 @@ const Login = () => {
 
         <View className="items-center mb-8">
           <View className="w-32 h-32 rounded-full bg-zinc-800 items-center justify-center mb-6">
-            <Icon name="user" size={64} color="#D6FC03" />
+            <Icon name="user" size={64} color="white" />
           </View>
           <Text
             className="text-3xl font-bold text-white mb-2"
@@ -209,22 +203,22 @@ const Login = () => {
           </View>
 
           <TouchableOpacity
-            className="w-full bg-primary hover:bg-lime-500 text-black font-bold h-12 rounded-md flex-row items-center justify-center mt-4"
+            className="w-full bg-primary hover:bg-lime-500 text-white font-bold h-12 rounded-md flex-row items-center justify-center mt-4"
             onPress={handleLogin}
             disabled={showLoadingState}
           >
             {showLoadingState ? (
               <View className="flex-row items-center justify-center">
-                <ActivityIndicator size="small" color="black" />
+                <ActivityIndicator size="small" color="white" />
                 <Text
-                  className="text-black font-bold ml-2"
+                  className="text-white font-bold ml-2"
                   style={styles.buttonText}
                 >
                   Logging in...
                 </Text>
               </View>
             ) : (
-              <Text className="text-black font-bold" style={styles.buttonText}>
+              <Text className="text-white font-bold" style={styles.buttonText}>
                 Log In
               </Text>
             )}

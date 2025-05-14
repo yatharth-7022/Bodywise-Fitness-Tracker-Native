@@ -72,15 +72,9 @@ const SignUp = () => {
         <View className="py-4">
           <TouchableOpacity
             className="flex-row items-center"
-            onPress={() => navigation.goBack()}
+            onPress={() => navigation.navigate(ROUTES.PRESIGNUP as never)}
           >
-            <Icon name="arrow-left" size={20} color="#D6FC03" />
-            <Text
-              className="text-primary font-medium ml-1"
-              style={styles.normalText}
-            >
-              Back
-            </Text>
+            <Icon name="arrow-left" size={22} color="white" />
           </TouchableOpacity>
         </View>
 
@@ -92,7 +86,7 @@ const SignUp = () => {
             className="text-2xl font-bold text-white"
             style={styles.headingText}
           >
-            FitTrack
+            BodyWise
           </Text>
         </View>
 
@@ -226,7 +220,7 @@ const SignUp = () => {
               <Text
                 style={[
                   styles.buttonText,
-                  { color: "black", fontWeight: "bold" },
+                  { color: "white", fontWeight: "bold" },
                 ]}
               >
                 Sign Up

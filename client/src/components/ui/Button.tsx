@@ -58,9 +58,9 @@ export const Button = ({
       case "destructive":
         return "bg-red-500";
       case "outline":
-        return "bg-transparent border border-zinc-700";
+        return "bg-transparent border border-border";
       case "secondary":
-        return "bg-zinc-800";
+        return "bg-card";
       case "ghost":
         return "bg-transparent";
       case "link":
@@ -74,7 +74,7 @@ export const Button = ({
   const getTextColorStyles = (variant: ButtonVariant) => {
     switch (variant) {
       case "default":
-        return "text-black";
+        return "text-white";
       case "destructive":
         return "text-white";
       case "outline":
@@ -86,7 +86,7 @@ export const Button = ({
       case "link":
         return "text-primary underline";
       default:
-        return "text-black";
+        return "text-white";
     }
   };
 
@@ -133,7 +133,7 @@ export const Button = ({
       {loading ? (
         <ActivityIndicator
           size="small"
-          color={variant === "default" ? "#000" : "#fff"}
+          color={variant === "default" ? "#fff" : "#fff"}
         />
       ) : (
         <>

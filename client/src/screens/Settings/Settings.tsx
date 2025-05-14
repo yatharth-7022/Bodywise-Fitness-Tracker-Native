@@ -39,7 +39,10 @@ export const Settings = () => {
   const [isUploading, setIsUploading] = useState(false);
   const [uploadProgress, setUploadProgress] = useState(0);
   const [isDarkMode, setIsDarkMode] = useState(true);
+  const [alertDialogOpen, setAlertDialogOpen] = useState(false);
   const [dialogOpen, setDialogOpen] = useState(false);
+  const [dialogTitle, setDialogTitle] = useState("");
+  const [dialogMessage, setDialogMessage] = useState("");
 
   const pickImage = async () => {
     const result = await ImagePicker.launchImageLibraryAsync({
@@ -93,10 +96,13 @@ export const Settings = () => {
       setUploadProgress(100);
       refetchProfilePicture();
       setSelectedImage(null);
-      Alert.alert("Success", "Profile picture updated successfully!");
+      setDialogTitle("Success");
+      setDialogMessage("Profile picture updated successfully!");
+      setAlertDialogOpen(true);
     } catch (error) {
       console.error(error);
-      Alert.alert("Error", "Failed to upload profile picture");
+      setDialogTitle("Error");
+      setDialogMessage("Failed to upload profile picture");
       setUploadProgress(0);
     } finally {
       setIsUploading(false);
@@ -110,6 +116,42 @@ export const Settings = () => {
 
   return (
     <SafeAreaView className="flex-1 bg-black">
+      <Dialog
+        open={alertDialogOpen}
+        onOpenChange={setAlertDialogOpen}
+        key="alert-dialog"
+      >
+        <Dialog.Portal>
+          <Dialog.Overlay
+            className="bg-black/75 backdrop-blur-sm"
+            animation="quick"
+            enterStyle={{ opacity: 0 }}
+            exitStyle={{ opacity: 0 }}
+          />
+
+          <Dialog.Content
+            className="bg-zinc-900 px-10 py-10 rounded-lg"
+            animation="bouncy"
+            enterStyle={{ scale: 0.9, opacity: 0, y: 10 }}
+            exitStyle={{ scale: 0.95, opacity: 0, y: 10 }}
+          >
+            <Dialog.Title className="text-xl font-bold text-white">
+              {dialogTitle}
+            </Dialog.Title>
+            <Dialog.Description className="text-gray-300 mt-2">
+              {dialogMessage}
+            </Dialog.Description>
+            <YStack marginTop="$4" space="$3">
+              <Dialog.Close asChild>
+                <Button className="bg-primary" size="$4">
+                  OK
+                </Button>
+              </Dialog.Close>
+            </YStack>
+          </Dialog.Content>
+        </Dialog.Portal>
+      </Dialog>
+
       <Dialog
         open={dialogOpen}
         onOpenChange={setDialogOpen}
@@ -200,7 +242,7 @@ export const Settings = () => {
                   />
                 </View>
                 <TouchableOpacity
-                  className="absolute bottom-0 right-0 bg-blue-500 rounded-full p-2"
+                  className="absolute bottom-0 right-0 bg-primary rounded-full p-2"
                   onPress={pickImage}
                 >
                   <Icon name="camera" size={16} color="white" />
@@ -211,7 +253,7 @@ export const Settings = () => {
                 <View className="w-full mb-4">
                   <View className="h-2 bg-zinc-800 rounded-full overflow-hidden">
                     <View
-                      className="h-full bg-blue-500"
+                      className="h-full bg-primary"
                       style={{ width: `${uploadProgress}%` }}
                     />
                   </View>
@@ -220,7 +262,7 @@ export const Settings = () => {
 
               {selectedImage && (
                 <TouchableOpacity
-                  className="w-full bg-blue-500 text-white font-bold py-3 rounded-md items-center disabled:bg-zinc-800 disabled:text-zinc-500"
+                  className="w-full bg-primary text-white font-bold py-3 rounded-md items-center disabled:bg-zinc-800 disabled:text-zinc-500"
                   onPress={handleUpload}
                   disabled={isUploading}
                 >

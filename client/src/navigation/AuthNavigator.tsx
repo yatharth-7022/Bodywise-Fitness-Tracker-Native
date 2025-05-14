@@ -4,7 +4,6 @@ import { ROUTES } from "./routes";
 import { AuthStackParamList } from "../types/navigation";
 
 // Screens
-import { Home } from "../screens/Home/Home";
 import { PreSignUp } from "../screens/Auth/PreSignUp";
 import SignUp from "../screens/Auth/SignUp";
 import Login from "../screens/Auth/Login";
@@ -14,7 +13,6 @@ const Stack = createStackNavigator<AuthStackParamList>();
 export function AuthNavigator() {
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
-      <Stack.Screen name="Home" component={Home} />
       <Stack.Screen name="PreSignUp" component={PreSignUp} />
       <Stack.Screen name="SignUp" component={SignUp} />
       <Stack.Screen name="Login" component={Login} />

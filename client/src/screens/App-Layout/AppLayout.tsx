@@ -21,7 +21,7 @@ const CustomTabBar = ({
 }) => {
   const getIcon = (routeName: string, isFocused: boolean) => {
     let iconName = "home";
-    let color = isFocused ? "#3B82F6" : "white";
+    let color = isFocused ? "#1d4ed8" : "white";
 
     if (routeName === ROUTES.DASHBOARD) iconName = "home";
     else if (routeName === ROUTES.EXERCISES) iconName = "activity";
@@ -59,7 +59,7 @@ const CustomTabBar = ({
                 // Navigate to add workout screen or open modal
               }}
             >
-              <View className="w-10 h-10 rounded-full bg-blue-600 justify-center items-center">
+              <View className="w-10 h-10 rounded-full bg-primary justify-center items-center">
                 <Icon name="plus" size={24} color="white" />
               </View>
             </TouchableOpacity>

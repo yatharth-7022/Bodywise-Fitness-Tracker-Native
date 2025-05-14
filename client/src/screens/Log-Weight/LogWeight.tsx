@@ -151,7 +151,7 @@ export const LogWeight = () => {
             </View>
 
             <TouchableOpacity
-              className="w-full bg-blue-500 hover:bg-blue-600 h-14 rounded-md flex-row items-center justify-center"
+              className="w-full bg-primary h-14 rounded-md flex-row items-center justify-center"
               onPress={validateAndSubmit}
             >
               <Icon name="plus" size={20} color="white" />
@@ -177,7 +177,7 @@ export const LogWeight = () => {
                     })
                   }
                 >
-                  <Text className="text-sm text-blue-500">View All</Text>
+                  <Text className="text-sm text-primary">View All</Text>
                 </TouchableOpacity>
               </View>
               <Text className="text-zinc-400 text-xs mt-1">Last 5 entries</Text>
@@ -193,7 +193,7 @@ export const LogWeight = () => {
                       backgroundGradientFrom: "#18181B",
                       backgroundGradientTo: "#18181B",
                       decimalPlaces: 1,
-                      color: (opacity = 1) => `rgba(59, 130, 246, ${opacity})`,
+                      color: (opacity = 1) => `rgba(29, 78, 216, ${opacity})`,
                       labelColor: (opacity = 1) =>
                         `rgba(255, 255, 255, ${opacity})`,
                       style: {
@@ -202,7 +202,7 @@ export const LogWeight = () => {
                       propsForDots: {
                         r: "4",
                         strokeWidth: "2",
-                        stroke: "#3B82F6",
+                        stroke: "#1d4ed8",
                       },
                       paddingRight: 20,
                       formatYLabel: (value) => value, // Format Y-axis labels

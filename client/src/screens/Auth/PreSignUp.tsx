@@ -10,83 +10,59 @@ export const PreSignUp = () => {
   const navigation = useNavigation();
 
   return (
-    <SafeAreaView className="flex-1 bg-black">
-      <View className="p-4">
-        <TouchableOpacity
-          className="flex-row items-center"
-          onPress={() => navigation.navigate(ROUTES.HOME as never)}
-        >
-          <Icon name="arrow-left" size={20} color="#D6FC03" />
-          <Text
-            className="text-primary ml-1 font-medium"
-            style={styles.normalText}
-          >
-            Back
-          </Text>
-        </TouchableOpacity>
-      </View>
-
-      <View className="flex-1 px-6 justify-center">
-        <View className="flex-row items-center justify-center mb-8">
-          <View className="bg-primary rounded-xl w-12 h-12 items-center justify-center mr-3">
-            <Icon name="activity" size={28} color="black" />
+    <SafeAreaView className="flex-1 bg-background">
+      <View className="flex-1 px-8 justify-center">
+        <View className="items-center mb-12">
+          <View className="bg-primary rounded-2xl w-24 h-24 items-center justify-center mb-6">
+            <Icon name="activity" size={48} color="white" />
           </View>
           <Text
-            className="text-white text-2xl font-bold"
+            className="text-white text-5xl font-bold"
             style={styles.headingText}
           >
             FitTrack
           </Text>
         </View>
 
-        <View className="items-center mb-8">
-          <Image
-            source={require("../../assets/image/chest-workout.jpg")}
-            className="w-60 h-60"
-            resizeMode="contain"
-          />
-        </View>
-
-        <View className="items-center mb-12">
+        <View className="items-center mb-16">
           <Text
-            className="text-white text-2xl font-bold text-center mb-3"
+            className="text-white text-4xl font-bold text-center mb-6"
             style={styles.headingText}
           >
             Track Your Fitness Journey
           </Text>
           <Text
-            className="text-gray-400 text-base text-center px-6 leading-6"
+            className="text-gray-400 text-base text-center leading-6"
             style={styles.normalText}
           >
             Monitor workouts, track progress, and achieve your fitness goals
           </Text>
         </View>
 
-        <View className="space-y-4">
-          <TouchableOpacity
-            className="bg-primary rounded-lg py-4 items-center"
-            onPress={() => navigation.navigate(ROUTES.SIGNUP as never)}
+        <TouchableOpacity
+          className="bg-primary rounded-lg py-5 items-center"
+          onPress={() => navigation.navigate(ROUTES.SIGNUP as never)}
+        >
+          <Text
+            className="text-white text-lg font-semibold"
+            style={styles.buttonText}
           >
-            <Text
-              className="text-black text-base font-bold"
-              style={styles.buttonText}
-            >
-              Create Account
-            </Text>
-          </TouchableOpacity>
+            Create Account
+          </Text>
+        </TouchableOpacity>
 
-          <TouchableOpacity
-            className="border border-primary rounded-lg py-4 items-center"
-            onPress={() => navigation.navigate(ROUTES.LOGIN as never)}
+        <TouchableOpacity
+          className="mt-4 items-center"
+          onPress={() => navigation.navigate(ROUTES.LOGIN as never)}
+        >
+          <Text
+            className="text-white text-base opacity-70"
+            style={styles.normalText}
           >
-            <Text
-              className="text-primary text-base font-bold"
-              style={styles.buttonText}
-            >
-              Log In
-            </Text>
-          </TouchableOpacity>
-        </View>
+            Already have an account?{" "}
+            <Text className="text-primary">Log In</Text>
+          </Text>
+        </TouchableOpacity>
       </View>
     </SafeAreaView>
   );
@@ -94,15 +70,13 @@ export const PreSignUp = () => {
 
 const styles = StyleSheet.create({
   headingText: {
-    fontFamily: "Montserrat",
-    letterSpacing: 0.5,
-    fontWeight: "bold",
+    fontFamily: "GilroySemiBold",
+    letterSpacing: -0.5,
   },
   normalText: {
-    fontFamily: "DMSans",
+    fontFamily: "GilroyRegular",
   },
   buttonText: {
-    fontFamily: "DMSans",
-    fontWeight: "bold",
+    fontFamily: "GilroySemiBold",
   },
 });

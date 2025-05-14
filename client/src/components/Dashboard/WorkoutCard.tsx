@@ -37,7 +37,7 @@ export const WorkoutCard = ({
 
   return (
     <TouchableOpacity
-      className="w-64 h-fit bg-zinc-900 rounded-lg overflow-hidden mr-4"
+      className="w-64 h-fit bg-card rounded-lg overflow-hidden mr-4 border border-border"
       onPress={() =>
         navigation.navigate("WorkoutStack", {
           screen: "Routine",

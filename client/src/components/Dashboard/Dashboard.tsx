@@ -57,7 +57,7 @@ export const Dashboard = () => {
 
   return (
     <>
-      <View className="flex-1 bg-zinc-950">
+      <View className="flex-1 bg-background">
         <ScrollView className="flex-1" showsVerticalScrollIndicator={false}>
           <View className="px-6 pt-8">
             <View className="flex-row justify-between items-center pb-6">
@@ -102,7 +102,7 @@ export const Dashboard = () => {
               {/* Row 1: Log Weight and Start Timer */}
               <View className="flex-row justify-between space-x-3 mb-3">
                 <Button
-                  className="flex-1 bg-blue-500"
+                  className="flex-1 bg-primary"
                   textClassName="text-white text-sm"
                   onPress={() =>
                     navigation.navigate("WeightStack", {
@@ -117,7 +117,7 @@ export const Dashboard = () => {
                 </Button>
 
                 <Button
-                  className="flex-1 bg-blue-500"
+                  className="flex-1 bg-primary"
                   textClassName="text-white text-sm"
                   onPress={() =>
                     navigation.navigate("MainTabs", {
@@ -133,7 +133,7 @@ export const Dashboard = () => {
               </View>
 
               {/* Row 2: Start Session and Make Routine */}
-              <View className="flex-row justify-between space-x-3">
+              {/* <View className="flex-row justify-between space-x-3">
                 <Button
                   className="flex-1 bg-red-500"
                   textClassName="text-white text-sm"
@@ -143,7 +143,7 @@ export const Dashboard = () => {
                     Start Session
                   </Text>
                 </Button>
-              </View>
+              </View> */}
             </View>
 
             <View className="mb-8">
@@ -152,7 +152,7 @@ export const Dashboard = () => {
                   Start a workout
                 </Text>
                 <TouchableOpacity>
-                  <Text style={normalText} className="text-blue-500">
+                  <Text style={normalText} className="text-primary">
                     See all
                   </Text>
                 </TouchableOpacity>
@@ -183,13 +183,13 @@ export const Dashboard = () => {
                   History
                 </Text>
                 <TouchableOpacity>
-                  <Text style={normalText} className="text-blue-500">
+                  <Text style={normalText} className="text-primary">
                     See all
                   </Text>
                 </TouchableOpacity>
               </View>
 
-              <Card className="bg-zinc-900 border border-zinc-800 p-4 rounded-xl">
+              <Card className="bg-card border border-border p-4 rounded-xl">
                 <View className="mb-2">
                   <Text style={cardTitle} className="text-white text-base">
                     Average weekly activity
@@ -213,7 +213,7 @@ export const Dashboard = () => {
             </View>
 
             <View className="mb-24">
-              <Card className="bg-zinc-900 border border-zinc-800 p-4 rounded-xl">
+              <Card className="bg-card border border-border p-4 rounded-xl">
                 <View className="flex-row justify-between mb-4">
                   <View>
                     <Text style={cardTitle} className="text-white text-base">

@@ -26,7 +26,7 @@ const toastConfig = {
   success: (props) => (
     <BaseToast
       {...props}
-      style={{ borderLeftColor: "#D6FC03", backgroundColor: "#222" }}
+      style={{ borderLeftColor: "#0D1B2A", backgroundColor: "#152233" }}
       contentContainerStyle={{ paddingHorizontal: 15 }}
       text1Style={{ fontSize: 16, fontWeight: "bold", color: "#FFF" }}
       text2Style={{ fontSize: 14, color: "#DDD" }}
@@ -35,7 +35,7 @@ const toastConfig = {
   error: (props) => (
     <ErrorToast
       {...props}
-      style={{ borderLeftColor: "#FF4444", backgroundColor: "#222" }}
+      style={{ borderLeftColor: "#FF4444", backgroundColor: "#152233" }}
       contentContainerStyle={{ paddingHorizontal: 15 }}
       text1Style={{ fontSize: 16, fontWeight: "bold", color: "#FFF" }}
       text2Style={{ fontSize: 14, color: "#DDD" }}
@@ -44,7 +44,8 @@ const toastConfig = {
 };
 
 export default function App() {
-  const colorScheme = useColorScheme();
+  // Force dark mode
+  const colorScheme = "dark";
 
   const [fontsLoaded] = useFonts({
     GilroyMedium: require("./assets/fonts/Gilroy-Medium.ttf"),
@@ -57,10 +58,7 @@ export default function App() {
   }
 
   return (
-    <TamaguiProvider
-      config={tamaguiConfig}
-      defaultTheme={colorScheme || "light"}
-    >
+    <TamaguiProvider config={tamaguiConfig} defaultTheme="dark">
       <QueryClientProvider client={queryClient}>
         <GestureHandlerRootView style={{ flex: 1 }}>
           <SafeAreaProvider>

@@ -109,7 +109,7 @@ export const ExerciseDrawer = ({
                   >
                     {exercise.name}
                   </Text>
-                  <Text style={normalText} className="text-blue-500">
+                  <Text style={normalText} className="text-primary">
                     {firstLetterUppercase(exercise.bodyPart)} Exercise
                   </Text>
                 </View>
@@ -184,7 +184,7 @@ export const ExerciseDrawer = ({
           </ScrollView>
 
           <View className="p-4 border-t border-zinc-800">
-            <TouchableOpacity className="bg-blue-600 py-4 rounded-lg items-center">
+            <TouchableOpacity className="bg-primary py-4 rounded-lg items-center">
               <Text style={buttonText} className="text-white font-semibold">
                 Add to Routine
               </Text>

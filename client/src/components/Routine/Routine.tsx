@@ -34,7 +34,7 @@ const Routine = () => {
   if (isRoutineLoading) {
     return (
       <View className="flex-1 items-center justify-center bg-zinc-950">
-        <ActivityIndicator size="large" color="#3b82f6" />
+        <ActivityIndicator size="large" color="#1d4ed8" />
       </View>
     );
   }
@@ -56,7 +56,7 @@ const Routine = () => {
           }
           className="mt-2"
         >
-          <Text style={normalText} className="text-blue-500">
+          <Text style={normalText} className="text-primary">
             Return to Dashboard
           </Text>
         </TouchableOpacity>
@@ -149,7 +149,7 @@ const Routine = () => {
                   <View className="items-end">
                     <Text
                       style={normalText}
-                      className="text-sm text-blue-500 font-medium"
+                      className="text-sm text-primary font-medium"
                     >
                       Free Weight
                     </Text>
@@ -167,7 +167,7 @@ const Routine = () => {
 
           <View className="px-4 py-2 border-t border-zinc-800">
             <TouchableOpacity
-              className="w-full bg-blue-600 py-3 rounded-lg items-center"
+              className="w-full bg-primary py-3 rounded-lg items-center"
               onPress={() =>
                 navigation.navigate("WorkoutStack", {
                   screen: "RoutineSession",

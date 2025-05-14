@@ -22,7 +22,6 @@ import { ToastExample } from "../components/ToastExample";
 
 // Use empty components as placeholders for screens we haven't created yet
 const EmptyComponent = () => null;
-const ChartScreen = EmptyComponent;
 
 const Tab = createBottomTabNavigator<MainTabParamList>();
 
@@ -34,13 +33,13 @@ export function MainTabNavigator() {
       screenOptions={({ route }) => ({
         headerShown: false,
         tabBarStyle: {
-          backgroundColor: "#18181b", // zinc-900
-          borderTopColor: "#27272a", // zinc-800
+          backgroundColor: "#0D1B2A", // Dark navy background
+          borderTopColor: "#1E3A5F", // Border color
           // height: 50,
           alignItems: "center", // Center icons vertically
           justifyContent: "center", // Ensure complete centering
         },
-        tabBarActiveTintColor: "#3B82F6", // blue-500
+        tabBarActiveTintColor: "#1d4ed8", // Blue primary color
         tabBarInactiveTintColor: "white",
         tabBarShowLabel: false,
         tabBarIcon: ({ color, size }) => {
@@ -73,7 +72,7 @@ export function MainTabNavigator() {
                 height: 64,
                 marginTop: -24,
                 borderRadius: 32,
-                backgroundColor: "#3B82F6",
+                backgroundColor: "#1d4ed8", // Blue primary color
                 alignItems: "center",
                 justifyContent: "center",
                 marginHorizontal: 8,
