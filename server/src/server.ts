@@ -17,28 +17,15 @@ const app = express();
 
 const allowedOrigins = process.env.ALLOWED_ORIGINS?.split(",") || [
   "http://localhost:5173",
-  "http://localhost:19000",  // Expo development server
-  "http://localhost:19006",  // Expo web
-  "exp://",                  // Expo Go app
-  "https://expo.dev"         // Expo production
+  "http://localhost:19000", // Expo development server
+  "http://localhost:19006", // Expo web
+  "exp://", // Expo Go app
+  "https://expo.dev", // Expo production
 ];
 
 app.use(
   cors({
-    origin: process.env.NODE_ENV === 'development' 
-      ? '*'  
-      : (origin: string | undefined, callback: (err: Error | null, allow?: boolean) => void) => {
-         
-          if (!origin) return callback(null, true);
-
-          if (allowedOrigins.indexOf(origin) === -1 && 
-              !allowedOrigins.some(allowed => origin.startsWith(allowed))) {
-            const msg =
-              "The CORS policy for this site does not allow access from the specified Origin.";
-            return callback(new Error(msg), false);
-          }
-          return callback(null, true);
-        },
+    origin: "*",
     credentials: true,
   })
 );
@@ -79,13 +66,13 @@ app.use(
 const PORT = parseInt(process.env.PORT || "5000", 10);
 
 // Run database setup in production
-if (process.env.NODE_ENV === 'production') {
+if (process.env.NODE_ENV === "production") {
   setup()
     .then(() => {
-      logger.info('Database setup completed, starting server...');
+      logger.info("Database setup completed, starting server...");
     })
     .catch((error) => {
-      logger.error('Failed to set up database:', error);
+      logger.error("Failed to set up database:", error);
       // Continue starting the server even if setup fails
     });
 }

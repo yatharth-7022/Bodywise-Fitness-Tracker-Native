@@ -1803,3 +1803,35 @@
 {"level":"info","message":"192.168.29.175 - - [14/May/2025:10:36:57 +0000] \"GET /api/auth/profile HTTP/1.1\" 304 - \"-\" \"okhttp/4.12.0\"","timestamp":"2025-05-14T10:36:57.948Z"}
 {"level":"info","message":"192.168.29.175 - - [14/May/2025:10:36:58 +0000] \"GET /api/routines/routines/default?includeExercises=false HTTP/1.1\" 304 - \"-\" \"okhttp/4.12.0\"","timestamp":"2025-05-14T10:36:58.027Z"}
 {"level":"info","message":"192.168.29.175 - - [14/May/2025:10:37:05 +0000] \"GET /api/exercises/exercises HTTP/1.1\" 304 - \"-\" \"okhttp/4.12.0\"","timestamp":"2025-05-14T10:37:05.767Z"}
+{"level":"info","message":"Server is running on port 5000","timestamp":"2025-05-15T07:41:01.124Z"}
+{"level":"info","message":"192.168.29.175 - - [15/May/2025:07:44:16 +0000] \"GET /api/auth/profile HTTP/1.1\" 401 32 \"-\" \"okhttp/4.12.0\"","timestamp":"2025-05-15T07:44:16.078Z"}
+{"level":"info","message":"192.168.29.175 - - [15/May/2025:07:44:16 +0000] \"POST /api/auth/refresh HTTP/1.1\" 401 32 \"-\" \"okhttp/4.12.0\"","timestamp":"2025-05-15T07:44:16.133Z"}
+{"level":"info","message":"192.168.29.175 - - [15/May/2025:07:45:35 +0000] \"POST /api/auth/login HTTP/1.1\" 200 226 \"-\" \"okhttp/4.12.0\"","timestamp":"2025-05-15T07:45:35.961Z"}
+{"level":"info","message":"192.168.29.175 - - [15/May/2025:07:45:36 +0000] \"GET /api/auth/profile HTTP/1.1\" 200 202 \"-\" \"okhttp/4.12.0\"","timestamp":"2025-05-15T07:45:36.625Z"}
+{"level":"info","message":"192.168.29.175 - - [15/May/2025:07:45:36 +0000] \"GET /api/routines/routines/default?includeExercises=false HTTP/1.1\" 200 1218 \"-\" \"okhttp/4.12.0\"","timestamp":"2025-05-15T07:45:36.659Z"}
+{"level":"info","message":"192.168.29.175 - - [15/May/2025:07:45:47 +0000] \"GET /api/exercises/exercises HTTP/1.1\" 200 34188 \"-\" \"okhttp/4.12.0\"","timestamp":"2025-05-15T07:45:47.589Z"}
+{"level":"info","message":"Fetching weights for user 1","timestamp":"2025-05-15T07:45:57.765Z"}
+{"level":"info","message":"192.168.29.175 - - [15/May/2025:07:45:57 +0000] \"GET /api/weight/recent-weights HTTP/1.1\" 200 1085 \"-\" \"okhttp/4.12.0\"","timestamp":"2025-05-15T07:45:57.847Z"}
+{"level":"info","message":"Found 8 weights for user 1","timestamp":"2025-05-15T07:45:57.849Z"}
+{"level":"info","message":"192.168.29.175 - - [15/May/2025:07:45:57 +0000] \"GET /api/weight HTTP/1.1\" 200 1248 \"-\" \"okhttp/4.12.0\"","timestamp":"2025-05-15T07:45:57.850Z"}
+{"level":"info","message":"Fetching weights for user 1","timestamp":"2025-05-15T07:46:04.936Z"}
+{"level":"info","message":"Found 8 weights for user 1","timestamp":"2025-05-15T07:46:04.941Z"}
+{"level":"info","message":"192.168.29.175 - - [15/May/2025:07:46:04 +0000] \"GET /api/weight HTTP/1.1\" 304 - \"-\" \"okhttp/4.12.0\"","timestamp":"2025-05-15T07:46:04.943Z"}
+{"level":"info","message":"192.168.29.175 - - [15/May/2025:07:46:04 +0000] \"GET /api/weight/recent-weights HTTP/1.1\" 304 - \"-\" \"okhttp/4.12.0\"","timestamp":"2025-05-15T07:46:04.945Z"}
+{"level":"info","message":"Fetching weights for user 1","timestamp":"2025-05-15T07:46:44.929Z"}
+{"level":"info","message":"192.168.29.175 - - [15/May/2025:07:46:44 +0000] \"GET /api/weight/recent-weights HTTP/1.1\" 304 - \"-\" \"okhttp/4.12.0\"","timestamp":"2025-05-15T07:46:44.932Z"}
+{"level":"info","message":"Found 8 weights for user 1","timestamp":"2025-05-15T07:46:44.935Z"}
+{"level":"info","message":"192.168.29.175 - - [15/May/2025:07:46:44 +0000] \"GET /api/weight HTTP/1.1\" 304 - \"-\" \"okhttp/4.12.0\"","timestamp":"2025-05-15T07:46:44.936Z"}
+{"level":"info","message":"Weight logged for user 1: 90.5kg on Thu May 15 2025 13:15:57 GMT+0530 (India Standard Time)","timestamp":"2025-05-15T07:46:50.056Z"}
+{"level":"info","message":"192.168.29.175 - - [15/May/2025:07:46:50 +0000] \"POST /api/weight HTTP/1.1\" 201 205 \"-\" \"okhttp/4.12.0\"","timestamp":"2025-05-15T07:46:50.056Z"}
+{"level":"info","message":"Fetching weights for user 1","timestamp":"2025-05-15T07:46:50.260Z"}
+{"level":"info","message":"Found 9 weights for user 1","timestamp":"2025-05-15T07:46:50.263Z"}
+{"level":"info","message":"192.168.29.175 - - [15/May/2025:07:46:50 +0000] \"GET /api/weight HTTP/1.1\" 200 1404 \"-\" \"okhttp/4.12.0\"","timestamp":"2025-05-15T07:46:50.263Z"}
+{"level":"info","message":"192.168.29.175 - - [15/May/2025:07:46:50 +0000] \"GET /api/weight/recent-weights HTTP/1.1\" 200 1088 \"-\" \"okhttp/4.12.0\"","timestamp":"2025-05-15T07:46:50.267Z"}
+{"level":"info","message":"Fetching weights for user 1","timestamp":"2025-05-15T07:46:53.537Z"}
+{"level":"info","message":"Found 9 weights for user 1","timestamp":"2025-05-15T07:46:53.541Z"}
+{"level":"info","message":"192.168.29.175 - - [15/May/2025:07:46:53 +0000] \"GET /api/weight HTTP/1.1\" 304 - \"-\" \"okhttp/4.12.0\"","timestamp":"2025-05-15T07:46:53.542Z"}
+{"level":"info","message":"192.168.29.175 - - [15/May/2025:07:46:53 +0000] \"GET /api/weight/recent-weights HTTP/1.1\" 304 - \"-\" \"okhttp/4.12.0\"","timestamp":"2025-05-15T07:46:53.544Z"}
+{"level":"info","message":"192.168.29.175 - - [15/May/2025:07:47:10 +0000] \"GET /api/auth/profile HTTP/1.1\" 304 - \"-\" \"okhttp/4.12.0\"","timestamp":"2025-05-15T07:47:10.697Z"}
+{"level":"info","message":"Server is running on port 5000","timestamp":"2025-05-15T09:48:45.658Z"}
+{"level":"info","message":"Server is running on port 5000","timestamp":"2025-05-15T11:30:20.721Z"}
