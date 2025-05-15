@@ -67,7 +67,7 @@ export const TimerPage = () => {
     <SafeAreaView
       style={{
         flex: 1,
-        backgroundColor: "#18181b",
+        backgroundColor: "#0D1B2A",
         alignItems: "center",
         justifyContent: "flex-start",
         paddingVertical: 32,
@@ -101,7 +101,7 @@ export const TimerPage = () => {
           >
             Timer & Stopwatch
           </Text>
-          <Icon name="clock" size={20} color="#D6FC03" />
+          <Icon name="clock" size={20} color="#1d4ed8" />
         </View>
       </View>
 
@@ -151,7 +151,7 @@ export const TimerPage = () => {
               bottom: 0,
               height: 4,
               width: "50%",
-              backgroundColor: "#3b82f6",
+              backgroundColor: "#1d4ed8",
               borderRadius: 2,
             },
             tabIndicatorStyle,

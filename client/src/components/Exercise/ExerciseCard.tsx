@@ -17,7 +17,7 @@ export const ExerciseCardContent = ({
 }) => {
   return (
     <TouchableOpacity
-      className="bg-zinc-900 rounded-lg overflow-hidden w-full mb-3"
+      className="bg-card rounded-lg overflow-hidden w-full mb-3"
       onPress={onClick}
       activeOpacity={0.7}
     >

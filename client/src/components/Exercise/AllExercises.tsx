@@ -48,7 +48,7 @@ export const AllExercises = () => {
   });
 
   return (
-    <SafeAreaView className="flex-1 bg-zinc-950">
+    <SafeAreaView className="flex-1 bg-background">
       {isLoadingAllExercises && (
         <View className="absolute inset-0 bg-black/70 z-50 flex items-center justify-center">
           <View className="flex flex-col items-center gap-4">
@@ -60,16 +60,16 @@ export const AllExercises = () => {
         </View>
       )}
 
-      <View className="flex-1 pt-5 px-2">
+      <View className="flex-1 pt-10 px-2">
         <View className="mb-6">
-          <View className="flex-row gap-2 items-center mb-4">
+          <View className="flex-row gap-2 items-center mb-4 px-5">
             <Text
               style={headingText}
-              className="text-2xl w-1/4 font-bold text-white"
+              className="text-2xl w-28 font-bold text-white"
             >
               Exercises
             </Text>
-            <View className="relative w-3/4">
+            <View className="relative ">
               <TextInput
                 placeholder="Search exercises..."
                 className="bg-gray-800 rounded-full h-11 py-2 px-10 text-sm text-white"

@@ -1798,3 +1798,8 @@
 {"level":"info","message":"192.168.29.175 - - [14/May/2025:10:20:37 +0000] \"GET /api/auth/profile HTTP/1.1\" 304 - \"-\" \"okhttp/4.12.0\"","timestamp":"2025-05-14T10:20:37.376Z"}
 {"level":"info","message":"192.168.29.175 - - [14/May/2025:10:20:38 +0000] \"GET /api/auth/profile HTTP/1.1\" 304 - \"-\" \"okhttp/4.12.0\"","timestamp":"2025-05-14T10:20:38.348Z"}
 {"level":"info","message":"192.168.29.175 - - [14/May/2025:10:20:48 +0000] \"GET /api/exercises/exercises HTTP/1.1\" 304 - \"-\" \"okhttp/4.12.0\"","timestamp":"2025-05-14T10:20:48.628Z"}
+{"level":"info","message":"192.168.29.175 - - [14/May/2025:10:36:57 +0000] \"GET /api/auth/profile HTTP/1.1\" 304 - \"-\" \"okhttp/4.12.0\"","timestamp":"2025-05-14T10:36:57.382Z"}
+{"level":"info","message":"192.168.29.175 - - [14/May/2025:10:36:57 +0000] \"GET /api/auth/profile HTTP/1.1\" 304 - \"-\" \"okhttp/4.12.0\"","timestamp":"2025-05-14T10:36:57.869Z"}
+{"level":"info","message":"192.168.29.175 - - [14/May/2025:10:36:57 +0000] \"GET /api/auth/profile HTTP/1.1\" 304 - \"-\" \"okhttp/4.12.0\"","timestamp":"2025-05-14T10:36:57.948Z"}
+{"level":"info","message":"192.168.29.175 - - [14/May/2025:10:36:58 +0000] \"GET /api/routines/routines/default?includeExercises=false HTTP/1.1\" 304 - \"-\" \"okhttp/4.12.0\"","timestamp":"2025-05-14T10:36:58.027Z"}
+{"level":"info","message":"192.168.29.175 - - [14/May/2025:10:37:05 +0000] \"GET /api/exercises/exercises HTTP/1.1\" 304 - \"-\" \"okhttp/4.12.0\"","timestamp":"2025-05-14T10:37:05.767Z"}

@@ -82,20 +82,20 @@ export const Stopwatch = ({
         ) : (
           <TouchableOpacity
             style={{
-              backgroundColor: "#D6FC03",
+              backgroundColor: "#1d4ed8",
               paddingVertical: 12,
               paddingHorizontal: 24,
               borderRadius: 8,
             }}
             onPress={startStopwatch}
           >
-            <Text style={{ color: "black", fontWeight: "bold" }}>Start</Text>
+            <Text style={{ color: "white", fontWeight: "bold" }}>Start</Text>
           </TouchableOpacity>
         )}
 
         <TouchableOpacity
           style={{
-            backgroundColor: "#D6FC03",
+            backgroundColor: "#1d4ed8",
             paddingVertical: 12,
             paddingHorizontal: 24,
             borderRadius: 8,
@@ -103,7 +103,7 @@ export const Stopwatch = ({
           onPress={addLap}
           disabled={!stopwatchActive}
         >
-          <Text style={{ color: "black", fontWeight: "bold" }}>Lap</Text>
+          <Text style={{ color: "white", fontWeight: "bold" }}>Lap</Text>
         </TouchableOpacity>
 
         <TouchableOpacity
