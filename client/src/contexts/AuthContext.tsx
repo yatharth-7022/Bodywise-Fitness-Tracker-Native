@@ -108,10 +108,25 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     try {
       setIsLoading(true);
       setErrors({});
+      console.log("🔄 Attempting login...");
       const response = await api.post(LOGIN, data);
+
+      console.log("✅ Login response received:", {
+        status: response.status,
+        hasToken: !!response.data.token,
+        hasUser: !!response.data.user,
+      });
+
+      if (!response.data.token) {
+        throw new Error("No token received from server");
+      }
+
       await AsyncStorage.setItem("token", response.data.token);
+      console.log("✅ Token stored in AsyncStorage");
+
       setIsAuthenticated(true);
       setUser(response.data.user);
+      console.log("✅ Authentication state updated");
 
       if (response.status === 200) {
         // Show success toast

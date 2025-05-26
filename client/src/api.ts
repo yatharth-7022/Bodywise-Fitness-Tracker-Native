@@ -4,13 +4,15 @@ import Config from "../config";
 
 const getApiBaseUrl = () => {
   const configUrl = Config.API_URL;
-  
-  return configUrl.endsWith('/') ? configUrl.slice(0, -1) : configUrl;
+
+  return configUrl.endsWith("/") ? configUrl.slice(0, -1) : configUrl;
 };
 
 const API_CONFIG = {
   baseUrl: getApiBaseUrl(),
-  timeout: Number(Constants.expoConfig?.extra?.apiTimeout) || Number(Config.API_TIMEOUT),
+  timeout:
+    Number(Constants.expoConfig?.extra?.apiTimeout) ||
+    Number(Config.API_TIMEOUT),
   endpoints: {
     auth: {
       login: "/api/auth/login",
@@ -41,7 +43,7 @@ console.log("API Base URL:", API_CONFIG.baseUrl);
 
 const buildUrl = (endpoint: string) => {
   const base = API_CONFIG.baseUrl;
-  const path = endpoint.startsWith('/') ? endpoint : `/${endpoint}`;
+  const path = endpoint.startsWith("/") ? endpoint : `/${endpoint}`;
   return `${base}${path}`;
 };
 

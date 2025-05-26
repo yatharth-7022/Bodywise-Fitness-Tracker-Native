@@ -3,15 +3,21 @@ import { Platform } from "react-native";
 import Constants from "expo-constants";
 
 const USE_PRODUCTION_API = false;
+const USE_AWS_API = true; // Set to true to test with AWS deployment
 
 const getApiUrl = () => {
   const PRODUCTION_API_URL = "https://bodywise-fitness-api.onrender.com";
-
+  const AWS_IP = "http://3.109.58.243:5000";
   const LOCAL_IP = "192.168.29.194";
 
   if (USE_PRODUCTION_API) {
     console.log("Using production API URL:", PRODUCTION_API_URL);
     return PRODUCTION_API_URL;
+  }
+
+  if (USE_AWS_API) {
+    console.log("Using AWS API URL:", AWS_IP);
+    return AWS_IP;
   }
 
   if (__DEV__) {
