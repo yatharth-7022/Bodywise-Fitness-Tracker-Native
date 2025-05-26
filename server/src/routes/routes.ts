@@ -8,6 +8,7 @@ import {
   logout,
   uploadProfilePicture,
   getProfilePicture,
+  debugAuth,
 } from "../controllers/authController";
 import { protect } from "../middleware/authMiddleware";
 
@@ -42,6 +43,7 @@ router.post("/signup", validateSignup, handleValidationErrors, signup);
 router.post("/login", validateLogin, handleValidationErrors, login);
 router.post("/refresh", refresh); // Cookie-based refresh (for web)
 router.post("/refresh-token", refreshWithToken); // Token-based refresh (for mobile)
+router.get("/debug-auth", debugAuth); // Debug endpoint (remove in production)
 
 // Apply rate limiting and protection to all routes below
 router.use(authRateLimiter);

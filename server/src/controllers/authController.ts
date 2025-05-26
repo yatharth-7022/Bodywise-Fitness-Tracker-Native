@@ -332,3 +332,62 @@ export const refreshWithToken = async (
     res.status(401).json({ message: "Invalid refresh token" });
   }
 };
+
+export const debugAuth = async (
+  req: AuthRequest,
+  res: Response
+): Promise<void> => {
+  try {
+    const authHeader = req.headers.authorization;
+    const token = authHeader?.split(" ")[1];
+
+    console.log("🔍 Debug Auth Endpoint:");
+    console.log("- Authorization header:", authHeader ? "Present" : "Missing");
+    console.log("- Token extracted:", token ? "Present" : "Missing");
+    console.log("- JWT_SECRET:", JWT_SECRET ? "Set" : "Not set");
+    console.log("- NODE_ENV:", process.env.NODE_ENV);
+
+    if (!authHeader || !authHeader.startsWith("Bearer ")) {
+      res.status(401).json({
+        message: "No token, authorization denied",
+        debug: {
+          hasAuthHeader: !!authHeader,
+          authHeaderFormat: authHeader
+            ? "Present but invalid format"
+            : "Missing",
+          expectedFormat: "Bearer <token>",
+        },
+      });
+      return;
+    }
+
+    try {
+      const decoded = jwt.verify(token!, JWT_SECRET) as { id: number };
+      res.status(200).json({
+        message: "Token is valid",
+        debug: {
+          userId: decoded.id,
+          tokenValid: true,
+          jwtSecret: JWT_SECRET.substring(0, 5) + "...",
+        },
+      });
+    } catch (jwtError) {
+      res.status(401).json({
+        message: "Token is not valid",
+        debug: {
+          jwtError: (jwtError as Error).message,
+          tokenPresent: !!token,
+          jwtSecret: JWT_SECRET.substring(0, 5) + "...",
+        },
+      });
+    }
+  } catch (error) {
+    console.error("Debug auth error:", error);
+    res
+      .status(500)
+      .json({
+        message: "Debug endpoint error",
+        error: (error as Error).message,
+      });
+  }
+};
