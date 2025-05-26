@@ -25,7 +25,25 @@ const allowedOrigins = process.env.ALLOWED_ORIGINS?.split(",") || [
 
 app.use(
   cors({
-    origin: "*",
+    origin: function (
+      origin: string | undefined,
+      callback: (err: Error | null, allow?: boolean) => void
+    ) {
+      // Allow requests with no origin (like mobile apps or curl requests)
+      if (!origin) return callback(null, true);
+
+      // Allow all origins in development
+      if (process.env.NODE_ENV !== "production") {
+        return callback(null, true);
+      }
+
+      // In production, check against allowed origins
+      if (allowedOrigins.indexOf(origin) !== -1) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
     credentials: true,
   })
 );

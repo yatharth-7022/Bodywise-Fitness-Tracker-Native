@@ -4,6 +4,7 @@ import {
   login,
   getUser,
   refresh,
+  refreshWithToken,
   logout,
   uploadProfilePicture,
   getProfilePicture,
@@ -36,13 +37,17 @@ import { upload } from "../utils/fileUpload";
 
 const router = Router();
 
+// Public routes (no authentication required)
 router.post("/signup", validateSignup, handleValidationErrors, signup);
 router.post("/login", validateLogin, handleValidationErrors, login);
+router.post("/refresh", refresh); // Cookie-based refresh (for web)
+router.post("/refresh-token", refreshWithToken); // Token-based refresh (for mobile)
 
+// Apply rate limiting and protection to all routes below
 router.use(authRateLimiter);
 router.use(protect);
 
-// Protected routes
+// Protected routes (authentication required)
 router.get("/user", getUser);
 router.post("/", validateWeightLog, handleValidationErrors, logWeight);
 router.get("/", getWeightLogs);
@@ -53,7 +58,6 @@ router.get("/exercises/:bodyPart", getExercisesByBodyPart);
 router.get("/routines", getAllRoutines);
 router.get("/routines/default", getDefaultRoutines);
 router.get("/routines/:id", getRoutineById);
-router.post("/refresh", refresh);
 router.post("/logout", logout);
 router.post(
   "/upload-profile-picture",

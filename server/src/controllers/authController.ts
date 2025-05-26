@@ -39,10 +39,20 @@ export const signup = async (req: Request, res: Response): Promise<void> => {
         password: hashedPassword,
       },
     });
-    const token = jwt.sign({ id: user.id }, JWT_SECRET, { expiresIn: "7d" });
+    const { accessToken, refreshToken } = generateTokens(user.id);
+
+    await prisma.refreshToken.create({
+      data: {
+        token: refreshToken,
+        userId: user.id,
+        expiresAt: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000), // 7 days
+      },
+    });
+
     res.status(201).json({
       user: { id: user.id, username: user.name, email: user.email },
-      token,
+      token: accessToken,
+      refreshToken: refreshToken,
     });
   } catch (error) {
     logger.error("Signup error:", error);
@@ -78,13 +88,14 @@ export const login = async (req: Request, res: Response): Promise<void> => {
     res.cookie("refreshToken", refreshToken, {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
-      sameSite: "strict",
+      sameSite: process.env.NODE_ENV === "production" ? "none" : "lax", // Allow cross-origin in production
       maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
     });
 
     res.status(200).json({
       user: { id: user.id, username: user.name, email: user.email },
       token: accessToken,
+      refreshToken: refreshToken, // Also return refresh token for mobile apps
     });
   } catch (error) {
     logger.error("Login error:", error);
@@ -154,7 +165,7 @@ export const refresh = async (req: Request, res: Response): Promise<void> => {
     res.cookie("refreshToken", newRefreshToken, {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
-      sameSite: "strict",
+      sameSite: process.env.NODE_ENV === "production" ? "none" : "lax", // Allow cross-origin in production
       maxAge: 7 * 24 * 60 * 60 * 1000,
     });
 
@@ -163,6 +174,7 @@ export const refresh = async (req: Request, res: Response): Promise<void> => {
     res.status(401).json({ message: "Invalid refresh token" });
   }
 };
+
 export const logout = async (
   req: AuthRequest,
   res: Response
@@ -179,7 +191,7 @@ export const logout = async (
     res.clearCookie("refreshToken", {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
-      sameSite: "strict",
+      sameSite: process.env.NODE_ENV === "production" ? "none" : "lax", // Allow cross-origin in production
     });
     res.status(200).json({ message: "Logged Out Successfully" });
   } catch (error) {
@@ -266,5 +278,57 @@ export const getProfilePicture = async (
   } catch (error) {
     logger.error("Get profile picture error:", error);
     res.status(500).json({ message: "Error retrieving profile picture" });
+  }
+};
+
+export const refreshWithToken = async (
+  req: Request,
+  res: Response
+): Promise<void> => {
+  const authHeader = req.headers.authorization;
+
+  if (!authHeader || !authHeader.startsWith("Bearer ")) {
+    res.status(401).json({ message: "No refresh token provided" });
+    return;
+  }
+
+  const refreshToken = authHeader.split(" ")[1];
+
+  try {
+    const decoded = jwt.verify(refreshToken, REFRESH_SECRET) as { id: number };
+
+    const storedToken = await prisma.refreshToken.findFirst({
+      where: {
+        token: refreshToken,
+        userId: decoded.id,
+        expiresAt: {
+          gt: new Date(),
+        },
+      },
+    });
+
+    if (!storedToken) {
+      res.status(401).json({ message: "Invalid refresh token" });
+      return;
+    }
+
+    const { accessToken, refreshToken: newRefreshToken } = generateTokens(
+      decoded.id
+    );
+
+    await prisma.refreshToken.update({
+      where: { id: storedToken.id },
+      data: {
+        token: newRefreshToken,
+        expiresAt: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
+      },
+    });
+
+    res.json({
+      token: accessToken,
+      refreshToken: newRefreshToken,
+    });
+  } catch (error) {
+    res.status(401).json({ message: "Invalid refresh token" });
   }
 };
